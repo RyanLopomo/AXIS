@@ -1,0 +1,21 @@
+components/
+Reutilizaveis, como footer, navbar e imports
+
+sections/
+Cada grande parte da landing page: Hero, Sobre, Portfólo ...
+
+data/
+Textos, imagens, links e conteudos do site separados do layout.
+
+animations/
+Animacoes GSAP e ScrollTrigger centralizadas.
+
+config/
+configuracoes globais, como URL do spline
+
+App.jsx
+Arquivo que junta todas as secoes da pagina
+
+index.css
+estilos globais, tailwind e ajustes gerais
+

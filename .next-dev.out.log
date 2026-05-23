@@ -1,0 +1,16 @@
+
+> axis-site@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.15.3:3000
+✓ Ready in 531ms
+Creating turbopack project {
+  dir: 'C:\\Users\\hp\\OneDrive\\Documentos\\AXIS\\axis-site',
+  testMode: true
+}
+
+○ Compiling / ...
+✓ Finished writing to filesystem cache in 21.4s
+✓ Finished writing to filesystem cache in 81s

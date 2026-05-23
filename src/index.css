@@ -1,0 +1,52 @@
+﻿/* Importa as camadas base do Tailwind. */
+@import "tailwindcss";
+
+/* Define comportamento suave ao clicar em links internos. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove margem padrão do navegador. */
+body {
+  margin: 0;
+}
+
+/* Define o fundo padrão do site. */
+body {
+  background: #020916;
+}
+
+/* Define fonte mais limpa caso o Tailwind não configure uma fonte específica. */
+body {
+  font-family: Inter, Montserrat, system-ui, sans-serif;
+}
+
+/* Remove a barra de rolagem horizontal visual em navegadores WebKit. */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Remove a barra de rolagem horizontal no Firefox. */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+/* Remove a barra de rolagem horizontal no Edge antigo. */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+}
+
+/* Melhora a renderização de imagens. */
+img {
+  max-width: 100%;
+}
+
+/* Evita que imagens criem espaços indesejados. */
+img {
+  display: block;
+}
+
+/* Melhora a aparência de links. */
+a {
+  text-decoration: none;
+}

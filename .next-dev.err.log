@@ -1,0 +1,1517 @@
+
+
+#
+# Fatal process out of memory: Worklist::Segment::Create
+#
+----- Native stack trace -----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+#
+
+#
+
+
+#
+#
+#
+#
+
+<--- Last few GCs --->
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+<--- Last few GCs --->
+<--- Last few GCs --->
+<--- Last few GCs --->
+<--- Last few GCs --->
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+[23808:000002AE2D34F000]     1383 ms: Scavenge 5.9 (7.2) -> 5.3 (9.9) MB, pooled: 0 MB, 1.35 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Failed to reserve virtual memory for CodeRange
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+----- Native stack trace -----
+#
+ 1: 00007FF65E02EF0D 
+[21344:00000252E1512000]     3147 ms: Scavenge 6.0 (7.2) -> 5.3 (9.9) MB, pooled: 0 MB, 1.96 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+[27960:000001E3CEFDF000]     2632 ms: Scavenge 6.0 (7.7) -> 5.3 (10.4) MB, pooled: 0 MB, 4.20 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+# Fatal process out of memory: Re-embedded builtins: set permissions
+
+#
+#
+#
+#
+#
+
+----- Native stack trace -----
+
+#
+[12344:00000293655B4000]     4507 ms: Scavenge 8.7 (11.8) -> 7.4 (9.6) MB, pooled: 2 MB, 13.60 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+#
+#
+#
+#
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+#
+----- Native stack trace -----
+[12344:00000293655B4000]     5896 ms: Scavenge 9.5 (10.3) -> 8.9 (17.6) MB, pooled: 0 MB, 4.41 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 2: 00007FF65F481D66 
+#
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+ 1: 00007FF65E02EF0D 
+
+#
+#
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+ 3: 00007FF65EA9FFD6 
+----- Native stack trace -----
+
+
+
+
+
+----- Native stack trace -----
+ 1: 00007FF65E02EF0D 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+
+
+----- Native stack trace -----
+
+
+
+
+
+
+
+
+ 2: 00007FF65F481D66 
+ 4: 00007FF65EA9D483 
+
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D 
+ 1: 00007FF65E02EF0D 
+ 1: 00007FF65E02EF0D 
+ 3: 00007FF65ED232B6 
+ 2: 00007FF65F481D66 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D 
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+ 1: 00007FF65E0DAD5F node::OnFatalError+1343
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 5: 00007FF65EA9335F 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 
+ 2: 00007FF65F481D66 
+ 2: 00007FF65F481D66 
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+#
+ 4: 00007FF65EB8A22E 
+ 3: 00007FF65ED232B6 
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+----- Native stack trace -----
+ 2: 00007FF65F481D66 
+ 1: 00007FF65E0DAD5F node::OnFatalError+1343
+ 1: 00007FF65E0DAD5F node::OnFatalError+1343
+ 2: 00007FF65ED232D7 v8::Function::NewInstance+423
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 6: 00007FF65EA8D6B8 
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65ED232B6 
+ 3: 00007FF65ED232B6 
+ 3: 00007FF65ED232B6 
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65EB23997 v8::base::AddressSpaceReservation::AddressSpaceReservation+322071
+ 5: 00007FF65EBBD80F 
+ 4: 00007FF65EB8A22E 
+FATAL ERROR: Zone Allocation failed - process out of memory
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+
+ 3: 00007FF65ED232B6 
+ 2: 00007FF65ED232D7 v8::Function::NewInstance+423
+ 2: 00007FF65ED232D7 v8::Function::NewInstance+423
+----- Native stack trace -----
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 7: 00007FF65EA8D490 
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB8A22E 
+ 4: 00007FF65EB8A22E 
+ 4: 00007FF65EB8A22E 
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 5: 00007FF65EBBD80F 
+ 6: 00007FF65EBBE2C2 
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+----- Native stack trace -----
+ 1: 00007FF65E0DAD5F node::OnFatalError+1343
+ 4: 00007FF65EB8A22E 
+ 3: 00007FF65E69E076 v8::SnapshotCreator::GetIsolate+56566
+ 3: 00007FF65E69E076 v8::SnapshotCreator::GetIsolate+56566
+ 4: 00007FF65EABC3BB v8::Platform::SystemClockTimeMillis+491051
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB2D3DB v8::base::AddressSpaceReservation::AddressSpaceReservation+361563
+ 8: 00007FF65F4F525D 
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBD80F 
+
+ 5: 00007FF65EBBD80F 
+ 5: 00007FF65EBBD80F 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 7: 00007FF65EBBECA2 
+ 6: 00007FF65EBBE2C2 
+
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 2: 00007FF65ED232D7 v8::Function::NewInstance+423
+ 5: 00007FF65EBBD80F 
+ 4: 00007FF65E296511 v8::internal::Version::GetVersion+165025
+ 4: 00007FF65E7B3A20 EC_KEY_METHOD_set_verify+123376
+ 5: 00007FF65EA93E0E v8::Platform::SystemClockTimeMillis+325758
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBE205 SSL_CTX_set_default_read_buffer_len+43797
+ 9: 00007FF65F4F5572 
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBE2C2 
+ 6: 00007FF65EBBE2C2 
+ 6: 00007FF65EBBE2C2 
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 8: 00007FF65E6BC263 
+ 7: 00007FF65EBBECA2 
+ 1: 00007FF65E0DAD5F node::OnFatalError+1343
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 3: 00007FF65E69E076 v8::SnapshotCreator::GetIsolate+56566
+ 6: 00007FF65EBBE2C2 
+ 5: 00007FF65E763006 v8::base::CPU::has_bmi2+15030
+ 5: 00007FF65E7B3113 EC_KEY_METHOD_set_verify+121059
+ 6: 00007FF65EB26432 v8::base::AddressSpaceReservation::AddressSpaceReservation+332978
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+10: 00007FF65EA94D8E 
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65EBBECA2 
+ 7: 00007FF65EBBECA2 
+ 7: 00007FF65EBBECA2 
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 9: 00007FF65ED4E496 
+ 8: 00007FF65E6BC263 
+ 2: 00007FF65ED232D7 v8::Function::NewInstance+423
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 4: 00007FF65E296511 v8::internal::Version::GetVersion+165025
+ 7: 00007FF65EBBECA2 
+ 6: 00007FF65E76879C v8::base::CPU::has_bmi2+37452
+ 6: 00007FF65E7B726B EC_KEY_METHOD_set_verify+137787
+ 7: 00007FF65EB253E7 v8::base::AddressSpaceReservation::AddressSpaceReservation+328807
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+11: 00007FF65EB26432 
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 8: 00007FF65E6BC263 
+ 8: 00007FF65E6BC263 
+ 8: 00007FF65E6BC263 
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+10: 00007FF65E1E8C5D 
+ 9: 00007FF65ED4E496 
+ 3: 00007FF65E69E076 v8::SnapshotCreator::GetIsolate+56566
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 5: 00007FF65EA33965 v8::Promise::MarkAsSilent+693077
+ 8: 00007FF65E6BC263 
+ 7: 00007FF65E74AA2B v8::base::CPU::family+39867
+ 7: 00007FF65E7B6733 EC_KEY_METHOD_set_verify+134915
+ 8: 00007FF65EB36352 v8::internal::StrongRootAllocatorBase::deallocate_impl+15858
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 8: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+12: 00007FF65EB253E7 
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65ED4E496 
+ 9: 00007FF65ED4E496 
+ 9: 00007FF65ED4E496 
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+11: 00007FF65DF45B84 
+10: 00007FF65E1E8C5D 
+ 4: 00007FF65E7BFAF6 EC_KEY_METHOD_set_verify+172742
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 6: 00007FF65EA42147 v8::Promise::MarkAsSilent+752439
+ 9: 00007FF65ED4E496 
+ 8: 00007FF65E72DE70 v8::PropertyDescriptor::value+10784
+ 8: 00007FF65E7B61D4 EC_KEY_METHOD_set_verify+133540
+ 9: 00007FF65EB35E7B v8::internal::StrongRootAllocatorBase::deallocate_impl+14619
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+13: 00007FF65EB36352 
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65E1E8C5D 
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+10: 00007FF65E1E8C5D 
+10: 00007FF65E1E8C5D 
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+12: 00007FF65DF44F19 
+ 5: 00007FF65E7B0953 EC_KEY_METHOD_set_verify+110883
+11: 00007FF65DF45B84 
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+ 7: 00007FF65EA2A21D v8::Promise::MarkAsSilent+654349
+10: 00007FF65E1E8C5D 
+ 9: 00007FF65E72D592 v8::PropertyDescriptor::value+8514
+ 9: 00007FF65E7B26CB EC_KEY_METHOD_set_verify+118427
+10: 00007FF65FF9E7ED v8::base::UnsignedDivisionByConstant<unsigned __int64>+2791357
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65DF45B84 RSA_meth_get_flags+218964
+14: 00007FF65EB35E7B 
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF45B84 
+11: 00007FF65DF45B84 
+11: 00007FF65DF45B84 
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+13: 00007FF65DF4EC30 
+12: 00007FF65DF44F19 
+ 6: 00007FF65E7AFF7D EC_KEY_METHOD_set_verify+108365
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+ 8: 00007FF65EA176D5 v8::Promise::MarkAsSilent+577733
+11: 00007FF65DF45B84 
+10: 00007FF65E72BE89 v8::PropertyDescriptor::value+2617
+10: 00007FF65E7B7CCF EC_KEY_METHOD_set_verify+140447
+11: 00007FF65EB21460 v8::base::AddressSpaceReservation::AddressSpaceReservation+312544
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF44F19 RSA_meth_get_flags+215785
+15: 00007FF65FF9E7ED 
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF44F19 
+12: 00007FF65DF44F19 
+12: 00007FF65DF44F19 
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+14: 00007FF65ED78646 
+13: 00007FF65DF4EC30 
+ 7: 00007FF65E7BC15B EC_KEY_METHOD_set_verify+157995
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+ 9: 00007FF65EA1594B v8::Promise::MarkAsSilent+570171
+12: 00007FF65DF44F19 
+11: 00007FF65E72C11C v8::PropertyDescriptor::value+3276
+11: 00007FF65E7B739E EC_KEY_METHOD_set_verify+138094
+12: 00007FF65EB3BCEA X509_STORE_set_cleanup+5098
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+16: 00007FF65EB21460 
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+13: 00007FF65DF4EC30 
+13: 00007FF65DF4EC30 
+13: 00007FF65DF4EC30 
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+15: 00007FF65FFB9FB3 
+14: 00007FF65ED78646 
+ 8: 00007FF65E7B06F2 EC_KEY_METHOD_set_verify+110274
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+10: 00007FF65EA15CD0 v8::Promise::MarkAsSilent+571072
+13: 00007FF65DF4EC30 
+12: 00007FF65E72BFFB v8::PropertyDescriptor::value+2987
+12: 00007FF65E7B6733 EC_KEY_METHOD_set_verify+134915
+13: 00007FF65EB48186 uv_timer_set_repeat+20694
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+13: 00007FF65ED78646 uv_thread_detach+150
+17: 00007FF65EB3BCEA 
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65ED78646 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+14: 00007FF65ED78646 uv_thread_detach+150
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+16: 00007FFEE75EE957 
+15: 00007FF65FFB9FB3 
+ 9: 00007FF65E7C1999 EC_KEY_METHOD_set_verify+180585
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65ED78646 uv_thread_detach+150
+11: 00007FF65EA178BA v8::Promise::MarkAsSilent+578218
+14: 00007FF65ED78646 
+13: 00007FF65E702D72 v8::String::Utf8Value::~Utf8Value+44050
+13: 00007FF65E7B518A EC_KEY_METHOD_set_verify+129370
+14: 00007FF65E71B1E7 v8::String::Utf8Value::~Utf8Value+143495
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+18: 00007FF65EB48186 
+14: 00007FF65ED78646 uv_thread_detach+150
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+15: 00007FF65FFB9FB3 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+17: 00007FFEE868427C 
+16: 00007FFEE75EE957 
+10: 00007FF65E7BDC19 EC_KEY_METHOD_set_verify+164841
+11: 00007FF65E7B09A6 EC_KEY_METHOD_set_verify+110966
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+12: 00007FF65EA14EEB v8::Promise::MarkAsSilent+567515
+15: 00007FF65FFB9FB3 
+14: 000001E39FE7733A 
+14: 00007FF65E7C02C4 EC_KEY_METHOD_set_verify+174740
+15: 000001AB602B733A 
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+15: 00007FFEE75EE957 BaseThreadInitThunk+23
+19: 00007FF65E71B1E7 
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 
+16: 00007FFEE75EE957 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+17: 00007FFEE868427C 
+14: 00007FF65ED78646 uv_thread_detach+150
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+13: 00007FF65EA1435F v8::Promise::MarkAsSilent+564559
+16: 00007FFEE75EE957 
+15: 00007FF65E7B099C EC_KEY_METHOD_set_verify+110956
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE868427C RtlUserThreadStart+44
+20: 000001CBA7E77750 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C 
+17: 00007FFEE868427C 
+17: 00007FFEE868427C RtlUserThreadStart+44
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+12: 00007FF65E7AFF7D EC_KEY_METHOD_set_verify+108365
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C RtlUserThreadStart+44
+14: 00007FF65EA129F3 v8::Promise::MarkAsSilent+558051
+17: 00007FFEE868427C 
+16: 00007FF65E7AFF7D EC_KEY_METHOD_set_verify+108365
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C RtlUserThreadStart+44
+14: 00007FF65ED78646 uv_thread_detach+150
+13: 00007FF65E7AF73B EC_KEY_METHOD_set_verify+106251
+17: 00007FFEE868427C RtlUserThreadStart+44
+15: 00007FF65EA09E16 v8::Promise::MarkAsSilent+522246
+17: 00007FF65E7AF73B EC_KEY_METHOD_set_verify+106251
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+14: 00007FF65E7B9009 EC_KEY_METHOD_set_verify+145369
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+18: 00007FF65E7B9009 EC_KEY_METHOD_set_verify+145369
+16: 00007FF65ECA7FCF X509_STORE_set_get_issuer+270383
+15: 00007FF65E7B7090 EC_KEY_METHOD_set_verify+137312
+17: 00007FF65EC9E8E8 X509_STORE_set_get_issuer+231752
+19: 00007FF65E7B7090 EC_KEY_METHOD_set_verify+137312
+17: 00007FFEE868427C RtlUserThreadStart+44
+16: 00007FF65E7B67AD EC_KEY_METHOD_set_verify+135037
+18: 00007FF65EC9E11D X509_STORE_set_get_issuer+229757
+20: 00007FF65E7B67AD EC_KEY_METHOD_set_verify+135037
+17: 00007FF65E7B61D4 EC_KEY_METHOD_set_verify+133540
+19: 00007FF65EC9EBAC X509_STORE_set_get_issuer+232460
+21: 00007FF65E7B518A EC_KEY_METHOD_set_verify+129370
+18: 00007FF65E7B26CB EC_KEY_METHOD_set_verify+118427
+20: 00007FF65E72225B v8::String::Utf8Value::~Utf8Value+172283
+22: 00007FF65E7C02C4 EC_KEY_METHOD_set_verify+174740
+19: 00007FF65E7B72DA EC_KEY_METHOD_set_verify+137898
+21: 000002931FE7733A 
+23: 00007FF65E7B099C EC_KEY_METHOD_set_verify+110956
+20: 00007FF65E7B6733 EC_KEY_METHOD_set_verify+134915
+24: 00007FF65E7AFF7D EC_KEY_METHOD_set_verify+108365
+21: 00007FF65E7BD517 EC_KEY_METHOD_set_verify+163047
+25: 00007FF65E7AF73B EC_KEY_METHOD_set_verify+106251
+22: 00007FF65E7AFD46 EC_KEY_METHOD_set_verify+107798
+26: 00007FF65E7B9009 EC_KEY_METHOD_set_verify+145369
+23: 00007FF65E7AE6AB EC_KEY_METHOD_set_verify+102011
+27: 00007FF65E7B7090 EC_KEY_METHOD_set_verify+137312
+24: 00007FF65E7AD9E6 EC_KEY_METHOD_set_verify+98742
+28: 00007FF65E7B67AD EC_KEY_METHOD_set_verify+135037
+25: 00007FF65E7D8548 EC_KEY_METHOD_set_verify+273688
+29: 00007FF65E7B61D4 EC_KEY_METHOD_set_verify+133540
+26: 00007FF65E7CC560 EC_KEY_METHOD_set_verify+224560
+30: 00007FF65E7B26CB EC_KEY_METHOD_set_verify+118427
+27: 00007FF65E7E7D1C EC_KEY_METHOD_set_verify+337132
+31: 00007FF65E7B72DA EC_KEY_METHOD_set_verify+137898
+28: 00007FF65E7DEB66 EC_KEY_METHOD_set_verify+299830
+32: 00007FF65E7B6733 EC_KEY_METHOD_set_verify+134915
+29: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+33: 00007FF65E7BD517 EC_KEY_METHOD_set_verify+163047
+30: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+31: 00007FF65E7F1312 EC_KEY_METHOD_set_verify+375522
+34: 00007FF65E7AFD46 EC_KEY_METHOD_set_verify+107798
+35: 00007FF65E7AE6AB EC_KEY_METHOD_set_verify+102011
+32: 00007FF65E7D0DE5 EC_KEY_METHOD_set_verify+243125
+36: 00007FF65E7AD9E6 EC_KEY_METHOD_set_verify+98742
+33: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+37: 00007FF65E7D8548 EC_KEY_METHOD_set_verify+273688
+34: 00007FF65E7CF42A EC_KEY_METHOD_set_verify+236538
+38: 00007FF65E7CC560 EC_KEY_METHOD_set_verify+224560
+35: 00007FF65E7E0160 EC_KEY_METHOD_set_verify+305456
+39: 00007FF65E7E7D1C EC_KEY_METHOD_set_verify+337132
+36: 00007FF65E7DF484 EC_KEY_METHOD_set_verify+302164
+40: 00007FF65E7DEB66 EC_KEY_METHOD_set_verify+299830
+37: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+41: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+38: 00007FF65E7E328E EC_KEY_METHOD_set_verify+318046
+42: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+39: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+43: 00007FF65E7F1312 EC_KEY_METHOD_set_verify+375522
+40: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+44: 00007FF65E7D0DE5 EC_KEY_METHOD_set_verify+243125
+41: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+45: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+42: 00007FF65E7F021F EC_KEY_METHOD_set_verify+371183
+46: 00007FF65E7CF42A EC_KEY_METHOD_set_verify+236538
+43: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+47: 00007FF65E7E0160 EC_KEY_METHOD_set_verify+305456
+44: 00007FF65E7D8EEA EC_KEY_METHOD_set_verify+276154
+48: 00007FF65E7DF484 EC_KEY_METHOD_set_verify+302164
+45: 00007FF65E7CC5E7 EC_KEY_METHOD_set_verify+224695
+49: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+46: 00007FF65E7CB7B4 EC_KEY_METHOD_set_verify+221060
+50: 00007FF65E7E328E EC_KEY_METHOD_set_verify+318046
+47: 00007FF65E7CAAA2 EC_KEY_METHOD_set_verify+217714
+51: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+48: 00007FF65E7CA74A EC_KEY_METHOD_set_verify+216858
+52: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+53: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+49: 00007FF65E7C5D79 EC_KEY_METHOD_set_verify+197961
+50: 00007FF65ECA0C7F X509_STORE_set_get_issuer+240863
+54: 00007FF65E7F021F EC_KEY_METHOD_set_verify+371183
+51: 00007FF65ECA3A81 X509_STORE_set_get_issuer+252641
+55: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+52: 00007FF65ED2C793 v8::ScriptCompiler::CompileFunction+1011
+56: 00007FF65E7D8EEA EC_KEY_METHOD_set_verify+276154
+53: 00007FF65E0F7733 node::GetCurrentEnvironment+20627
+57: 00007FF65E7CC5E7 EC_KEY_METHOD_set_verify+224695
+54: 00007FF65E0F5ECD node::GetCurrentEnvironment+14381
+58: 00007FF65E7CB7B4 EC_KEY_METHOD_set_verify+221060
+55: 000002AE6598F64D 
+59: 00007FF65E7CAAA2 EC_KEY_METHOD_set_verify+217714
+60: 00007FF65E7CA74A EC_KEY_METHOD_set_verify+216858
+61: 00007FF65E7C5D79 EC_KEY_METHOD_set_verify+197961
+62: 00007FF65ECA0C7F X509_STORE_set_get_issuer+240863
+63: 00007FF65ECA3A81 X509_STORE_set_get_issuer+252641
+64: 00007FF65ED2C793 v8::ScriptCompiler::CompileFunction+1011
+65: 00007FF65E0F7733 node::GetCurrentEnvironment+20627
+66: 00007FF65E0F5ECD node::GetCurrentEnvironment+14381
+67: 000002529FDCF64D 
+
+
+#
+
+# Fatal process out of memory: Re-embedded builtins: set permissions
+<--- Last few GCs --->
+#
+
+----- Native stack trace -----
+
+
+
+#
+# Fatal JavaScript out of memory: MemoryChunk allocation failed during deserialization.
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+#
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+----- Native stack trace -----
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 4: 00007FF65EB23997 v8::base::AddressSpaceReservation::AddressSpaceReservation+322071
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 5: 00007FF65EAD5BEA v8::base::AddressSpaceReservation::AddressSpaceReservation+3178
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 6: 00007FF65EAD5CAC v8::base::AddressSpaceReservation::AddressSpaceReservation+3372
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+ 7: 00007FF65EAD659B v8::base::AddressSpaceReservation::AddressSpaceReservation+5659
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+ 8: 00007FF65EAAD7F1 v8::Platform::SystemClockTimeMillis+430689
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+ 9: 00007FF65EB136A3 v8::base::AddressSpaceReservation::AddressSpaceReservation+255779
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+10: 00007FF65EB1340E v8::base::AddressSpaceReservation::AddressSpaceReservation+255118
+14: 00007FF65ED78646 uv_thread_detach+150
+11: 00007FF65EB121F8 v8::base::AddressSpaceReservation::AddressSpaceReservation+250488
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+12: 00007FF65EB1217A v8::base::AddressSpaceReservation::AddressSpaceReservation+250362
+13: 00007FF65E6D98C3 v8::internal::Version::GetSONAME+242723
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+14: 00007FF65E6D770C v8::internal::Version::GetSONAME+234092
+15: 00007FF65E6DD3B6 v8::internal::Version::GetSONAME+257814
+16: 00007FF65E6D83F8 v8::internal::Version::GetSONAME+237400
+17: 00007FF65E6D78EE v8::internal::Version::GetSONAME+234574
+18: 00007FF65E6DD3B6 v8::internal::Version::GetSONAME+257814
+19: 00007FF65E6D83F8 v8::internal::Version::GetSONAME+237400
+20: 00007FF65E6D78EE v8::internal::Version::GetSONAME+234574
+21: 00007FF65E6DD3B6 v8::internal::Version::GetSONAME+257814
+22: 00007FF65E6D83F8 v8::internal::Version::GetSONAME+237400
+
+23: 00007FF65E6D78EE v8::internal::Version::GetSONAME+234574
+
+24: 00007FF65E6DD3B6 v8::internal::Version::GetSONAME+257814
+#
+25: 00007FF65E6D83F8 v8::internal::Version::GetSONAME+237400
+# Fatal process out of memory: Re-embedded builtins: set permissions
+26: 00007FF65E6D78EE v8::internal::Version::GetSONAME+234574
+27: 00007FF65E6DD3B6 v8::internal::Version::GetSONAME+257814
+#
+28: 00007FF65E6D83F8 v8::internal::Version::GetSONAME+237400
+----- Native stack trace -----
+29: 00007FF65E6D78EE v8::internal::Version::GetSONAME+234574
+
+30: 00007FF65E6DE98E v8::internal::Version::GetSONAME+263406
+ 1: 00007FF65E02EF0D 
+31: 00007FF65E6D813D v8::internal::Version::GetSONAME+236701
+ 2: 00007FF65F481D66 
+32: 00007FF65EB2B958 v8::base::AddressSpaceReservation::AddressSpaceReservation+354776
+
+ 3: 00007FF65ED232B6 
+33: 00007FF65E6B6623 v8::internal::Version::GetSONAME+98691
+
+34: 00007FF65EBBE8AC SSL_CTX_set_default_read_buffer_len+45500
+ 4: 00007FF65EB8A22E 
+#
+ 5: 00007FF65EBBD80F 
+35: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+# Fatal error in , line 0
+ 6: 00007FF65EBBE2C2 
+36: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 7: 00007FF65EBBECA2 
+37: 00007FF65ED4E496 v8::Isolate::Initialize+662
+# Out of memory: HashMap::Initialize
+ 8: 00007FF65E6BC263 
+#
+38: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+ 9: 00007FF65ED4E496 
+#
+39: 00007FF65DF45B84 RSA_meth_get_flags+218964
+10: 00007FF65E1E8C5D 
+#
+40: 00007FF65DF44F19 RSA_meth_get_flags+215785
+11: 00007FF65DF45B84 
+#FailureMessage Object: 000000735D7FA5A0
+41: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+12: 00007FF65DF44F19 
+42: 00007FF65ED78646 uv_thread_detach+150
+----- Native stack trace -----
+13: 00007FF65DF4EC30 
+
+43: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+14: 00007FF65ED78646 
+44: 00007FFEE75EE957 BaseThreadInitThunk+23
+15: 00007FF65FFB9FB3 
+45: 00007FFEE868427C RtlUserThreadStart+44
+16: 00007FFEE75EE957 
+17: 00007FFEE868427C 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 2: 00007FF65F4822FF V8_Fatal+287
+ 3: 00007FF65ED21376 X509_STORE_set_get_issuer+766934
+ 4: 00007FF65ED20A62 X509_STORE_set_get_issuer+764610
+ 5: 00007FF65ED20890 X509_STORE_set_get_issuer+764144
+ 6: 00007FF65E7A8F4F EC_KEY_METHOD_set_verify+79647
+ 7: 00007FF65E7C9B76 EC_KEY_METHOD_set_verify+213830
+ 8: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+ 9: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+10: 00007FF65E7E5CA2 EC_KEY_METHOD_set_verify+328818
+11: 00007FF65E7E26C3 EC_KEY_METHOD_set_verify+315027
+12: 00007FF65E7E02B8 EC_KEY_METHOD_set_verify+305800
+13: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+14: 00007FF65E7DF0F9 EC_KEY_METHOD_set_verify+301257
+
+
+15: 00007FF65E7E86A9 EC_KEY_METHOD_set_verify+339577
+
+
+
+16: 00007FF65E7E7576 EC_KEY_METHOD_set_verify+335174
+
+#
+#
+17: 00007FF65E7DEB66 EC_KEY_METHOD_set_verify+299830
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+18: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+#
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+19: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+----- Native stack trace -----
+----- Native stack trace -----
+20: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+
+
+#
+----- Native stack trace -----
+21: 00007FF65E7E328E EC_KEY_METHOD_set_verify+318046
+
+22: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+23: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+24: 00007FF65E7D9822 EC_KEY_METHOD_set_verify+278514
+25: 00007FF65E7CF3B5 EC_KEY_METHOD_set_verify+236421
+26: 00007FF65E7E0160 EC_KEY_METHOD_set_verify+305456
+27: 00007FF65E7DF484 EC_KEY_METHOD_set_verify+302164
+28: 00007FF65E7DF0F9 EC_KEY_METHOD_set_verify+301257
+29: 00007FF65E7E78C0 EC_KEY_METHOD_set_verify+336016
+30: 00007FF65E7DEB66 EC_KEY_METHOD_set_verify+299830
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 1: 00007FF65E02EF0D 
+31: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+32: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 
+33: 00007FF65E7F1312 EC_KEY_METHOD_set_verify+375522
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 3: 00007FF65ED232B6 
+34: 00007FF65E7D0DE5 EC_KEY_METHOD_set_verify+243125
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB8A22E 
+35: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBD80F 
+36: 00007FF65E7D8EEA EC_KEY_METHOD_set_verify+276154
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBE2C2 
+37: 00007FF65E7CC5E7 EC_KEY_METHOD_set_verify+224695
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65EBBECA2 
+38: 00007FF65E7CB7B4 EC_KEY_METHOD_set_verify+221060
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 8: 00007FF65E6BC263 
+39: 00007FF65E7CAAA2 EC_KEY_METHOD_set_verify+217714
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65ED4E496 
+40: 00007FF65E7CA74A EC_KEY_METHOD_set_verify+216858
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65E1E8C5D 
+41: 00007FF65E7C5D79 EC_KEY_METHOD_set_verify+197961
+
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF45B84 
+42: 00007FF65ECA0C7F X509_STORE_set_get_issuer+240863
+
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF44F19 
+43: 00007FF65ECA3A81 X509_STORE_set_get_issuer+252641
+#
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+13: 00007FF65DF4EC30 
+44: 00007FF65ED2C793 v8::ScriptCompiler::CompileFunction+1011
+# Fatal process out of memory: Re-embedded builtins: set permissions
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65ED78646 
+45: 00007FF65E0F7733 node::GetCurrentEnvironment+20627
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+#
+15: 00007FF65FFB9FB3 
+46: 00007FF65E0F5ECD node::GetCurrentEnvironment+14381
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+----- Native stack trace -----
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+47: 000001871FDCF64D 
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C RtlUserThreadStart+44
+
+17: 00007FFEE868427C RtlUserThreadStart+44
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F481D66 
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB8A22E 
+ 5: 00007FF65EBBD80F 
+ 6: 00007FF65EBBE2C2 
+ 7: 00007FF65EBBECA2 
+ 8: 00007FF65E6BC263 
+ 9: 00007FF65ED4E496 
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F481D66 
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB8A22E 
+ 5: 00007FF65EBBD80F 
+ 6: 00007FF65EBBE2C2 
+ 7: 00007FF65EBBECA2 
+ 8: 00007FF65E6BC263 
+ 9: 00007FF65ED4E496 
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+
+
+#
+#
+----- Native stack trace -----
+# Fatal process out of memory: Re-embedded builtins: set permissions
+
+#
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+
+
+
+
+----- Native stack trace -----
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+
+
+
+
+
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+#
+#
+#
+#
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+#
+#
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+#
+----- Native stack trace -----
+#
+----- Native stack trace -----
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+----- Native stack trace -----
+
+----- Native stack trace -----
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+
+ 1: 00007FF65E02EF0D 
+
+
+ 1: 00007FF65E02EF0D 
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 2: 00007FF65F481D66 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 2: 00007FF65F481D66 
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+ 3: 00007FF65ED232B6 
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB8A22E 
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 4: 00007FF65EB8A22E 
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+ 5: 00007FF65EBBD80F 
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 6: 00007FF65EBBE2C2 
+ 5: 00007FF65EBBD80F 
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 6: 00007FF65EBBE2C2 
+14: 00007FF65ED78646 uv_thread_detach+150
+ 7: 00007FF65EBBECA2 
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 7: 00007FF65EBBECA2 
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+ 8: 00007FF65E6BC263 
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 8: 00007FF65E6BC263 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+ 9: 00007FF65ED4E496 
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 9: 00007FF65ED4E496 
+17: 00007FFEE868427C RtlUserThreadStart+44
+10: 00007FF65E1E8C5D 
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+ 1: 00007FF65E02EF0D 
+14: 00007FF65ED78646 uv_thread_detach+150
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+14: 00007FF65ED78646 uv_thread_detach+150
+ 2: 00007FF65F481D66 
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+ 3: 00007FF65ED232B6 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 
+
+17: 00007FFEE868427C RtlUserThreadStart+44
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+ 4: 00007FF65EB8A22E 
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C 
+
+17: 00007FFEE868427C RtlUserThreadStart+44
+ 5: 00007FF65EBBD80F 
+#
+ 6: 00007FF65EBBE2C2 
+# Fatal process out of memory: Re-embedded builtins: set permissions
+ 7: 00007FF65EBBECA2 
+ 8: 00007FF65E6BC263 
+#
+ 9: 00007FF65ED4E496 
+----- Native stack trace -----
+10: 00007FF65E1E8C5D 
+
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+14: 00007FF65ED78646 uv_thread_detach+150
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+
+thread '<unnamed>' (26116) panicked at C:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rayon-core-1.12.1\src\registry.rs:168:10:
+The global thread pool has not been initialized.: ThreadPoolBuildError { kind: IOError(Os { code: 1450, kind: Uncategorized, message: "Não existem recursos de sistema suficientes para concluir o serviço solicitado." }) }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+
+
+#
+
+
+# Fatal process out of memory: Re-embedded builtins: set permissions
+
+#
+#
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+#
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+
+----- Native stack trace -----
+----- Native stack trace -----
+#
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+
+
+----- Native stack trace -----
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 1: 00007FF65E02EF0D 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 2: 00007FF65F481D66 
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 3: 00007FF65ED232B6 
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 2: 00007FF65F481D66 v8::base::FatalOOM+54
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 4: 00007FF65EB8A22E 
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 3: 00007FF65ED232B6 v8::Function::NewInstance+390
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 5: 00007FF65EBBD80F 
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 4: 00007FF65EB8A22E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111438
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 6: 00007FF65EBBE2C2 
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 5: 00007FF65EBBD80F SSL_CTX_set_default_read_buffer_len+41247
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 7: 00007FF65EBBECA2 
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 6: 00007FF65EBBE2C2 SSL_CTX_set_default_read_buffer_len+43986
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+ 8: 00007FF65E6BC263 
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 7: 00007FF65EBBECA2 SSL_CTX_set_default_read_buffer_len+46514
+ 8: 00007FF65E6BC263 v8::internal::Version::GetSONAME+122307
+ 9: 00007FF65ED4E496 
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+ 9: 00007FF65ED4E496 v8::Isolate::Initialize+662
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+10: 00007FF65E1E8C5D node::SetIsolateUpForNode+749
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+12: 00007FF65DF44F19 
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+11: 00007FF65DF45B84 RSA_meth_get_flags+218964
+14: 00007FF65ED78646 uv_thread_detach+150
+13: 00007FF65DF4EC30 
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+12: 00007FF65DF44F19 RSA_meth_get_flags+215785
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+14: 00007FF65ED78646 
+14: 00007FF65ED78646 uv_thread_detach+150
+13: 00007FF65DF4EC30 RSA_meth_get_flags+256000
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+15: 00007FF65FFB9FB3 
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+14: 00007FF65ED78646 uv_thread_detach+150
+17: 00007FFEE868427C RtlUserThreadStart+44
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+15: 00007FF65FFB9FB3 v8::base::UnsignedDivisionByConstant<unsigned __int64>+2903939
+17: 00007FFEE868427C RtlUserThreadStart+44
+17: 00007FFEE868427C RtlUserThreadStart+44
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+
+<--- Last few GCs --->
+
+[26880:00000204D2942000]     3239 ms: Scavenge 8.7 (11.9) -> 7.5 (11.6) MB, pooled: 0 MB, 1.03 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[26880:00000204D2942000]     4339 ms: Scavenge 9.5 (12.3) -> 8.8 (17.3) MB, pooled: 0 MB, 1011.88 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF65E0DAD5F 
+ 2: 00007FF65ED232D7 
+ 3: 00007FF65E69E076 
+ 4: 00007FF65FCD8DC5 
+ 5: 00007FF65F846CB7 
+ 6: 00007FF65F84678D 
+ 7: 00007FF65F701657 
+ 8: 00007FF65F6F7F71 
+ 9: 00007FF65F6F7303 
+10: 00007FF65EC96F0F 
+11: 00007FF65EC5BF9D 
+12: 00007FF65EC5BC95 
+13: 00007FF65F4F593F 
+14: 00007FF65E02ADCE 
+15: 00007FF65ED78646 
+16: 00007FF65FFB9FB3 
+17: 00007FFEE75EE957 BaseThreadInitThunk+23
+18: 00007FFEE868427C RtlUserThreadStart+44
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F481D66 
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB8A22E 
+ 5: 00007FF65EBBD80F 
+ 6: 00007FF65EBBE2C2 
+ 7: 00007FF65EBBECA2 
+ 8: 00007FF65E6BC263 
+ 9: 00007FF65ED4E496 
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 
+17: 00007FFEE868427C 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F481D66 
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB8A22E 
+ 5: 00007FF65EBBD80F 
+ 6: 00007FF65EBBE2C2 
+ 7: 00007FF65EBBECA2 
+ 8: 00007FF65E6BC263 
+ 9: 00007FF65ED4E496 
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+
+
+#
+# Fatal error in , line 0
+# Out of memory: HashMap::Initialize
+#
+#
+#
+#FailureMessage Object: 000000131CBF8820
+----- Native stack trace -----
+
+
+
+#
+# Fatal error in , line 0
+# Out of memory: HashMap::Initialize
+#
+#
+#
+#FailureMessage Object: 000000D7813FA260
+----- Native stack trace -----
+
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F4822FF 
+ 3: 00007FF65ED21376 
+ 4: 00007FF65ED20A62 
+ 5: 00007FF65ED20890 
+ 6: 00007FF65E7A8F4F 
+ 7: 00007FF65E7C9B76 
+ 1: 00007FF65E02EF0D node::MultiIsolatePlatform::DisposeIsolate+5341
+ 8: 00007FF65E7E026B 
+ 2: 00007FF65F4822FF V8_Fatal+287
+ 9: 00007FF65E7DF43E 
+ 3: 00007FF65ED21376 X509_STORE_set_get_issuer+766934
+10: 00007FF65E7E5CA2 
+ 4: 00007FF65ED20A62 X509_STORE_set_get_issuer+764610
+11: 00007FF65E7E26C3 
+ 5: 00007FF65ED20890 X509_STORE_set_get_issuer+764144
+12: 00007FF65E7E02B8 
+ 6: 00007FF65E7A8F4F EC_KEY_METHOD_set_verify+79647
+13: 00007FF65E7DF43E 
+ 7: 00007FF65E7E8747 EC_KEY_METHOD_set_verify+339735
+14: 00007FF65E7DF0F9 
+ 8: 00007FF65E7E7576 EC_KEY_METHOD_set_verify+335174
+15: 00007FF65E7E86A9 
+ 9: 00007FF65E7DEB66 EC_KEY_METHOD_set_verify+299830
+16: 00007FF65E7E7576 
+10: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+17: 00007FF65E7DEB66 
+11: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+18: 00007FF65E7E026B 
+12: 00007FF65E7DFCA6 EC_KEY_METHOD_set_verify+304246
+19: 00007FF65E7DF43E 
+13: 00007FF65E7DF484 EC_KEY_METHOD_set_verify+302164
+20: 00007FF65E7E4E04 
+14: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+21: 00007FF65E7E328E 
+15: 00007FF65E7F021F EC_KEY_METHOD_set_verify+371183
+22: 00007FF65E7E026B 
+16: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+23: 00007FF65E7DF43E 
+17: 00007FF65E7CF42A EC_KEY_METHOD_set_verify+236538
+24: 00007FF65E7D9822 
+18: 00007FF65E7E0160 EC_KEY_METHOD_set_verify+305456
+25: 00007FF65E7CF3B5 
+19: 00007FF65E7DF484 EC_KEY_METHOD_set_verify+302164
+26: 00007FF65E7E0160 
+20: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+27: 00007FF65E7DF484 
+21: 00007FF65E7E328E EC_KEY_METHOD_set_verify+318046
+28: 00007FF65E7DF0F9 
+22: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+29: 00007FF65E7E78C0 
+23: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+30: 00007FF65E7DEB66 
+24: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+31: 00007FF65E7E026B 
+25: 00007FF65E7F021F EC_KEY_METHOD_set_verify+371183
+32: 00007FF65E7DF43E 
+26: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+33: 00007FF65E7F1312 
+27: 00007FF65E7CF42A EC_KEY_METHOD_set_verify+236538
+34: 00007FF65E7D0DE5 
+28: 00007FF65E7E0160 EC_KEY_METHOD_set_verify+305456
+35: 00007FF65E7D99EB 
+29: 00007FF65E7DF484 EC_KEY_METHOD_set_verify+302164
+36: 00007FF65E7D8EEA 
+30: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+37: 00007FF65E7CC5E7 
+31: 00007FF65E7E328E EC_KEY_METHOD_set_verify+318046
+38: 00007FF65E7CB7B4 
+32: 00007FF65E7E026B EC_KEY_METHOD_set_verify+305723
+39: 00007FF65E7CAAA2 
+33: 00007FF65E7DF43E EC_KEY_METHOD_set_verify+302094
+40: 00007FF65E7CA74A 
+34: 00007FF65E7E4E04 EC_KEY_METHOD_set_verify+325076
+41: 00007FF65E7C5D79 
+35: 00007FF65E7F021F EC_KEY_METHOD_set_verify+371183
+42: 00007FF65ECA0C7F 
+36: 00007FF65E7D99EB EC_KEY_METHOD_set_verify+278971
+43: 00007FF65ECA3A81 
+37: 00007FF65E7D8EEA EC_KEY_METHOD_set_verify+276154
+44: 00007FF65ED2C793 
+38: 00007FF65E7CC5E7 EC_KEY_METHOD_set_verify+224695
+45: 00007FF65E0F7733 
+39: 00007FF65E7CB7B4 EC_KEY_METHOD_set_verify+221060
+46: 00007FF65E0F5ECD 
+40: 00007FF65E7CAAA2 EC_KEY_METHOD_set_verify+217714
+47: 000001D89FDCF64D 
+41: 00007FF65E7CA74A EC_KEY_METHOD_set_verify+216858
+42: 00007FF65E7C5D79 EC_KEY_METHOD_set_verify+197961
+43: 00007FF65ECA0C7F X509_STORE_set_get_issuer+240863
+44: 00007FF65ECA3A81 X509_STORE_set_get_issuer+252641
+45: 00007FF65ED2C793 v8::ScriptCompiler::CompileFunction+1011
+46: 00007FF65E0F7733 node::GetCurrentEnvironment+20627
+47: 00007FF65E0F5ECD node::GetCurrentEnvironment+14381
+48: 000001D9D72CF64D 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F481D66 
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB8A22E 
+ 5: 00007FF65EBBD80F 
+ 6: 00007FF65EBBE2C2 
+ 7: 00007FF65EBBECA2 
+ 8: 00007FF65E6BC263 
+ 9: 00007FF65ED4E496 
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 BaseThreadInitThunk+23
+17: 00007FFEE868427C RtlUserThreadStart+44
+
+<--- Last few GCs --->
+
+
+
+#
+# Fatal JavaScript out of memory: MemoryChunk allocation failed during deserialization.
+#
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[34888:000002BD67007000]    12239 ms: Scavenge 9.1 (11.8) -> 8.3 (12.6) MB, pooled: 0 MB, 0.75 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34888:000002BD67007000]    17334 ms: Scavenge 10.4 (13.3) -> 9.6 (13.8) MB, pooled: 2 MB, 5052.59 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34888:000002BD67007000]    17377 ms: Scavenge 11.2 (14.1) -> 10.4 (17.3) MB, pooled: 0 MB, 0.52 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F481D66 
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB23997 
+ 5: 00007FF65EAD5BEA 
+ 6: 00007FF65EAD5CAC 
+ 7: 00007FF65EAD659B 
+ 8: 00007FF65EAAD7F1 
+ 9: 00007FF65EB136A3 
+10: 00007FF65EB1340E 
+11: 00007FF65EB121F8 
+12: 00007FF65EB1217A 
+13: 00007FF65EB3BC15 
+14: 00007FF65E6D9938 
+15: 00007FF65E6D770C 
+16: 00007FF65E6DD3B6 
+17: 00007FF65E6D83F8 
+18: 00007FF65E6D78EE 
+19: 00007FF65E6DD3B6 
+ 1: 00007FF65E0DAD5F 
+20: 00007FF65E6D83F8 
+ 2: 00007FF65ED232D7 
+21: 00007FF65E6D78EE 
+ 3: 00007FF65EB23997 
+22: 00007FF65E6DD3B6 
+ 4: 00007FF65EABC3BB 
+23: 00007FF65E6D83F8 
+ 5: 00007FF65EAE472A 
+24: 00007FF65E6D78EE 
+ 6: 00007FF65EB25D76 
+25: 00007FF65E6DD3B6 
+ 7: 00007FF65EB253C6 
+26: 00007FF65E6D83F8 
+ 8: 00007FF65EB36352 
+27: 00007FF65E6D78EE 
+ 9: 00007FF65EB35E7B 
+28: 00007FF65E6DD3B6 
+10: 00007FF65FF9E7ED 
+29: 00007FF65E6D83F8 
+11: 00007FF65EB21460 
+30: 00007FF65E6D78EE 
+12: 00007FF65EB6992B 
+31: 00007FF65E6DE98E 
+13: 00007FF65EB6965E 
+32: 00007FF65E6D813D 
+14: 00007FF65EB6413C 
+33: 00007FF65EB2B958 
+15: 00007FF65E928161 
+34: 00007FF65E6B6623 
+16: 00007FF65E8F0507 
+35: 00007FF65EBBE8AC 
+17: 00007FF65E8F0B52 
+36: 00007FF65EBBECA2 
+18: 00007FF65EC9EC03 
+37: 00007FF65E6BC263 
+19: 00007FF65E72225B 
+38: 00007FF65ED4E496 
+20: 000002BD1FE7733A 
+39: 00007FF65E1E8C5D 
+40: 00007FF65DF45B84 
+41: 00007FF65DF44F19 
+42: 00007FF65DF4EC30 
+43: 00007FF65ED78646 
+44: 00007FF65FFB9FB3 
+45: 00007FFEE75EE957 BaseThreadInitThunk+23
+46: 00007FFEE868427C RtlUserThreadStart+44
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF65E02EF0D 
+ 2: 00007FF65F481D66 
+ 3: 00007FF65ED232B6 
+ 4: 00007FF65EB8A22E 
+ 5: 00007FF65EBBD80F 
+ 6: 00007FF65EBBE2C2 
+ 7: 00007FF65EBBECA2 
+ 8: 00007FF65E6BC263 
+ 9: 00007FF65ED4E496 
+10: 00007FF65E1E8C5D 
+11: 00007FF65DF45B84 
+12: 00007FF65DF44F19 
+13: 00007FF65DF4EC30 
+14: 00007FF65ED78646 
+15: 00007FF65FFB9FB3 
+16: 00007FFEE75EE957 
+17: 00007FFEE868427C RtlUserThreadStart+44
