@@ -38,10 +38,16 @@ export function DynamicNavigation({ items, logo }) {
           <span>en</span>
 
           {/* Mostra a bandeira do Brasil. */}
-          <span className="ml-2">ðŸ‡§ðŸ‡·</span>
+          <span aria-label="Brasil" className="relative ml-2 h-3.5 w-5 overflow-hidden rounded-[2px] bg-[#009b3a] shadow-[0_0_0_1px_rgba(255,255,255,0.18)]">
+            <span className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#ffdf00]" />
+            <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#002776]" />
+          </span>
 
           {/* Mostra a bandeira dos Estados Unidos. */}
-          <span>ðŸ‡ºðŸ‡¸</span>
+          <span aria-label="Estados Unidos" className="relative h-3.5 w-5 overflow-hidden rounded-[2px] bg-white shadow-[0_0_0_1px_rgba(255,255,255,0.18)]">
+            <span className="absolute inset-0 bg-[repeating-linear-gradient(to_bottom,#b22234_0_1px,#ffffff_1px_2px)]" />
+            <span className="absolute left-0 top-0 h-2 w-2.5 bg-[#3c3b6e]" />
+          </span>
         </div>
       </div>
     </header>
