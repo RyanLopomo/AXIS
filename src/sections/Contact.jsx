@@ -15,12 +15,17 @@ import {
 
 // Importa o botão magnético.
 import { MagneticButton } from "../lightswind/magnetic-button";
+import { translations } from "../data/translations";
+import { useSitePreferences } from "../context/site-preferences";
 
 // Define o número de WhatsApp que receberá o briefing.
 const whatsappNumber = "5513991087633";
 
 // Cria a seção Contato.
 export function Contact() {
+  const { language } = useSitePreferences();
+  const content = translations[language].contact;
+
   // Guarda o valor digitado no campo nome.
   const [name, setName] = useState("");
 
@@ -37,14 +42,14 @@ export function Contact() {
   function handleSendBriefing() {
     // Monta a mensagem que será enviada para o WhatsApp.
     const briefingMessage = `
-Olá, vim pelo site da AXIS e quero iniciar um projeto.
+${content.briefingIntro}
 
-Nome: ${name || "Não informado"}
-Tipo de projeto: ${projectType || "Não informado"}
-Orçamento estimado: ${budget || "Não informado"}
+${content.fields.name}: ${name || content.notInformed}
+${content.fields.type}: ${projectType || content.notInformed}
+${content.fields.budget}: ${budget || content.notInformed}
 
-Ideia:
-${message || "Não informado"}
+${content.fields.idea}:
+${message || content.notInformed}
     `.trim();
 
     // Codifica a mensagem para funcionar corretamente dentro da URL.
@@ -75,17 +80,17 @@ ${message || "Não informado"}
         <div data-animate>
           {/* Label da seção. */}
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.28em] text-cyan-400">
-            Contato
+            {content.eyebrow}
           </p>
 
           {/* Título principal. */}
           <h2 className="max-w-2xl text-5xl font-semibold leading-[1.02] tracking-[-0.06em] text-white md:text-7xl">
-            Pronto para criar algo marcante?
+            {content.title}
           </h2>
 
           {/* Texto de apoio. */}
           <p className="mt-7 max-w-lg text-lg leading-8 text-white/62">
-            Conte sua ideia e vamos transformar o conceito em uma experiência digital premium.
+            {content.text}
           </p>
 
           {/* Botão principal. */}
@@ -97,7 +102,7 @@ ${message || "Não informado"}
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 rounded-full bg-cyan-400 px-8 py-4 text-sm font-bold text-[#020916] shadow-[0_0_44px_rgba(34,211,238,0.38)] transition hover:bg-cyan-300"
               >
-                Falar no WhatsApp
+                {content.whatsapp}
                 <ArrowUpRight size={18} />
               </a>
             </MagneticButton>
@@ -108,27 +113,27 @@ ${message || "Não informado"}
             <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 backdrop-blur-xl">
               <Clock className="mb-3 text-cyan-300" size={22} />
               <p className="text-sm font-semibold text-white">
-                Resposta rápida
+                {content.badges[0][0]}
               </p>
-              <p className="mt-1 text-xs text-white/50">Até 24h úteis</p>
+              <p className="mt-1 text-xs text-white/50">{content.badges[0][1]}</p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 backdrop-blur-xl">
               <Sparkles className="mb-3 text-cyan-300" size={22} />
               <p className="text-sm font-semibold text-white">
-                Visual premium
+                {content.badges[1][0]}
               </p>
               <p className="mt-1 text-xs text-white/50">
-                Design de alto nível
+                {content.badges[1][1]}
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 backdrop-blur-xl">
               <ShieldCheck className="mb-3 text-cyan-300" size={22} />
               <p className="text-sm font-semibold text-white">
-                Projeto seguro
+                {content.badges[2][0]}
               </p>
-              <p className="mt-1 text-xs text-white/50">Código escalável</p>
+              <p className="mt-1 text-xs text-white/50">{content.badges[2][1]}</p>
             </div>
           </div>
         </div>
@@ -141,12 +146,11 @@ ${message || "Não informado"}
             <div className="mb-7 flex items-start justify-between gap-6">
               <div>
                 <h3 className="text-2xl font-semibold tracking-[-0.04em] text-white">
-                  Envie um briefing rápido
+                  {content.formTitle}
                 </h3>
 
                 <p className="mt-2 text-sm leading-6 text-white/55">
-                  Preencha os detalhes iniciais e enviaremos tudo direto para o
-                  WhatsApp da AXIS.
+                  {content.formText}
                 </p>
               </div>
 
@@ -159,7 +163,7 @@ ${message || "Não informado"}
             <form className="grid gap-4">
               <input
                 type="text"
-                placeholder="Seu nome"
+                placeholder={content.namePlaceholder}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-300/50"
@@ -170,14 +174,12 @@ ${message || "Não informado"}
                 onChange={(event) => setProjectType(event.target.value)}
                 className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-white/80 outline-none transition focus:border-cyan-300/50"
               >
-                <option value="">Tipo de projeto</option>
-                <option value="Landing Page">Landing Page</option>
-                <option value="Sistema Web">Sistema Web</option>
-                <option value="Aplicativo">Aplicativo</option>
-                <option value="Inteligência Artificial">
-                  Inteligência Artificial
-                </option>
-                <option value="Identidade Digital">Identidade Digital</option>
+                <option value="">{content.projectPlaceholder}</option>
+                {content.projects.map((project) => (
+                  <option key={project} value={project}>
+                    {project}
+                  </option>
+                ))}
               </select>
 
               <select
@@ -185,19 +187,16 @@ ${message || "Não informado"}
                 onChange={(event) => setBudget(event.target.value)}
                 className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-white/80 outline-none transition focus:border-cyan-300/50"
               >
-                <option value="">Orçamento estimado</option>
-                <option value="Até R$ 1.000">Até R$ 1.000</option>
-                <option value="R$ 1.000 a R$ 3.000">
-                  R$ 1.000 a R$ 3.000
-                </option>
-                <option value="R$ 3.000 a R$ 7.000">
-                  R$ 3.000 a R$ 7.000
-                </option>
-                <option value="Acima de R$ 7.000">Acima de R$ 7.000</option>
+                <option value="">{content.budgetPlaceholder}</option>
+                {content.budgets.map((budgetOption) => (
+                  <option key={budgetOption} value={budgetOption}>
+                    {budgetOption}
+                  </option>
+                ))}
               </select>
 
               <textarea
-                placeholder="Fale rapidamente sobre sua ideia..."
+                placeholder={content.messagePlaceholder}
                 rows="4"
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
@@ -209,7 +208,7 @@ ${message || "Não informado"}
                 onClick={handleSendBriefing}
                 className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-bold text-[#020916] transition hover:bg-cyan-300"
               >
-                Enviar briefing pelo WhatsApp
+                {content.submit}
                 <ArrowUpRight size={18} />
               </button>
             </form>
@@ -220,28 +219,28 @@ ${message || "Não informado"}
             <ContactMiniCard
               icon={Camera}
               title="Instagram"
-              text="Projetos e bastidores"
+              text={content.socials[0]}
               href="https://instagram.com/axis"
             />
 
             <ContactMiniCard
               icon={MessageCircle}
               title="WhatsApp"
-              text="Atendimento direto"
+              text={content.socials[1]}
               href={`https://wa.me/${whatsappNumber}`}
             />
 
             <ContactMiniCard
               icon={Mail}
               title="E-mail"
-              text="contato@axis.dev"
+              text={content.socials[2]}
               href="mailto:contato@axis.dev"
             />
 
             <ContactMiniCard
               icon={BriefcaseBusiness}
               title="LinkedIn"
-              text="Conexão profissional"
+              text={content.socials[3]}
               href="https://linkedin.com/company/axis"
             />
           </div>

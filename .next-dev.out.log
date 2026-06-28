@@ -1,16 +1,64 @@
 
-> axis-site@0.1.0 dev
+> dev
 > next dev
 
-▲ Next.js 16.2.6 (Turbopack)
+▲ Next.js 16.2.9 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://192.168.15.3:3000
-✓ Ready in 531ms
-Creating turbopack project {
-  dir: 'C:\\Users\\hp\\OneDrive\\Documentos\\AXIS\\axis-site',
-  testMode: true
-}
+- Network:       http://192.168.15.7:3000
+✓ Ready in 1366ms
+Creating turbopack project { dir: 'C:\\Users\\R\\Documents\\AXIS\\AXIS', testMode: true }
 
 ○ Compiling / ...
-✓ Finished writing to filesystem cache in 21.4s
-✓ Finished writing to filesystem cache in 81s
+ GET / 200 in 7.0s (next.js: 6.6s, application-code: 335ms)
+ GET /icon.svg 404 in 447ms (next.js: 385ms, application-code: 62ms)
+✓ Compiled in 350ms
+ GET / 200 in 160ms (next.js: 108ms, application-code: 52ms)
+ GET / 200 in 140ms (next.js: 6ms, application-code: 134ms)
+✓ Compiled in 212ms
+ GET / 200 in 431ms (next.js: 226ms, application-code: 205ms)
+ GET / 200 in 235ms (next.js: 65ms, application-code: 171ms)
+ GET / 200 in 129ms (next.js: 17ms, application-code: 113ms)
+ GET / 200 in 66ms (next.js: 12ms, application-code: 54ms)
+✓ Compiled in 60ms
+ GET / 200 in 149ms (next.js: 114ms, application-code: 35ms)
+ GET / 200 in 300ms (next.js: 11ms, application-code: 290ms)
+✓ Compiled in 153ms
+ GET / 200 in 303ms (next.js: 107ms, application-code: 196ms)
+ GET / 200 in 218ms (next.js: 7ms, application-code: 211ms)
+ GET / 200 in 70ms (next.js: 30ms, application-code: 40ms)
+✓ Compiled in 166ms
+ GET / 200 in 160ms (next.js: 109ms, application-code: 51ms)
+✓ Compiled in 209ms
+ GET / 200 in 204ms (next.js: 115ms, application-code: 89ms)
+ GET / 200 in 47ms (next.js: 8ms, application-code: 39ms)
+✓ Compiled in 110ms
+ GET / 200 in 189ms (next.js: 107ms, application-code: 83ms)
+ GET / 200 in 39ms (next.js: 6ms, application-code: 33ms)
+✓ Compiled in 128ms
+ GET / 200 in 273ms (next.js: 121ms, application-code: 151ms)
+ GET / 200 in 116ms (next.js: 32ms, application-code: 84ms)
+✓ Compiled in 90ms
+ GET / 200 in 157ms (next.js: 115ms, application-code: 42ms)
+✓ Compiled in 125ms
+ GET / 200 in 140ms (next.js: 99ms, application-code: 41ms)
+✓ Compiled in 221ms
+ GET / 200 in 207ms (next.js: 103ms, application-code: 104ms)
+ GET / 200 in 71ms (next.js: 11ms, application-code: 60ms)
+✓ Compiled in 86ms
+ GET / 200 in 171ms (next.js: 123ms, application-code: 49ms)
+✓ Compiled in 115ms
+ GET / 200 in 217ms (next.js: 134ms, application-code: 83ms)
+✓ Compiled in 72ms
+ GET / 200 in 173ms (next.js: 122ms, application-code: 51ms)
+✓ Compiled in 120ms
+ GET / 200 in 194ms (next.js: 150ms, application-code: 44ms)
+✓ Compiled in 106ms
+ GET / 200 in 306ms (next.js: 264ms, application-code: 42ms)
+ GET /icon.svg 404 in 228ms (next.js: 38ms, application-code: 190ms)
+ GET /icon.svg 404 in 220ms (next.js: 18ms, application-code: 202ms)
+ GET / 200 in 346ms (next.js: 19ms, application-code: 327ms)
+ GET /icon.svg 404 in 145ms (next.js: 23ms, application-code: 122ms)
+✓ Compiled in 262ms
+ GET / 200 in 293ms (next.js: 204ms, application-code: 90ms)
+✓ Compiled in 144ms
+ GET / 200 in 172ms (next.js: 128ms, application-code: 44ms)

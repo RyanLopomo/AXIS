@@ -1,54 +1,160 @@
-﻿// Importa o React para permitir JSX.
-import React from "react";
+"use client";
 
-// Cria a navegação dinâmica.
+import React, { useMemo, useState } from "react";
+import { Languages, Menu, Moon, Sun, X } from "lucide-react";
+import { useSitePreferences } from "../context/site-preferences";
+
+const labels = {
+  "pt-BR": {
+    Inicio: "Início",
+    Sobre: "Sobre",
+    Portfolio: "Portfólio",
+    Servicos: "Serviços",
+    Contato: "Contato",
+  },
+  en: {
+    Inicio: "Home",
+    Sobre: "About",
+    Portfolio: "Portfolio",
+    Servicos: "Services",
+    Contato: "Contact",
+  },
+};
+
+const labelKeys = {
+  "#inicio": "Inicio",
+  "#sobre": "Sobre",
+  "#portfolio": "Portfolio",
+  "#servicos": "Servicos",
+  "#contato": "Contato",
+};
+
 export function DynamicNavigation({ items, logo }) {
-  // Retorna a navbar fixa.
+  const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage, isDark, toggleTheme } = useSitePreferences();
+
+  const translatedItems = useMemo(
+    () =>
+      items.map((item) => {
+        const key = labelKeys[item.href];
+        return {
+          ...item,
+          label: key ? labels[language][key] : item.label,
+        };
+      }),
+    [items, language],
+  );
+
+  function selectLanguage(nextLanguage) {
+    setLanguage(nextLanguage);
+    setIsOpen(false);
+  }
+
   return (
-    // Define o header fixo no topo.
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-white/5 bg-[#020916]/55 backdrop-blur-xl">
-      {/* Centraliza o conteúdo da navbar. */}
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        {/* Cria o link da logo. */}
-        <a href="#inicio" className="flex items-center gap-3">
-          {/* Mostra a imagem da logo. */}
-          <img src={logo} alt="AXIS" className="h-12 w-auto" />
-        </a>
+    <header className="fixed left-0 top-0 z-50 w-full px-4 pt-4 sm:px-6">
+      <div className="mx-auto max-w-7xl">
+        <div className="axis-nav-glass flex min-h-16 items-center justify-between rounded-full border px-4 py-2 shadow-2xl backdrop-blur-2xl sm:px-5">
+          <a href="#inicio" className="flex items-center gap-3" aria-label="AXIS Home">
+            <img src={logo} alt="AXIS" className="h-9 w-9 object-contain" />
+            <span className="text-sm font-semibold uppercase tracking-[0.22em]">AXIS</span>
+          </a>
 
-        {/* Cria os links centrais. */}
-        <nav className="hidden items-center gap-10 text-sm font-medium text-white/75 md:flex">
-          {/* Renderiza cada item da navegação. */}
-          {items.map((item) => (
-            // Cria um link individual.
-            <a key={item.href} href={item.href} className="transition hover:text-cyan-300">
-              {item.label}
-            </a>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Navegação principal">
+            {translatedItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-4 py-2 text-sm font-medium transition hover:bg-cyan-300/10 hover:text-cyan-300"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
 
-        {/* Cria o seletor visual de idiomas. */}
-        <div className="flex items-center gap-2 text-sm font-semibold text-white">
-          {/* Mostra o idioma português. */}
-          <span>pt-br</span>
+          <div className="hidden items-center gap-2 md:flex">
+            <div className="flex items-center rounded-full border border-white/10 bg-white/[0.04] p-1">
+              <Languages size={15} className="mx-2 text-cyan-300" aria-hidden="true" />
+              {["pt-BR", "en"].map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => selectLanguage(option)}
+                  className={`rounded-full px-3 py-1.5 text-xs font-bold uppercase transition ${
+                    language === option ? "bg-cyan-300 text-[#02101c]" : "text-current/70 hover:text-current"
+                  }`}
+                  aria-pressed={language === option}
+                >
+                  {option === "pt-BR" ? "PT" : "EN"}
+                </button>
+              ))}
+            </div>
 
-          {/* Mostra o separador. */}
-          <span className="text-white/40">|</span>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] transition hover:border-cyan-300/45 hover:text-cyan-300"
+              aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
+              aria-pressed={!isDark}
+            >
+              {isDark ? <Sun size={17} /> : <Moon size={17} />}
+            </button>
+          </div>
 
-          {/* Mostra o idioma inglês. */}
-          <span>en</span>
-
-          {/* Mostra a bandeira do Brasil. */}
-          <span aria-label="Brasil" className="relative ml-2 h-3.5 w-5 overflow-hidden rounded-[2px] bg-[#009b3a] shadow-[0_0_0_1px_rgba(255,255,255,0.18)]">
-            <span className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#ffdf00]" />
-            <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#002776]" />
-          </span>
-
-          {/* Mostra a bandeira dos Estados Unidos. */}
-          <span aria-label="Estados Unidos" className="relative h-3.5 w-5 overflow-hidden rounded-[2px] bg-white shadow-[0_0_0_1px_rgba(255,255,255,0.18)]">
-            <span className="absolute inset-0 bg-[repeating-linear-gradient(to_bottom,#b22234_0_1px,#ffffff_1px_2px)]" />
-            <span className="absolute left-0 top-0 h-2 w-2.5 bg-[#3c3b6e]" />
-          </span>
+          <button
+            type="button"
+            onClick={() => setIsOpen((current) => !current)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] md:hidden"
+            aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
+
+        {isOpen && (
+          <div className="axis-nav-glass mt-3 rounded-3xl border p-3 shadow-2xl backdrop-blur-2xl md:hidden">
+            <nav className="grid gap-1" aria-label="Navegação mobile">
+              {translatedItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-2xl px-4 py-3 text-sm font-semibold transition hover:bg-cyan-300/10 hover:text-cyan-300"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="mt-3 flex items-center justify-between gap-3 border-t border-white/10 pt-3">
+              <div className="flex rounded-full border border-white/10 bg-white/[0.04] p-1">
+                {["pt-BR", "en"].map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => selectLanguage(option)}
+                    className={`rounded-full px-4 py-2 text-xs font-bold uppercase transition ${
+                      language === option ? "bg-cyan-300 text-[#02101c]" : "text-current/70"
+                    }`}
+                    aria-pressed={language === option}
+                  >
+                    {option === "pt-BR" ? "PT" : "EN"}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
+                aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
+                aria-pressed={!isDark}
+              >
+                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

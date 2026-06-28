@@ -4,11 +4,14 @@ import React from "react";
 // Importa o ícone de seta.
 import { ArrowUpRight } from "lucide-react";
 
-// Importa os serviços.
-import { serviceItems } from "../data/services";
+import { translations } from "../data/translations";
+import { useSitePreferences } from "../context/site-preferences";
 
 // Cria a seção Serviços.
 export function Services() {
+  const { language } = useSitePreferences();
+  const content = translations[language].services;
+
   // Retorna a seção de serviços.
   return (
     // Define a seção com espaçamento vertical.
@@ -19,19 +22,19 @@ export function Services() {
         <div data-animate className="mb-14 max-w-3xl">
           {/* Mostra o rótulo. */}
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-400">
-            Serviços
+            {content.eyebrow}
           </p>
 
           {/* Mostra o título. */}
           <h2 className="text-4xl font-semibold leading-tight tracking-[-0.05em] text-white md:text-6xl">
-            Soluções para transformar presença em resultado.
+            {content.title}
           </h2>
         </div>
 
         {/* Cria o grid dos serviços. */}
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {/* Renderiza cada serviço. */}
-          {serviceItems.map((service) => (
+          {content.items.map((service) => (
             // Cria o card de serviço.
             <article data-animate key={service.title} className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-7 transition duration-300 hover:-translate-y-2 hover:border-cyan-300/40 hover:bg-cyan-300/[0.04]">
               {/* Mostra o ícone do card. */}

@@ -14,7 +14,7 @@ import { ArrowUpRight } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 // Cria o carrossel duplo controlado pelo scroll.
-export function ScrollCarousel({ items }) {
+export function ScrollCarousel({ items, viewProjectLabel = "Ver projeto" }) {
   // Referência da seção do carrossel.
   const sectionRef = useRef(null);
 
@@ -116,14 +116,14 @@ export function ScrollCarousel({ items }) {
         {/* Linha superior. */}
         <div ref={topRowRef} className="flex w-max gap-4 will-change-transform">
           {topItems.map((item) => (
-            <CarouselCard key={item.title} item={item} />
+            <CarouselCard key={item.title} item={item} viewProjectLabel={viewProjectLabel} />
           ))}
         </div>
 
         {/* Linha inferior. */}
         <div ref={bottomRowRef} className="flex w-max gap-4 pl-12 will-change-transform">
           {bottomItems.map((item) => (
-            <CarouselCard key={item.title} item={item} />
+            <CarouselCard key={item.title} item={item} viewProjectLabel={viewProjectLabel} />
           ))}
         </div>
       </div>
@@ -132,7 +132,7 @@ export function ScrollCarousel({ items }) {
 }
 
 // Cria o card individual do carrossel.
-function CarouselCard({ item }) {
+function CarouselCard({ item, viewProjectLabel }) {
   // Retorna o card padronizado.
   return (
     <article className="group relative h-[230px] w-[410px] shrink-0 overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.035] shadow-2xl transition duration-500 hover:scale-[1.01] md:h-[260px] md:w-[460px]">
@@ -163,7 +163,7 @@ function CarouselCard({ item }) {
 
         {/* Botão do projeto. */}
         <button className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs text-white/80 backdrop-blur-md transition hover:border-cyan-300/60 hover:text-cyan-300 md:text-sm">
-          Ver projeto <ArrowUpRight size={15} />
+          {viewProjectLabel} <ArrowUpRight size={15} />
         </button>
       </div>
     </article>

@@ -11,25 +11,28 @@ import { navigationItems } from "./data/navigation";
 import { DynamicNavigation } from "./lightswind/dynamic-navigation";
 import { MagneticCursor } from "./lightswind/magnetic-cursor";
 import { ScrollStarEffect } from "./lightswind/scroll-star-effect";
+import { SitePreferencesProvider } from "./context/site-preferences";
 
 export default function App() {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#020916] font-sans text-white selection:bg-cyan-400 selection:text-[#020916]">
-      <MagneticCursor />
+    <SitePreferencesProvider>
+      <main className="custom-cursor min-h-screen overflow-x-hidden bg-[var(--axis-bg)] font-sans text-white selection:bg-cyan-400 selection:text-[#020916]">
+        <MagneticCursor />
 
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-80">
-        <ScrollStarEffect />
-      </div>
+        <div className="pointer-events-none fixed inset-0 z-0 opacity-80">
+          <ScrollStarEffect />
+        </div>
 
-      <div className="relative z-10">
-        <DynamicNavigation items={navigationItems} logo="/logo-axis.png" />
-        <Hero />
-        <About />
-        <Portfolio />
-        <Services />
-        <Contact />
-        <Footer />
-      </div>
-    </main>
+        <div className="relative z-10">
+          <DynamicNavigation items={navigationItems} logo="/logo-axis.png" />
+          <Hero />
+          <About />
+          <Portfolio />
+          <Services />
+          <Contact />
+          <Footer />
+        </div>
+      </main>
+    </SitePreferencesProvider>
   );
 }

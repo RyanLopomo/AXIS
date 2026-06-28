@@ -14,7 +14,7 @@ export function MagneticCursor() {
       if (!cursorRef.current) return;
 
       // Move o cursor para a posição do mouse.
-      cursorRef.current.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+      cursorRef.current.style.transform = `translate3d(calc(${event.clientX}px - 50%), calc(${event.clientY}px - 50%), 0)`;
     }
 
     // Adiciona o listener de movimento do mouse.
@@ -27,6 +27,6 @@ export function MagneticCursor() {
   // Retorna o cursor visual.
   return (
     // Cria a bolinha fixa do cursor.
-    <div ref={cursorRef} className="pointer-events-none fixed left-0 top-0 z-[999] hidden h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/70 mix-blend-difference transition-transform duration-75 lg:block" />
+    <div ref={cursorRef} className="pointer-events-none fixed left-0 top-0 z-[999] hidden h-5 w-5 rounded-full border border-cyan-300/70 mix-blend-difference transition-transform duration-75 lg:block" />
   );
 }

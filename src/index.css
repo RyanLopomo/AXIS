@@ -1,6 +1,24 @@
 ﻿/* Importa as camadas base do Tailwind. */
 @import "tailwindcss";
 
+:root {
+  --axis-bg: #020916;
+  --axis-fg: #ffffff;
+  --axis-muted: rgba(255, 255, 255, 0.62);
+  --axis-nav-bg: rgba(2, 9, 22, 0.58);
+  --axis-nav-border: rgba(255, 255, 255, 0.12);
+  --axis-nav-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+[data-theme="light"] {
+  --axis-bg: #f6fbff;
+  --axis-fg: #06111f;
+  --axis-muted: rgba(6, 17, 31, 0.62);
+  --axis-nav-bg: rgba(255, 255, 255, 0.66);
+  --axis-nav-border: rgba(6, 17, 31, 0.12);
+  --axis-nav-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+}
+
 /* Define comportamento suave ao clicar em links internos. */
 html {
   scroll-behavior: smooth;
@@ -13,12 +31,85 @@ body {
 
 /* Define o fundo padrão do site. */
 body {
-  background: #020916;
+  background: var(--axis-bg);
 }
 
 /* Define fonte mais limpa caso o Tailwind não configure uma fonte específica. */
 body {
   font-family: Inter, Montserrat, system-ui, sans-serif;
+}
+
+.axis-nav-glass {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035)),
+    var(--axis-nav-bg);
+  border-color: var(--axis-nav-border);
+  box-shadow: var(--axis-nav-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  color: var(--axis-fg);
+}
+
+[data-theme="light"] .text-white {
+  color: var(--axis-fg) !important;
+}
+
+[data-theme="light"] .text-white\/75,
+[data-theme="light"] .text-white\/64,
+[data-theme="light"] .text-white\/62,
+[data-theme="light"] .text-white\/60,
+[data-theme="light"] .text-white\/58,
+[data-theme="light"] .text-white\/55,
+[data-theme="light"] .text-white\/50,
+[data-theme="light"] .text-white\/45,
+[data-theme="light"] .text-white\/40,
+[data-theme="light"] .text-white\/35 {
+  color: var(--axis-muted) !important;
+}
+
+[data-theme="light"] [class*="border-white/"] {
+  border-color: rgba(6, 17, 31, 0.12) !important;
+}
+
+[data-theme="light"] [class*="bg-white/["] {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+[data-theme="light"] [class*="bg-black/20"] {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  color: #06111f !important;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: rgba(6, 17, 31, 0.42) !important;
+}
+
+[data-theme="light"] .shadow-2xl {
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] [class*="from-[#020916]"] {
+  --tw-gradient-from: var(--axis-bg) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(246, 251, 255, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+/* Esconde o cursor nativo para deixar apenas o cursor customizado visivel. */
+html,
+body,
+body *,
+button,
+a,
+input,
+textarea,
+select,
+canvas,
+iframe {
+  cursor: none !important;
 }
 
 /* Remove a barra de rolagem horizontal visual em navegadores WebKit. */

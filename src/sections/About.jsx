@@ -4,14 +4,15 @@ import React, { useRef } from "react";
 // Importa o ícone de seta.
 import { ArrowUpRight } from "lucide-react";
 
-// Importa os textos da seção Sobre.
-import { aboutItems } from "../data/about";
-
 // Importa o hook de animações GSAP.
 import { useAxisAnimations } from "../animations/useAxisAnimations";
+import { translations } from "../data/translations";
+import { useSitePreferences } from "../context/site-preferences";
 
 // Cria a seção Sobre.
 export function About() {
+  const { language } = useSitePreferences();
+  const content = translations[language].about;
   // Cria uma referência para a seção inteira.
   const aboutSectionRef = useRef(null);
 
@@ -34,35 +35,44 @@ export function About() {
         <article className="w-[86vw] max-w-[560px] shrink-0">
           {/* Mostra o rótulo da seção. */}
           <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-400">
-            Sobre a AXIS
+            {content.eyebrow}
           </p>
 
           {/* Mostra o título da seção. */}
           <h2 className="text-5xl font-semibold leading-[0.98] tracking-[-0.05em] text-white md:text-7xl">
-            Tecnologia com visão, design e propósito.
+            {content.title}
           </h2>
 
           {/* Mostra o texto explicativo. */}
           <p className="mt-7 text-lg leading-8 text-white/60">
-            Unimos estratégia, estética e desenvolvimento para criar produtos digitais modernos, escaláveis e memoráveis.
+            {content.text}
           </p>
         </article>
 
         {/* Renderiza os cards narrativos. */}
-        {aboutItems.map((item) => (
+        {content.items.map((item) => (
           // Cria um card individual.
-          <article key={item.number} className="h-[430px] w-[78vw] max-w-[580px] shrink-0 rounded-[2.25rem] border border-white/10 bg-white/[0.04] p-9 shadow-2xl backdrop-blur-xl">
-            {/* Mostra o número do card. */}
-            <span className="text-6xl font-light text-cyan-400">{item.number}</span>
+          <article key={item.title} className="relative h-[430px] w-[78vw] max-w-[560px] shrink-0 overflow-hidden rounded-[2.25rem] border border-white/10 bg-white/[0.04] p-8 shadow-2xl backdrop-blur-xl md:p-9">
+            {/* Mostra a imagem do card. */}
+            <img
+              src={item.image}
+              alt=""
+              className="absolute right-7 top-7 h-24 w-24 rounded-3xl border border-white/10 object-cover shadow-2xl md:h-28 md:w-28"
+            />
+
+            {/* Cria um brilho sutil atrás do conteúdo. */}
+            <div className="pointer-events-none absolute right-0 top-0 h-44 w-44 rounded-full bg-cyan-300/10 blur-3xl" />
 
             {/* Mostra o título do card. */}
-            <h3 className="mt-20 text-3xl font-semibold tracking-[-0.03em] text-white">{item.title}</h3>
+            <h3 className="relative mt-36 max-w-[18rem] text-3xl font-semibold tracking-[-0.03em] text-white md:mt-40">
+              {item.title}
+            </h3>
 
             {/* Mostra o texto do card. */}
-            <p className="mt-5 max-w-md text-lg leading-8 text-white/64">{item.text}</p>
+            <p className="relative mt-5 max-w-md text-base leading-7 text-white/64 md:text-lg md:leading-8">{item.text}</p>
 
             {/* Mostra o ícone decorativo. */}
-            <ArrowUpRight className="mt-10 text-cyan-300" />
+            <ArrowUpRight className="relative mt-9 text-cyan-300" />
           </article>
         ))}
       </div>
