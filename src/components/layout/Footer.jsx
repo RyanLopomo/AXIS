@@ -11,7 +11,7 @@ export function Footer() {
   // Retorna o rodapé do site.
   return (
     // Define a área do rodapé.
-    <footer className="border-t border-white/10 bg-[var(--axis-bg)] py-10">
+    <footer className="bg-transparent py-10">
       {/* Centraliza e distribui o conteúdo. */}
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 px-6 text-sm text-white/45 md:flex-row md:items-center">
         {/* Agrupa logo e copyright. */}

@@ -23,7 +23,7 @@ export default function App() {
           <ScrollStarEffect />
         </div>
 
-        <div className="relative z-10">
+        <div className="axis-atmosphere relative z-10">
           <DynamicNavigation items={navigationItems} logo="/logo-axis.png" />
           <Hero />
           <About />

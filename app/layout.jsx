@@ -4,7 +4,7 @@ export const metadata = {
   title: "AXIS",
   description: "Experiências digitais premium para marcas modernas.",
   icons: {
-    icon: "/icon.svg",
+    icon: "/logo-axis.png",
   },
 };
 

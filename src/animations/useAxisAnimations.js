@@ -1,4 +1,4 @@
-﻿// Importa o useLayoutEffect do React para rodar animações depois que o layout estiver montado.
+// Importa o useLayoutEffect do React para rodar animações depois que o layout estiver montado.
 import { useLayoutEffect } from "react";
 
 // Importa o GSAP, que será o motor principal das animações avançadas.
@@ -11,9 +11,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Cria um hook personalizado para centralizar as animações principais da AXIS.
-export function useAxisAnimations({ aboutSectionRef, aboutTrackRef }) {
+export function useAxisAnimations({ aboutSectionRef, aboutTrackRef, aboutStatementRef, horizontalEnabled = true }) {
   // Executa as animações depois que os elementos estiverem disponíveis no DOM.
   useLayoutEffect(() => {
+    const horizontalMedia = gsap.matchMedia();
+
     // Cria um contexto GSAP para facilitar a limpeza das animações ao desmontar o componente.
     const context = gsap.context(() => {
       // Seleciona todos os elementos que tiverem o atributo data-animate.
@@ -70,53 +72,109 @@ export function useAxisAnimations({ aboutSectionRef, aboutTrackRef }) {
       // Verifica se a referência do trilho horizontal existe.
       if (!aboutTrackRef.current) return;
 
-      // Calcula a distância horizontal que o trilho precisa percorrer.
-      const horizontalDistance =
-        // Pega a largura total do conteúdo horizontal.
-        aboutTrackRef.current.scrollWidth -
-        // Subtrai a largura visível da janela.
-        window.innerWidth;
+      // Mede a posição central real do último card em relação ao trilho.
+      // A diferença entre os retângulos elimina o x aplicado pelo GSAP durante refreshes.
+      const getHorizontalDistance = () => {
+        const track = aboutTrackRef.current;
+        const section = aboutSectionRef.current;
+        const lastCard = track.querySelector("[data-principle-card]:last-of-type");
 
-      // Cria a animação horizontal da seção Sobre.
-      gsap.to(aboutTrackRef.current, {
-        // Move o trilho para a esquerda com base na distância calculada.
-        x: -horizontalDistance,
+        if (!lastCard) return 0;
 
-        // Remove easing para o movimento acompanhar o scroll de forma direta.
-        ease: "none",
+        const trackRect = track.getBoundingClientRect();
+        const cardRect = lastCard.getBoundingClientRect();
+        const cardCenterOnTrack = cardRect.left - trackRect.left + cardRect.width / 2;
 
-        // Configura a animação para ser controlada pelo ScrollTrigger.
-        scrollTrigger: {
-          // Define a seção Sobre como gatilho.
-          trigger: aboutSectionRef.current,
+        return Math.max(0, cardCenterOnTrack - section.clientWidth / 2);
+      };
 
-          // Começa quando o topo da seção encosta no topo da tela.
-          start: "top top",
+      if (horizontalEnabled) {
+        horizontalMedia.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+          // Cria o movimento lateral somente quando existe uma faixa larga para percorrer.
+          if (getHorizontalDistance() <= 0) return undefined;
 
-          // Termina depois da distância horizontal necessária.
-          end: () => `+=${horizontalDistance}`,
+          const horizontalTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: aboutSectionRef.current,
+              start: "top top",
+              end: () => `+=${getHorizontalDistance()}`,
+              scrub: 1,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
 
-          // Sincroniza a animação com o scroll.
-          scrub: 1,
+          horizontalTimeline.to(aboutTrackRef.current, {
+            x: () => -getHorizontalDistance(),
+            duration: 1,
+            ease: "none",
+          }, 0);
 
-          // Fixa a seção na tela enquanto o conteúdo horizontal se move.
-          pin: true,
+          const statementCharacters = aboutStatementRef.current?.querySelectorAll("[data-erasure-char]");
+          if (statementCharacters?.length) {
+            gsap.set(statementCharacters, { autoAlpha: 0 });
+            horizontalTimeline.to(statementCharacters, {
+              autoAlpha: 1,
+              duration: 0.001,
+              ease: "none",
+              stagger: { amount: 0.18, from: "start" },
+            }, 0.02);
+            horizontalTimeline.to(statementCharacters, {
+              autoAlpha: 0,
+              duration: 0.001,
+              ease: "none",
+              stagger: { amount: 0.2, from: "end" },
+            }, 0.8);
+          }
+        });
 
-          // Ajuda a evitar pequenos saltos no momento do pin.
-          anticipatePin: 1,
+        horizontalMedia.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+          const statementCharacters = aboutStatementRef.current?.querySelectorAll("[data-erasure-char]");
+          if (!statementCharacters?.length) return undefined;
 
-          // Recalcula valores ao redimensionar a tela.
-          invalidateOnRefresh: true,
-        },
-      });
+          gsap.set(statementCharacters, { autoAlpha: 0 });
+          const typingTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: aboutSectionRef.current,
+              start: "top 90%",
+              end: "top 35%",
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          typingTimeline.to(statementCharacters, {
+            autoAlpha: 1,
+            duration: 0.001,
+            ease: "none",
+            stagger: { amount: 0.55, from: "start" },
+          }, 0);
+        });
+      }
+
     });
+
+    // Atualiza o percurso se o texto, a fonte ou o tamanho do trilho mudar após a montagem.
+    let refreshFrameId;
+    const layoutResizeObserver = new ResizeObserver(() => {
+      window.cancelAnimationFrame(refreshFrameId);
+      refreshFrameId = window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+    layoutResizeObserver.observe(aboutTrackRef.current);
+    layoutResizeObserver.observe(aboutSectionRef.current);
 
     // Força o ScrollTrigger a recalcular posições depois da montagem.
     ScrollTrigger.refresh();
 
     // Limpa todas as animações criadas neste contexto quando o componente desmontar.
-    return () => context.revert();
+    return () => {
+      layoutResizeObserver.disconnect();
+      window.cancelAnimationFrame(refreshFrameId);
+      horizontalMedia.revert();
+      context.revert();
+    };
 
     // Roda novamente apenas se as referências mudarem.
-  }, [aboutSectionRef, aboutTrackRef]);
+  }, [aboutSectionRef, aboutTrackRef, horizontalEnabled]);
 }

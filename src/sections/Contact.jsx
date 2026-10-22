@@ -68,12 +68,6 @@ ${message || content.notInformed}
       id="contato"
       className="relative overflow-hidden bg-transparent py-28"
     >
-      {/* Luz principal de fundo. */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_58%,rgba(0,145,255,0.24),transparent_34%)]" />
-
-      {/* Luz lateral suave. */}
-      <div className="absolute left-0 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-cyan-400/10 blur-3xl" />
-
       {/* Container principal. */}
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         {/* Coluna esquerda. */}

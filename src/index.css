@@ -1,4 +1,5 @@
 ﻿/* Importa as camadas base do Tailwind. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Montserrat:wght@700&family=Poppins:wght@500&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -24,6 +25,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* Remove margem padrão do navegador. */
 body {
   margin: 0;
@@ -39,6 +46,29 @@ body {
   font-family: Inter, Montserrat, system-ui, sans-serif;
 }
 
+/* Iluminação ampla compartilhada para que os limites das seções não recortem os brilhos. */
+.axis-atmosphere {
+  background-image:
+    radial-gradient(ellipse 54rem 32rem at 50% 8%, rgba(34, 211, 238, 0.085), transparent 74%),
+    radial-gradient(ellipse 48rem 38rem at 12% 30%, rgba(0, 153, 255, 0.06), transparent 76%),
+    radial-gradient(ellipse 58rem 40rem at 86% 52%, rgba(0, 145, 255, 0.055), transparent 78%),
+    radial-gradient(ellipse 52rem 36rem at 38% 75%, rgba(34, 211, 238, 0.045), transparent 76%),
+    radial-gradient(ellipse 56rem 42rem at 78% 96%, rgba(0, 153, 255, 0.05), transparent 78%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@media (max-width: 640px) {
+  .axis-atmosphere {
+    background-image:
+      radial-gradient(ellipse 34rem 30rem at 50% 8%, rgba(34, 211, 238, 0.075), transparent 76%),
+      radial-gradient(ellipse 34rem 34rem at 18% 30%, rgba(0, 153, 255, 0.055), transparent 78%),
+      radial-gradient(ellipse 36rem 34rem at 82% 52%, rgba(0, 145, 255, 0.05), transparent 80%),
+      radial-gradient(ellipse 34rem 32rem at 38% 75%, rgba(34, 211, 238, 0.04), transparent 78%),
+      radial-gradient(ellipse 36rem 34rem at 78% 96%, rgba(0, 153, 255, 0.045), transparent 80%);
+  }
+}
+
 .axis-nav-glass {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035)),
@@ -46,6 +76,101 @@ body {
   border-color: var(--axis-nav-border);
   box-shadow: var(--axis-nav-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   color: var(--axis-fg);
+}
+
+.axis-about-viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.axis-about-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.axis-principle-card {
+  width: min(92vw, 360px);
+  scroll-snap-align: center;
+}
+
+.axis-principle-track {
+  --axis-principle-size: min(92vw, 360px);
+  padding-block: 1rem 6rem;
+  padding-inline: calc((100% - var(--axis-principle-size)) / 2);
+}
+
+.axis-principle-art {
+  aspect-ratio: 240 / 170;
+  height: auto;
+  margin-top: auto;
+  max-width: 160px;
+  width: 34%;
+}
+
+.axis-about-label,
+.axis-about-scroll-hint {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.axis-about-statement-visual {
+  color: var(--axis-muted);
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1.25rem, 1.55vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.axis-principle-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+.axis-principle-description {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .axis-principle-card {
+    width: 380px;
+  }
+
+  .axis-principle-track {
+    --axis-principle-size: 380px;
+    padding-block: 2rem 7rem;
+    padding-inline: clamp(32px, 5vw, 72px);
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .axis-principle-card {
+    width: 420px;
+  }
+
+  .axis-principle-track {
+    --axis-principle-size: 420px;
+  }
+}
+
+@media (max-width: 639px) {
+  .axis-principle-track {
+    --axis-principle-size: min(92vw, 360px);
+  }
+
+  .axis-about-statement-visual {
+    font-size: clamp(1rem, 4.6vw, 1.125rem);
+  }
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .axis-about-viewport {
+    overflow: hidden;
+  }
 }
 
 [data-theme="light"] .text-white {
@@ -98,18 +223,24 @@ body {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 
-/* Esconde o cursor nativo para deixar apenas o cursor customizado visivel. */
-html,
-body,
-body *,
-button,
-a,
-input,
-textarea,
-select,
-canvas,
-iframe {
+/* Usa o cursor customizado apenas onde há ponteiro preciso e hover. */
+@media (hover: hover) and (pointer: fine) {
+  .axis-custom-cursor {
+    display: block;
+  }
+
+  html,
+  body,
+  body *,
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  canvas,
+  iframe {
   cursor: none !important;
+  }
 }
 
 /* Remove a barra de rolagem horizontal visual em navegadores WebKit. */

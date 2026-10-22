@@ -2,11 +2,34 @@ export const translations = {
   "pt-BR": {
     hero: {
       words: ["Design", "Presença", "Segurança"],
+      closingLine: "Tudo só depende de você.",
     },
     about: {
       eyebrow: "Sobre a AXIS",
       title: "Tecnologia com visão, design e propósito.",
       text: "Unimos estratégia, estética e desenvolvimento para criar produtos digitais modernos, escaláveis e memoráveis.",
+      principles: [
+        {
+          title: "Foco",
+          text: "Faça o que precisa ser feito, independentemente de estar irritado, feliz ou frustrado. Mantenha o foco e complete a missão.",
+        },
+        {
+          title: "Sonhe alto",
+          text: "Olhe para cima. É assim que crescemos, evoluímos e conquistamos lugares antes impossíveis.",
+        },
+        {
+          title: "Trabalho duro",
+          text: "Sem trabalho, não há recompensa. A dedicação e a persistência transformam objetivos em conquistas.",
+        },
+        {
+          title: "Transparência",
+          text: "Agimos com clareza e honestidade. Compartilhamos informações e esclarecemos dúvidas com confiança.",
+        },
+        {
+          title: "Acolhimento",
+          text: "Acolhemos empresas de todos os tamanhos, porque acreditamos que todos podem crescer.",
+        },
+      ],
       items: [
         {
           title: "Quem somos",
@@ -42,33 +65,14 @@ export const translations = {
     },
     portfolio: {
       eyebrow: "Portfólio",
-      title: "Projetos digitais com presença, estética e performance.",
-      typewriterWords: [
-        "Sites profissionais.",
-        "Lojas virtuais.",
-        "Sistemas sob medida.",
-        "Automações inteligentes.",
-      ],
-      cta: "Criar meu projeto",
+      title: "Projetos que transformam ideias em experiências digitais.",
+      subtitle: "Conheça alguns dos projetos que desenvolvemos e descubra o que podemos criar para o seu negócio.",
+      emptyState: "Estamos preparando esta seleção de projetos. Enquanto isso, conte à Axis o que você gostaria de criar.",
+      ctaTitle: "Seu próximo projeto pode estar aqui.",
+      ctaText: "Agora que você conhece um pouco do nosso trabalho, que tal fazer parte dessa história? Vamos transformar sua ideia em um projeto extraordinário.",
+      cta: "Vamos conversar",
       viewProject: "Ver projeto",
-      items: [
-        "Experiência visual para plataforma de streaming e conteúdo esportivo.",
-        "Landing page imobiliária premium focada em captação e autoridade.",
-        "Interface dark premium para pizzaria, cardápio digital e pedidos.",
-        "Dashboard moderno para gestão, produtividade e dados empresariais.",
-        "Aplicativo financeiro futurista com navegação simples e visual premium.",
-        "Interface para solução de inteligência artificial e automação.",
-        "Landing page criativa para marca visual, design e produção digital.",
-        "Sistema web para atendimento, organização e operação empresarial.",
-        "Experiência digital premium para restaurante e pedidos online.",
-        "Plataforma visual para apresentação de imóveis e leads qualificados.",
-        "E-commerce com estética escura, moderna e focada em conversão.",
-        "Interface financeira com visual tecnológico, limpo e seguro.",
-        "Sistema digital para agendamentos, consultas e gestão clínica.",
-        "Landing page automotiva premium com foco em performance visual.",
-        "Plataforma educacional moderna para cursos, aulas e conteúdo.",
-        "Site institucional futurista para tecnologia, inovação e software.",
-      ],
+      projectImageAlt: "Captura de tela do site",
     },
     services: {
       eyebrow: "Serviços",
@@ -130,11 +134,34 @@ export const translations = {
   en: {
     hero: {
       words: ["Design", "Presence", "Security"],
+      closingLine: "It all depends on you.",
     },
     about: {
       eyebrow: "About AXIS",
       title: "Technology with vision, design, and purpose.",
       text: "We combine strategy, aesthetics, and development to create modern, scalable, memorable digital products.",
+      principles: [
+        {
+          title: "Focus",
+          text: "Do what needs to be done, whether you feel irritated, happy, or frustrated. Stay focused and complete the mission.",
+        },
+        {
+          title: "Dream big",
+          text: "Look up. That is how we grow, evolve, and reach places that once seemed impossible.",
+        },
+        {
+          title: "Hard work",
+          text: "Without work, there is no reward. Dedication and persistence turn goals into achievements.",
+        },
+        {
+          title: "Transparency",
+          text: "We act with clarity and honesty. We share information and answer questions with confidence.",
+        },
+        {
+          title: "Welcoming",
+          text: "We welcome businesses of every size because we believe everyone can grow.",
+        },
+      ],
       items: [
         {
           title: "Who we are",
@@ -170,33 +197,14 @@ export const translations = {
     },
     portfolio: {
       eyebrow: "Portfolio",
-      title: "Digital projects with presence, aesthetics, and performance.",
-      typewriterWords: [
-        "Professional websites.",
-        "Online stores.",
-        "Custom systems.",
-        "Smart automations.",
-      ],
-      cta: "Start my project",
+      title: "Projects that turn ideas into digital experiences.",
+      subtitle: "Explore projects we have developed and discover what we can create for your business.",
+      emptyState: "We are preparing this project showcase. In the meantime, tell AXIS what you would like to create.",
+      ctaTitle: "Your next project could be here.",
+      ctaText: "Now that you have seen a little of our work, why not be part of the story? Let’s turn your idea into an extraordinary project.",
+      cta: "Let’s talk",
       viewProject: "View project",
-      items: [
-        "Visual experience for a sports streaming and content platform.",
-        "Premium real estate landing page focused on leads and authority.",
-        "Premium dark interface for a pizzeria, digital menu, and orders.",
-        "Modern dashboard for management, productivity, and business data.",
-        "Futuristic finance app with simple navigation and a premium look.",
-        "Interface for an artificial intelligence and automation solution.",
-        "Creative landing page for visual branding, design, and digital production.",
-        "Web system for support, organization, and business operations.",
-        "Premium digital experience for restaurants and online ordering.",
-        "Visual platform for property presentation and qualified leads.",
-        "Modern dark e-commerce focused on conversion.",
-        "Financial interface with a clean, secure, technology-driven look.",
-        "Digital system for appointments, consultations, and clinic management.",
-        "Premium automotive landing page focused on visual performance.",
-        "Modern education platform for courses, classes, and content.",
-        "Futuristic institutional website for technology, innovation, and software.",
-      ],
+      projectImageAlt: "Screenshot of the website",
     },
     services: {
       eyebrow: "Services",
