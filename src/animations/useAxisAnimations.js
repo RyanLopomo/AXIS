@@ -76,29 +76,28 @@ export function useAxisAnimations({ aboutSectionRef, aboutTrackRef, aboutStateme
       // A diferença entre os retângulos elimina o x aplicado pelo GSAP durante refreshes.
       const getHorizontalDistance = () => {
         const track = aboutTrackRef.current;
-        const section = aboutSectionRef.current;
+        const viewport = track?.closest(".axis-about-viewport");
         const lastCard = track.querySelector("[data-principle-card]:last-of-type");
 
-        if (!lastCard) return 0;
+        if (!lastCard || !viewport) return 0;
 
         const trackRect = track.getBoundingClientRect();
         const cardRect = lastCard.getBoundingClientRect();
         const cardCenterOnTrack = cardRect.left - trackRect.left + cardRect.width / 2;
 
-        return Math.max(0, cardCenterOnTrack - section.clientWidth / 2);
+        return Math.max(0, cardCenterOnTrack - viewport.clientWidth / 2);
       };
 
       if (horizontalEnabled) {
-        horizontalMedia.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-          // Cria o movimento lateral somente quando existe uma faixa larga para percorrer.
+        const createHorizontalTimeline = ({ scrub, distanceFactor }) => {
           if (getHorizontalDistance() <= 0) return undefined;
 
           const horizontalTimeline = gsap.timeline({
             scrollTrigger: {
               trigger: aboutSectionRef.current,
               start: "top top",
-              end: () => `+=${getHorizontalDistance()}`,
-              scrub: 1,
+              end: () => `+=${getHorizontalDistance() * distanceFactor}`,
+              scrub,
               pin: true,
               anticipatePin: 1,
               invalidateOnRefresh: true,
@@ -127,9 +126,19 @@ export function useAxisAnimations({ aboutSectionRef, aboutTrackRef, aboutStateme
               stagger: { amount: 0.2, from: "end" },
             }, 0.8);
           }
-        });
 
-        horizontalMedia.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+          return horizontalTimeline;
+        };
+
+        horizontalMedia.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () =>
+          createHorizontalTimeline({ scrub: 0.45, distanceFactor: 1.12 })
+        );
+
+        horizontalMedia.add("(max-width: 767px) and (min-height: 580px) and (prefers-reduced-motion: no-preference)", () =>
+          createHorizontalTimeline({ scrub: 0.25, distanceFactor: 1.18 })
+        );
+
+        horizontalMedia.add("(max-width: 767px) and (max-height: 579px) and (prefers-reduced-motion: no-preference)", () => {
           const statementCharacters = aboutStatementRef.current?.querySelectorAll("[data-erasure-char]");
           if (!statementCharacters?.length) return undefined;
 
@@ -157,19 +166,31 @@ export function useAxisAnimations({ aboutSectionRef, aboutTrackRef, aboutStateme
 
     // Atualiza o percurso se o texto, a fonte ou o tamanho do trilho mudar após a montagem.
     let refreshFrameId;
-    const layoutResizeObserver = new ResizeObserver(() => {
+    let disposed = false;
+    const scheduleRefresh = () => {
+      if (disposed) return;
       window.cancelAnimationFrame(refreshFrameId);
       refreshFrameId = window.requestAnimationFrame(() => ScrollTrigger.refresh());
-    });
+    };
+    const layoutResizeObserver = new ResizeObserver(scheduleRefresh);
     layoutResizeObserver.observe(aboutTrackRef.current);
     layoutResizeObserver.observe(aboutSectionRef.current);
+    layoutResizeObserver.observe(aboutTrackRef.current.closest(".axis-about-viewport"));
+    layoutResizeObserver.observe(aboutStatementRef.current);
+
+    window.addEventListener("orientationchange", scheduleRefresh);
+    document.fonts?.addEventListener?.("loadingdone", scheduleRefresh);
+    document.fonts?.ready?.then(scheduleRefresh);
 
     // Força o ScrollTrigger a recalcular posições depois da montagem.
     ScrollTrigger.refresh();
 
     // Limpa todas as animações criadas neste contexto quando o componente desmontar.
     return () => {
+      disposed = true;
       layoutResizeObserver.disconnect();
+      window.removeEventListener("orientationchange", scheduleRefresh);
+      document.fonts?.removeEventListener?.("loadingdone", scheduleRefresh);
       window.cancelAnimationFrame(refreshFrameId);
       horizontalMedia.revert();
       context.revert();

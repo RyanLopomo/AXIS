@@ -34,21 +34,23 @@ export function About() {
   const scrollLabel = language === "en" ? "Scroll to explore" : "Role para explorar";
 
   return (
-    <section id="sobre" ref={sectionRef} className="relative h-[100svh] min-h-[700px] overflow-hidden bg-transparent md:min-h-0" aria-labelledby="about-title">
-      <h2 id="about-title" className={`axis-about-label absolute left-6 top-24 z-20 text-xs font-medium uppercase tracking-[0.22em] sm:left-8 lg:left-12 ${isLight ? "text-cyan-700" : "text-cyan-400"}`}>
-        {principlesLabel}
-      </h2>
-      <p className={`axis-about-scroll-hint absolute right-6 top-24 z-20 hidden text-xs font-medium uppercase tracking-[0.18em] sm:right-8 lg:right-12 lg:block ${isLight ? "text-slate-500" : "text-[var(--axis-muted)]"}`}>
-        {scrollLabel}
-      </p>
-      <div className="axis-about-viewport h-full">
-        <div ref={trackRef} className="axis-principle-track flex h-full w-max items-center gap-5 sm:gap-6 lg:gap-6">
+    <section id="sobre" ref={sectionRef} className="axis-about-section relative bg-transparent" aria-labelledby="about-title">
+      <div className="axis-about-heading flex items-center justify-between gap-4">
+        <h2 id="about-title" className={`axis-about-label text-xs font-medium uppercase tracking-[0.22em] ${isLight ? "text-cyan-700" : "text-cyan-400"}`}>
+          {principlesLabel}
+        </h2>
+        <p className={`axis-about-scroll-hint hidden text-right text-xs font-medium uppercase tracking-[0.18em] sm:block ${isLight ? "text-slate-500" : "text-[var(--axis-muted)]"}`}>
+          {scrollLabel}
+        </p>
+      </div>
+      <div className="axis-about-viewport">
+        <div ref={trackRef} className="axis-principle-track flex h-full w-max items-center">
           {principleItems.map((item, index) => (
             <PrincipleCard key={item.id} item={item} index={index} isLight={isLight} reducedMotion={prefersReducedMotion} />
           ))}
         </div>
       </div>
-      <div ref={statementRef} className="axis-about-statement absolute bottom-6 left-1/2 z-60 w-[min(540vw,1500px)] -translate-x-1/2 text-center sm:bottom-8 lg:bottom-50">
+      <div ref={statementRef} className="axis-about-statement text-center">
         <span className="sr-only">{content.text}</span>
         <span aria-hidden="true" className="axis-about-statement-visual">
           {statementCharacters.map((character, index) => (
@@ -98,7 +100,7 @@ function PrincipleCard({ item, index, isLight, reducedMotion }) {
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : index * 0.08, ease: "easeOut" }}
       data-principle-card
-      className={`axis-principle-card group relative isolate flex flex-col overflow-hidden rounded-2xl border p-5 transition-[border-color,box-shadow] duration-300 motion-reduce:transition-none sm:p-6 ${surface}`}
+      className={`axis-principle-card group relative isolate flex flex-col overflow-hidden rounded-2xl border transition-[border-color,box-shadow] duration-300 motion-reduce:transition-none ${surface}`}
       style={{ aspectRatio: "1 / 1", flex: "0 0 auto" }}
     >
       <div

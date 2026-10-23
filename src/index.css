@@ -79,6 +79,12 @@ body {
 }
 
 .axis-about-viewport {
+  container-type: size;
+  grid-row: 2;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
@@ -91,14 +97,19 @@ body {
 }
 
 .axis-principle-card {
-  width: min(92vw, 360px);
+  width: var(--axis-principle-size);
+  height: var(--axis-principle-size);
+  flex: 0 0 auto;
+  padding: clamp(1rem, calc(var(--axis-principle-size) * 0.05), 1.5rem);
   scroll-snap-align: center;
 }
 
 .axis-principle-track {
-  --axis-principle-size: min(92vw, 360px);
-  padding-block: 1rem 6rem;
-  padding-inline: calc((100% - var(--axis-principle-size)) / 2);
+  --axis-principle-size: min(92cqw, 520px, 90cqh);
+  box-sizing: border-box;
+  height: 100%;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  padding-inline: calc((100cqw - var(--axis-principle-size)) / 2);
 }
 
 .axis-principle-art {
@@ -118,48 +129,60 @@ body {
 .axis-about-statement-visual {
   color: var(--axis-muted);
   font-family: "Inter", sans-serif;
-  font-size: clamp(1.25rem, 1.55vw, 1.5rem);
+  font-size: clamp(1rem, 1.55vw, 1.5rem);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.4;
   white-space: pre-wrap;
 }
 
 .axis-principle-title {
   font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.125rem, calc(var(--axis-principle-size) * 0.058), 2rem);
   font-weight: 700;
+  line-height: 1.12;
 }
 
 .axis-principle-description {
   font-family: "Inter", sans-serif;
+  font-size: clamp(0.95rem, calc(var(--axis-principle-size) * 0.042), 1.25rem);
   font-weight: 400;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
-@media (min-width: 768px) {
-  .axis-principle-card {
-    width: 380px;
-  }
-
-  .axis-principle-track {
-    --axis-principle-size: 380px;
-    padding-block: 2rem 7rem;
-    padding-inline: clamp(32px, 5vw, 72px);
-  }
-
+.axis-about-section {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100svh;
+  min-height: 0;
+  padding: max(6rem, calc(8svh + 1rem)) clamp(1.25rem, 4vw, 4rem) clamp(1.5rem, 4svh, 3rem);
 }
 
-@media (min-width: 1200px) {
-  .axis-principle-card {
-    width: 420px;
-  }
-
-  .axis-principle-track {
-    --axis-principle-size: 420px;
-  }
+.axis-about-heading {
+  grid-row: 1;
+  min-height: 1.25rem;
 }
 
-@media (max-width: 639px) {
-  .axis-principle-track {
-    --axis-principle-size: min(92vw, 360px);
+.axis-about-statement {
+  grid-row: 3;
+  justify-self: center;
+  max-width: min(60rem, 100%);
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .axis-about-section {
+    height: auto;
+    min-height: 100svh;
+    grid-template-rows: auto minmax(18rem, 1fr) auto;
+    padding-top: max(6rem, calc(8svh + 1rem));
+    padding-bottom: 1.5rem;
+    row-gap: 1.25rem;
+  }
+
+  .axis-about-viewport {
+    min-height: 18rem;
   }
 
   .axis-about-statement-visual {
@@ -167,9 +190,23 @@ body {
   }
 }
 
+@supports not (height: 1cqh) {
+  .axis-principle-track {
+    --axis-principle-size: min(84vw, 520px, 58svh);
+  }
+}
+
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   .axis-about-viewport {
     overflow: hidden;
+    scroll-snap-type: none;
+  }
+}
+
+@media (max-width: 767px) and (min-height: 580px) and (prefers-reduced-motion: no-preference) {
+  .axis-about-viewport {
+    overflow: hidden;
+    scroll-snap-type: none;
   }
 }
 
