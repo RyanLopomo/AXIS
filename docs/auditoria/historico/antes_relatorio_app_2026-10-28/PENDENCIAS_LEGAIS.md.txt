@@ -1,0 +1,138 @@
+# Pendências para aprovação jurídica e publicação
+
+**Estado:** não aprovado para publicação como documento definitivo. Este arquivo é checklist técnico/editorial, não parecer jurídico.
+
+**Consolidação em 28/10/2026:** o [estado atual](./ESTADO_ATUAL.md) reúne as respostas já informadas e as pendências restantes. O aviso das páginas usa `src/data/legalReviewStatus.js`, compartilhado pelos Termos e pela Política em português e inglês. Itens informados pelo responsável descrevem regras previstas; não comprovam implementação, consulta cadastral nem aprovação jurídica.
+
+## Identidade e contato
+
+- [x] Grafia corrigida para “Ryan Lopomo”, responsável pela Engineraxis, informada pelo solicitante em 25/10/2026 e aplicada às páginas legais.
+- [x] Enquadramento MEI e CNPJ 69.569.807/0001-46 informados em 25/10/2026. O número passou na verificação local de comprimento e dígitos verificadores e foi incluído no site como informado; não houve consulta cadastral oficial.
+- [x] Nome empresarial “Ryan Lopomo” informado pelo solicitante em 25/10/2026 e aplicado ao site; “Engineraxis” permanece como nome de apresentação.
+- [ ] Conferir cadastro oficial e titularidade do CNPJ; o nome empresarial acima foi informado pelo solicitante, sem consulta cadastral independente.
+- [x] Endereço parcial informado em 28/10/2026: Rua Graça Aranha, registrado no site como incompleto.
+- [x] Responsável informou que o endereço não tem número; registrado como Rua Graça Aranha, sem número.
+- [ ] Completar endereço público com bairro, cidade/UF e CEP; não inferir cidade a partir da região dos servidores.
+- [x] Canal `engineeraxisltda@gmail.com` confirmado pelo solicitante para privacidade e suporte em 23/10/2026 e publicado nas páginas legais. O contato comercial `contato@axis.dev` permanece na seção comercial.
+- [x] Solicitante reconfirmou em 25/10/2026 o e-mail acima para privacidade e suporte, em resposta à pergunta sobre recebimento e acompanhamento da caixa. Não foi realizado teste de entrega.
+- [x] Site oficial `https://www.engineraxis.com.br` confirmado pelo solicitante em 23/10/2026.
+- [ ] Definir representante/controlador, eventual encarregado e procedimento de atendimento a direitos.
+
+## Produto, dados e operação
+
+- [x] Responsável confirmou em 25/10/2026 que somente ele tem acesso ao AXIS CLIPES nesta fase de desenvolvimento e testes.
+- [x] Modelo de lançamento informado em 25/10/2026: versão gratuita com planos para acesso a opções adicionais; não há download disponível neste momento.
+- [x] Recursos previstos confirmados em 25/10/2026: gratuito com corte de clipes e upload com agendamento, com marca d’água; pago sem marca d’água e sem limite de quantidade de publicações imposto pelo plano, preservados os limites das plataformas e da instalação.
+- [x] Periodicidade dos planos pagos confirmada: mensal. O responsável informou que a renovação será escolhida pelo usuário; não foram definidos a interface dessa escolha nem o meio de pagamento.
+- [x] Limite gratuito esclarecido: até 20 publicações diárias somadas entre YouTube e TikTok; por exemplo, 10 em cada plataforma esgotam a cota. Trata-se de publicações, sem definir limite de geração de clipes. Uma conta vinculada ao YouTube e outra ao TikTok. O preço dos planos permanece não definido.
+- [x] Reinício da cota diária confirmado: à meia-noite, horário de Brasília.
+- [x] No gratuito, troca das contas vinculadas permitida a cada dia, com reinício da disponibilidade à meia-noite de Brasília.
+- [x] Troca de conta mantém a cota diária gratuita: 15 publicações anteriores deixam apenas 5 disponíveis no mesmo dia.
+- [x] Plano pago permitirá até 6 contas vinculadas no total entre YouTube e TikTok (exemplo informado: 3 em cada), com a mesma regra de troca diária do gratuito e reinício à meia-noite de Brasília.
+- [x] Modelo mensal, limites, renovação escolhida pelo usuário, cancelamentos, regularização de 30 dias e tratamento da fatura correspondente foram informados e incorporados aos documentos.
+- [ ] Definir preços, meios/provedor de pagamento e detalhes de contratação; implementar os fluxos comerciais e registrar a escolha de renovação. Submeter regras de cobrança, cancelamento e restituição à revisão jurídica.
+- [x] Prazo de regularização confirmado: 30 dias corridos a partir do vencimento da fatura, mantendo os benefícios pagos durante esse prazo. Sem regularização, cancela-se o plano pago e o usuário retorna às permissões do plano gratuito. Essa regra foi incluída nas páginas PT/EN; não representa exclusão da conta.
+- [x] Cancelamento voluntário mantém benefícios até o fim do período já pago; depois, retorno ao gratuito.
+- [x] Canal previsto de solicitação de cancelamento voluntário: site.
+- [ ] Implementar e validar fluxo de cancelamento no site antes da oferta; este checkout não possui rota/API de cancelamento ou gestão de assinatura. Não foi criado botão sem operação funcional. Autenticação, confirmação e tratamento da solicitação continuam pendentes. Meios de pagamento também permanecem pendentes.
+- [ ] Validação técnica dos recursos e acesso ao código do aplicativo permanecem pendentes, conforme resposta do solicitante; o produto ainda não está disponível para download. Não interpretar a confirmação comercial como implementação verificada.
+- [x] Página do produto informada: https://engineraxis.com.br/axisclipes. A rota `/axisclipes` neste checkout apresenta o produto; o endereço não fornece o código-fonte do aplicativo para auditoria. A publicação remota não foi confirmada nesta etapa.
+- [ ] Localizar a pasta ou repositório do aplicativo AXIS CLIPES para verificar controles técnicos; a URL da página de apresentação não resolve esta pendência.
+- [x] Solicitante esclareceu em 25/10/2026 que o AXIS CLIPES ainda não está disponível para download. As descrições anteriores de “beta distribuído” foram corrigidas nas páginas do site para desenvolvimento/testes, sem download disponível. Os registros históricos abaixo não comprovam distribuição.
+- [x] Relatório de auditoria estática do repositório do AXIS CLIPES fornecido pelo solicitante em 23/10/2026. O relatório identifica frontend React, API FastAPI, processamento de mídia, PostgreSQL, Redis/RQ e implementações OAuth/publishers. Este checkout institucional continua sem o código do aplicativo; os achados foram incorporados como provenientes do relatório, sem verificação independente neste workspace ou contra o build distribuído.
+- [x] Responsável confirmou em 23/10/2026 que o AXIS CLIPES continua em fase de testes beta; disponibilidade operacional das funções e correspondência com o build distribuído ainda precisam ser verificadas.
+- [x] Responsável informou em 23/10/2026 que a versão beta distribuída roda apenas em Windows, sem versão oficial para smartphones e sem requisito mínimo específico de hardware.
+- [x] Responsável reconfirmou em 25/10/2026 que não estabelece idade mínima para usuários. Isso não resolve a avaliação e implementação das salvaguardas para menores.
+- [x] Uso pessoal e comercial permitido, inclusive em trabalhos para clientes, respeitados direitos sobre os materiais e condições do plano.
+- [x] Quando disponibilizado, download exclusivamente pelo site oficial da Engineraxis; redistribuição do instalador por terceiros não autorizada. O produto continua sem download disponível.
+- [ ] Avaliar tratamento de vídeos/áudios que podem incluir menores, riscos e salvaguardas; o relatório não encontrou verificação etária ou controles parentais. Revisar LGPD e Estatuto Digital da Criança e do Adolescente antes da aprovação.
+- [ ] Mecanismos de autorização/acompanhamento por responsáveis expressamente mantidos pendentes pelo solicitante.
+- [x] Atualizações automáticas do aplicativo confirmadas como comportamento previsto, ainda sem validação de implementação.
+- [x] Suporte pelo e-mail já confirmado, sem prazo de resposta definido pelo responsável; direitos e prazos legais não são afastados por essa definição.
+- [ ] Definir e testar origem/verificação de pacotes, momento da instalação e recuperação de atualizações; a declaração não comprova segurança do mecanismo.
+- [ ] Verificar compatibilidade real, requisitos efetivos e build distribuído quando o aplicativo estiver disponível.
+- [x] Relatório estático recebido descreve importação por arquivo/URL, extração de áudio, Faster-Whisper, FFmpeg, Ollama configurável, persistência de mídias/metadados e exportação; conferir os achados no repositório e no build realmente distribuído.
+- [ ] Inventariar categorias de dados, local de armazenamento, finalidade, base legal a validar, acesso e compartilhamentos.
+- [x] Acesso previsto ao aplicativo por conta Google, conforme informação do responsável. Não foi implementado login no site nesta etapa.
+- [x] E-mail da conta Google usada para entrar confirmado como destinatário dos avisos.
+- [x] E-mail do cadastro e dados/situação da assinatura serão armazenados nos servidores do serviço, conforme confirmação do responsável.
+- [x] Usuário poderá excluir o cadastro na AXIS pelo aplicativo; não se trata de excluir a conta Google.
+- [x] Região dos servidores informada: São Paulo, Brasil. Fornecedor e configuração efetiva ainda não verificados; não presumir que todos os subprocessadores/backups estejam na mesma região.
+- [x] Exclusão pelo app prevista como imediata para o cadastro ativo, com encerramento da assinatura e de novas cobranças.
+- [x] Confirmação da exclusão do cadastro exigirá aviso sobre assinatura/acesso e digitação exata de “Excluo minha conta” no campo de exclusão; implementação ainda não verificada.
+- [x] Alcance esclarecido pela opção 1: remoção completa dos dados locais do aplicativo ocorre somente ao desinstalar. Excluir cadastro não apaga projetos/histórico locais; as regras específicas de limpeza pós-publicação e exclusão manual continuam previstas.
+- [x] Desinstalar não constitui cancelamento formal e não interrompe cobranças por si só. Assinatura segue as condições de renovação; sem cancelamento formal e sem regularização da fatura vencida, o plano pago é cancelado aos 30 dias corridos do vencimento, encerrando novas cobranças e retornando ao gratuito.
+- [x] No cancelamento automático por falta de pagamento ao fim dos 30 dias, a fatura vencida que iniciou o prazo também será cancelada, sem permanecer pendente de pagamento, conforme confirmação do responsável. Não estender a outros débitos/situações não definidos.
+- [ ] Implementar e testar cancelamento do plano e da fatura correspondente, encerramento de novas cobranças e retorno ao gratuito; submeter regras comerciais à revisão jurídica.
+- [ ] Testar remoção efetiva dos dados locais na desinstalação, preservação na exclusão de cadastro e encerramento de novas cobranças pelos fluxos previstos. Arquivos externos, exportações e backups continuam pendentes.
+- [x] Regra comercial informada: excluir cadastro não gera reembolso automático de mensalidade já paga. O texto preserva arrependimento e restituições legais quando aplicáveis, conforme CDC arts. 49 e 51, II; não foi inserida proibição absoluta de reembolso. Revisão jurídica continua pendente.
+- [ ] Demais dados recebidos no login Google continuam pendentes. Confirmar escopos, sessão, fornecedor/configuração de hospedagem, campos, acesso, proteção e retenção legal/exclusão de cadastro e assinatura. Testar exclusão e encerramento de novas cobranças; definir tratamento de backups e efeitos sobre projetos/histórico locais.
+- [x] Responsável informou que a AXIS não terá acesso aos vídeos gerados ou publicados pelo aplicativo; registrado nas páginas como declaração sobre o fluxo previsto, sem comprovação técnica.
+- [ ] Verificar ausência de envio de mídia para a AXIS, acesso de suporte, logs e telemetria. Publicação em plataformas externas envolve transmissão aos respectivos serviços.
+- [x] Na primeira entrada no aplicativo, o usuário escolherá compartilhar estatísticas com a AXIS ou mantê-las somente no computador.
+- [x] Escopo de envio atualizado pelo responsável: apenas estatísticas de uso de hardware, sem identificação de origem no conteúdo enviado, para diagnóstico de funcionamento/desempenho. Isso substitui a lista anterior de falhas, contagens de projetos/clipes e tempos de criação como dados compartilhados; essas categorias não integram o envio previsto atual.
+- [x] Escolha de compartilhamento poderá ser alterada a qualquer momento nas configurações do aplicativo.
+- [x] Componentes previstos para estatísticas: uso de RAM, CPU e GPU.
+- [x] Periodicidade de envio confirmada: mensal, todo dia 1º, quando o compartilhamento estiver habilitado. A expressão “fins de mês” foi interpretada conforme a data explícita informada, sem presumir envio no último dia do mês.
+- [x] Relatório mensal resumirá o mês anterior. Se o envio não for possível no dia 1º, ficará pendente para a próxima abertura em que o aplicativo puder enviar, respeitada a escolha de compartilhamento vigente.
+- [x] Agregação confirmada: apenas médias mensais de uso de RAM, CPU e GPU, sem envio de picos ou medições individuais.
+- [x] Desativar compartilhamento apagará o relatório pendente, impedindo seu envio. A resposta não define exclusão de estatísticas já recebidas pela AXIS.
+- [x] Prazo de retenção das médias recebidas pela AXIS definido em 28/10/2026: 2 dias para análise de anomalias e consumo excessivo de recursos, com exclusão ao fim do período.
+- [ ] Definir campos/unidades das médias, horário/fuso, vários meses pendentes e estado anterior à escolha; verificar cópias, exclusão efetiva após 2 dias, ausência de identificadores, metadados/logs do receptor e respeito à preferência. Não presumir anonimização completa a partir da ausência declarada de identificação.
+- [x] Prazo de retenção dos logs técnicos do aplicativo definido em 28/10/2026: 1 dia, com exclusão automática; não confundir com logs do site ou estatísticas recebidas pela AXIS.
+- [x] Desconexão de contas Google/YouTube e TikTok estará disponível pelo aplicativo, conforme responsável; remoção de tokens e revogação remota continuam sem teste.
+- [x] Logs técnicos do aplicativo terão exclusão automática, conforme regra prevista informada pelo responsável.
+- [ ] Definir conteúdo, início da contagem, gatilho e cópias dos logs do aplicativo; testar a exclusão automática após 1 dia. Não aplicar esse prazo aos logs do site na Vercel nem ao histórico local de links. Apagar logs não comprova segurança integral.
+- [x] Exclusão do projeto esclarecida: remove apenas arquivos locais; os vídeos já publicados no YouTube/TikTok permanecem nas plataformas.
+- [x] Limpeza automática prevista: arquivos locais serão excluídos após a postagem de todos os clipes daquele projeto; regra baseada no evento de conclusão, sem prazo fixo em dias informado.
+- [x] Abrangência prevista da limpeza esclarecida: todos os arquivos locais relacionados ao projeto, incluindo o vídeo original baixado e as transcrições, para liberar armazenamento. Não presumir exclusão de originais externos à pasta do projeto.
+- [x] Falha de postagem: usuário será notificado e poderá tentar publicar o clipe novamente. Implementação da notificação e nova tentativa ainda não testada.
+- [x] Após a limpeza dos arquivos, o histórico com os links das publicações será mantido.
+- [x] Retenção prevista do histórico definida: até o usuário excluí-lo, com remoção disponível pelo aplicativo; implementação ainda não testada.
+- [x] Responsável informou aviso/notificação quando o usuário tentar excluir o projeto.
+- [x] Exclusão de projeto exigirá aviso e confirmação antes de apagar os arquivos.
+- [x] Se um clipe falhar e o usuário não agir, os arquivos permanecerão até ele republicar ou confirmar a exclusão do projeto. A limpeza após todas as postagens continua prevista.
+- [x] Histórico com links será armazenado apenas no computador do usuário, até remoção pelo aplicativo.
+- [ ] Testar confirmação antes da exclusão, retenção de clipes com falha e armazenamento/remoção exclusivamente locais do histórico. Esclarecer postagens canceladas, cópias exportadas/backups e arquivos de origem fora do projeto. Conciliar a limpeza prevista com o relatório anterior, que descrevia preservação de originais e legendas.
+- [ ] Testar botão e endpoint de exclusão em instalação isolada: banco, originais, áudio, transcrições, clipes, legendas, thumbnails, temporários, filas, logs, backups e revogação de tokens.
+- [x] Regras de retenção informadas para arquivos de projetos, clipes com falha, histórico local e relatório de estatísticas pendente; descrição aplicada ao site.
+- [ ] Definir retenção restante dos logs do site, dados de cadastro/assinatura e backups. Testar execução e abrangência das regras de 1 dia para logs do aplicativo e 2 dias para estatísticas recebidas, além das regras locais já informadas.
+- [ ] Confirmar controles reais de segurança, gestão de chaves, atualização, ACLs, TLS, backups, logs e resposta a incidentes.
+- [x] Relatório estático recebido identifica fila, publicação/agendamento, publishers YouTube/TikTok e acompanhamento; disponibilidade, configuração, aprovação e operação na versão distribuída seguem pendentes.
+- [x] Relatório estático recebido identifica OAuth Google/YouTube e TikTok, escopos, armazenamento cifrado e legado, renovação e fluxos de desconexão; revisar credenciais/escopos efetivos, aprovação, revogação e interface no build real.
+- [x] Responsável confirmou em 23/10/2026 que API, workers e Ollama ficam no computador do usuário na versão beta distribuída. A configuração exata do build não foi verificada independentemente; o relatório indica que o endpoint Ollama é configurável.
+- [x] Mapear regras de retenção reportadas no código: limpeza pós-publicação condicional (padrão `CLEANUP_AFTER_PUBLISH=true`), TTL de resultados RQ concluídos (7 dias), falhos (30 dias) e progresso/heartbeat Redis (24 h renovados a cada gravação); validade de OAuth, cache, upload TikTok, polling e timeout de job não é prazo de exclusão.
+- [ ] Verificar limpeza após postagens e manutenção/exclusão do histórico local; conciliar com o relatório anterior. Confirmar `CLEANUP_AFTER_PUBLISH`, retenção de notificações e prazos ainda não definidos para logs do site, cadastro/assinatura e backups. Logs do aplicativo (1 dia) e estatísticas recebidas (2 dias) têm prazo informado, com execução ainda não testada.
+- [ ] Validar detalhes da exclusão de projeto, reinício de vídeo, publicação e desconexão; considerar cópias exportadas, arquivos temporários, histórico, backups e conteúdo já enviado às plataformas.
+- [ ] Confrontar a confirmação de execução local de API/workers/Ollama com o pacote beta efetivamente distribuído e verificar se a instalação pode redirecionar o endpoint Ollama.
+- [ ] Revisar o achado de credenciais legadas em JSON sem cifragem e confirmar proteção/rotação de qualquer segredo que tenha sido distribuído.
+- [x] Uso pessoal/comercial, distribuição exclusiva pelo site, atualização automática e suporte por e-mail sem prazo comercial definido foram informados.
+- [ ] Testar instalador/atualização do Windows, revisar titularidade e licenças de componentes e definir preço/pagamento; validar juridicamente restituições e demais condições antes da oferta comercial.
+
+## Site e terceiros
+
+- [x] Responsável informou em 23/10/2026 que o site está hospedado na Vercel e possui logs de acesso.
+- [ ] Revisar configuração efetiva do projeto: analytics, headers, CDN, backups, deploys e subprocessadores. Região, dados registrados e acesso aos logs foram marcados PENDENTE pelo solicitante em 23/10/2026.
+- [ ] Prazo de retenção dos logs de acesso: o solicitante respondeu PENDENTE em 23/10/2026.
+- [x] Google Fonts é carregado pelo CSS; o responsável informou em 23/10/2026 que a publicação usa apenas Google Fonts e o encaminhamento ao WhatsApp. A cena Spline está configurada, mas não é importada pelo código do site.
+- [ ] Revisar o aviso do formulário para explicar a transferência do briefing pela URL para WhatsApp; estabelecer procedimento de retenção no WhatsApp/e-mail.
+- [ ] Verificar cookies, armazenamento, scripts e SDKs do site publicado por inspeção de rede/cookies no ambiente real; a declaração do responsável não foi verificada na implantação.
+- [ ] Conferir implantação das rotas públicas: em 28/10/2026, a página inicial `https://www.engineraxis.com.br/` respondeu HTTP 200, enquanto `/axisclipes` e `/privacidade` no domínio com `www` responderam HTTP 404. URLs correspondentes sem `www` responderam HTTP 308. Isso não conclui inspeção de cookies, SDKs ou cabeçalhos em produção.
+- [ ] Se houver YouTube API, cumprir a política vigente de termos, privacidade, exclusão, revogação e informações ao usuário.
+- [ ] Se houver TikTok Direct Post, confirmar aprovação de app/scope e fluxo de consentimento/controle segundo a política vigente.
+
+## Rascunhos existentes no site
+
+- [x] Primeira utilização do aplicativo exigirá aceite dos Termos antes do acesso e apresentação da Política de Privacidade. A escolha de estatísticas permanece separada.
+- [x] Mudanças importantes nos Termos, Política de Privacidade ou planos serão comunicadas por e-mail e por notificação no aplicativo.
+- [x] Alterações importantes nos Termos exigirão novo aceite antes de continuar o uso do aplicativo.
+- [ ] Implementar/verificar apresentação e aceites inicial/renovado, registro de versão/data e retenção, envio ao e-mail Google e fluxo/registros de aviso. Definir acesso a dados e encerramento da utilização se o usuário não aceitar alterações. Esses fluxos não foram implementados neste checkout do site.
+`app/termos/page.jsx`, `app/privacidade/page.jsx` e `src/data/legalDocuments.js` fazem parte da aplicação e contêm minutas com avisos de pendência. Se esse build estiver implantado, essas páginas são acessíveis ao público; confirmar a publicação e mantê-las marcadas como rascunho até validação. Os arquivos nesta pasta são rascunhos offline.
+
+## Validação jurídica
+
+- [ ] Advogado revisar identificação, papéis de controlador/operador, finalidades e bases legais para cada operação.
+- [ ] Confirmar informação clara sobre tratamento, compartilhamento e direitos conforme LGPD, sem afirmar conformidade integral.
+- [ ] Rever relação de consumo, oferta, preço, cancelamento, suporte, garantias e limites sem reduzir direitos legais.
+- [ ] Revisar jurisdição/lei aplicável e transferência internacional com base nos contratos e regiões reais.
+- [ ] Registrar data de aprovação real; a data desta auditoria não deve ser usada como data de vigência.

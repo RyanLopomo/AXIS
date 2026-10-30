@@ -1,0 +1,153 @@
+# Relatório técnico — auditoria do AXIS CLIPES
+
+## Limpeza de arquivos, falhas e links preservados — 25/10/2026
+
+O responsável esclareceu que a limpeza libera armazenamento removendo todos os arquivos locais do projeto após todas as postagens, inclusive o vídeo original baixado e transcrições. Falhas de postagem terão notificação e possibilidade de nova tentativa. Após a limpeza será mantido histórico com os links, e os vídeos publicados permanecerão nas plataformas. Termos, privacidade PT/EN e documentos de apoio refletem essas regras previstas. A retenção do histórico e dos arquivos com falha, cancelamentos, arquivos externos, exportações e backups continuam pendentes; originais fora do projeto não foram incluídos por presunção. A implementação permanece sem teste. Este complemento resolve as pendências equivalentes nos registros históricos abaixo.
+
+## Exclusão local e limpeza por conclusão — 25/10/2026
+
+O responsável manteve pendentes os dados que serão recebidos no acesso Google, esclareceu que excluir um projeto remove apenas arquivos locais (sem apagar vídeos publicados nas redes) e informou limpeza dos arquivos locais após a postagem de todos os clipes do projeto. Termos, privacidade PT/EN e documentos de apoio foram atualizados como regras previstas. A limpeza precisa de teste e conciliação com a preservação de originais/legendas descrita no relatório estático anterior. Originais externos, registros/histórico, falhas/cancelamentos, exportações e backups permanecem pendentes. As referências anteriores abaixo à ausência de confirmação sobre exclusão remota ficam resolvidas: não haverá remoção das publicações pela exclusão local do projeto.
+
+## Acesso Google, vídeos e exclusão informados — 25/10/2026
+
+O responsável informou uso de contas Google para acesso, ausência de acesso da AXIS aos vídeos publicados/gerados e exclusão de tudo vinculado ao projeto quando removido. Páginas PT/EN, minutas e mapas foram atualizados como declarações/regras previstas, sem implementar autenticação ou exclusão neste checkout. Recebimento de dados no login, escopos, fluxo de mídia, logs, telemetria, suporte e remoção efetiva precisam de verificação. Não foi presumida exclusão remota de publicações, cópias exportadas ou backups. O repositório do aplicativo segue indisponível para auditoria nesta etapa.
+
+## Contas pagas, cota após troca e canal de cancelamento — 25/10/2026
+
+O responsável confirmou que trocar a conta não reinicia a cota diária gratuita: após 15 publicações, restam 5. O plano pago permitirá até 6 contas no total (exemplo: 3 YouTube + 3 TikTok), com a mesma regra de troca diária do gratuito e reinício à meia-noite de Brasília. O cancelamento voluntário será solicitado pelo site. As páginas PT/EN e a minuta foram atualizadas como condições previstas; este checkout ainda não possui fluxo funcional de cancelamento ou cobrança, que precisará ser implementado e validado antes da oferta. Não foi presumido limite de 3 contas por plataforma a partir do exemplo, nem criada operação fictícia de cancelamento. Este complemento resolve as pendências correspondentes dos registros históricos abaixo.
+
+## Cancelamento voluntário e troca diária — 25/10/2026
+
+O responsável confirmou manutenção dos benefícios até o fim do período já pago em caso de cancelamento voluntário e troca das contas vinculadas do plano gratuito a cada dia, com reinício da disponibilidade à meia-noite de Brasília. Os meios de pagamento foram mantidos pendentes. As páginas PT/EN e a minuta de apoio refletem as decisões como condições previstas. Permanecem pendentes o canal de cancelamento, contas/trocas do plano pago e efeito da troca de conta sobre a cota gratuita. Essa atualização resolve as pendências equivalentes nos registros históricos abaixo, sem comprovar implementação ou operação no aplicativo.
+
+## Confirmação de prazo e reinício diário — 25/10/2026
+
+O responsável confirmou **30 dias corridos a partir do vencimento da fatura**, com **manutenção dos benefícios pagos nesse prazo**, e reinício da cota diária à **meia-noite no horário de Brasília**. Sem regularização ao fim do prazo, o usuário retorna ao gratuito conforme resposta anterior. Textos PT/EN da apresentação, termos e minuta de apoio foram atualizados. As pendências equivalentes dos registros históricos abaixo ficam resolvidas por esta confirmação. Procedimento de cancelamento voluntário, preços, pagamentos e reembolsos continuam pendentes. A aplicação dessas regras no aplicativo ainda não foi verificada.
+
+## Confirmação de cota compartilhada e regularização — 25/10/2026
+
+O responsável confirmou que as 20 publicações diárias do plano gratuito são somadas entre YouTube e TikTok: 10 em cada rede esgotam a cota. O prazo de até um mês para regularização começa no vencimento da fatura; sem regularização, o plano pago é cancelado e o usuário retorna às permissões do gratuito. A cota foi atualizada na apresentação e nos termos PT/EN; a regra de regularização foi incorporada aos termos. Permanecem pendentes o horário/fuso de reinício da cota, a contagem de um mês (calendário ou 30 dias), os benefícios durante a regularização e o cancelamento voluntário. Esses esclarecimentos substituem as pendências equivalentes nos registros históricos abaixo. Nenhuma implementação do aplicativo ou cobrança foi testada.
+
+## Esclarecimento de cota, contas e regularização — 25/10/2026
+
+O responsável esclareceu que a cota gratuita corresponde a **20 clipes publicados por dia na rede social escolhida**, com **uma conta vinculada ao YouTube e outra ao TikTok**. A geração de clipes não recebeu limite confirmado. Páginas PT/EN e minuta de termos foram atualizadas. Ainda é preciso esclarecer se a cota é compartilhada ou separada entre plataformas e quando reinicia. O responsável também mencionou até um mês para regularização, seguido de cancelamento; início do prazo, manutenção de benefícios e alcance do cancelamento não ficaram definidos. Essa resposta está registrada no checklist para esclarecimento, sem criar uma regra pública presumida de inadimplência ou exclusão de conta. Este complemento substitui as descrições anteriores de uma única conta total e cota genérica de vídeos.
+
+## Complemento dos limites e renovação — 25/10/2026
+
+O responsável informou limite gratuito de **20 vídeos diários**, com publicação em **apenas uma conta**, e renovação dos planos mensais conforme escolha do usuário. O preço permanece não definido. As páginas PT/EN e a minuta de apoio refletem essas decisões como condições previstas. Permanecem pendentes a regra de contagem e reinício diário, o alcance da restrição de conta, o registro da escolha de renovação e os efeitos do cancelamento sobre o período pago. Os registros anteriores abaixo correspondem às respostas anteriores e são complementados por esta atualização. Nenhuma implementação do aplicativo ou cobrança foi verificada.
+
+## Detalhamento dos planos informado em 25/10/2026
+
+O responsável informou que a versão gratuita prevista permitirá corte de clipes e upload com agendamento, com marca d’água. Os planos pagos serão mensais, sem marca d’água e sem limite de quantidade de publicações imposto pelo plano; limites das plataformas externas e limitações da instalação continuam aplicáveis. Preços, eventuais limites da versão gratuita, pagamento, renovação, cancelamento e reembolso não foram definidos. A validação técnica e o acesso ao código do aplicativo permanecem pendentes; não há download disponível. As páginas PT/EN e a minuta de termos foram atualizadas como previsão de lançamento, sem afirmar que os recursos foram testados.
+
+## Complemento de acesso e modelo de lançamento — 25/10/2026
+
+O responsável confirmou que somente ele tem acesso ao AXIS CLIPES nesta fase e que o lançamento está previsto com versão gratuita e planos para opções adicionais. Recursos, limites, preços e condições dos planos permanecem pendentes. Informou https://engineraxis.com.br/axisclipes como página do produto; a rota equivalente neste checkout é de apresentação e não contém o aplicativo/backend. Não foi possível confirmar a publicação pelo navegador de pesquisa nesta etapa. A localização do repositório do aplicativo continua pendente para auditoria técnica.
+
+## Esclarecimento posterior — nome empresarial e disponibilidade
+
+Em resposta posterior de 25/10/2026, o solicitante confirmou **Ryan Lopomo** como nome empresarial e esclareceu que **o AXIS CLIPES ainda não está disponível para download**. As páginas de apresentação, termos e privacidade foram atualizadas em português e inglês. Este esclarecimento substitui as referências históricas abaixo a “beta distribuído”: elas descrevem o desenvolvimento/testes informado anteriormente, sem comprovar distribuição pública. Cadastro oficial do CNPJ e endereço continuam pendentes; o nome empresarial deixou de ser uma informação não fornecida.
+
+## Atualização cadastral recebida em 25/10/2026
+
+O solicitante corrigiu a grafia do responsável para **Ryan Lopomo**, informou **Engineraxis**, enquadramento **MEI** e **CNPJ 69.569.807/0001-46**, manteve o endereço pendente e reconfirmou o e-mail de suporte/privacidade. O CNPJ passou na verificação local de comprimento e dígitos verificadores; cadastro oficial, titularidade e nome empresarial ainda precisam ser conferidos. Os dados foram aplicados às páginas em português e inglês. As referências abaixo ao nome anterior e à ausência de documento fiscal correspondem ao registro histórico e foram substituídas por esta atualização cadastral. Não houve aprovação jurídica nem validação do build do aplicativo nesta etapa.
+
+## Atualização recebida em 23/10/2026
+
+O solicitante forneceu um segundo relatório, atribuído a uma auditoria estática do repositório do aplicativo. Segundo esse material, o repositório do app inclui frontend React, API FastAPI, pipeline de vídeos, PostgreSQL, Redis/RQ, Ollama configurável e implementações OAuth/publishers de YouTube e TikTok. Ele também descreve categorias de dados, exclusão parcial, TTLs específicos e controles criptográficos limitados. Esse repositório não foi reaberto neste checkout institucional e os achados não foram reproduzidos por esta auditoria; o build distribuído e as configurações efetivas continuam sem validação. As conclusões abaixo que diziam que não havia código do app referem-se à primeira inspeção do checkout institucional e não devem ser lidas como negação dos achados recebidos depois.
+
+As páginas legais foram atualizadas para refletir esses achados como descrição de auditoria estática fornecida, com limites e pendências explícitos. O responsável confirmou que API, workers e Ollama rodam no computador do usuário no beta distribuído; configuração do endpoint/build, retenção geral, credenciais/aprovação das plataformas, comportamento do build e salvaguardas para menores continuam pendentes de verificação independente.
+
+**Data:** 22/10/2026
+
+**Escopo:** checkout disponível em `C:/Users/R/Documents/AXIS/AXIS` e referências oficiais consultadas nesta data.
+
+**Natureza:** análise estática do checkout. Nesta atualização, os dados institucionais foram aplicados às páginas públicas; afirmações técnicas do produto e documentos legais continuam pendentes de validação.
+
+## Resumo executivo
+
+O checkout auditado diretamente é o site institucional AXIS em Next.js e não contém o aplicativo AXIS CLIPES nem seu backend. Um relatório estático separado fornecido pelo solicitante descreve esses fluxos do aplicativo; não foi reproduzido neste checkout e não confirma o build distribuído ou a configuração operacional.
+
+É possível verificar o comportamento do site: preferências de idioma e tema em `localStorage`; formulário que monta uma mensagem com os campos preenchidos e abre um endereço `wa.me`; carregamento de Google Fonts; navegação para sites de terceiros. Não foi encontrado endpoint de envio próprio, login, upload, banco, analytics ou SDK publicitário no código pesquisado.
+
+O `npm audit --omit=dev` terminou com 6 vulnerabilidades reportadas no conjunto de dependências de produção: 1 crítica, 4 altas e 1 moderada. A crítica está associada ao Next.js 16.2.9 e a advisories com condições de exploração específicas. A aplicabilidade de cada cenário ao deploy não foi testada. Nenhuma atualização foi aplicada.
+
+Os documentos legais ao final deste pacote são **rascunhos de trabalho**. Não são parecer jurídico nem documentos aprovados. As rotas `/termos` e `/privacidade` exibem texto identificado como minuta; os achados técnicos do aplicativo foram incorporados com atribuição ao relatório estático fornecido e ressalvas sobre configuração, distribuição e pendências operacionais.
+
+## O que foi fornecido e o que foi comprovado
+
+| Informação | Origem | Resultado |
+|---|---|---|
+| Responsável: Ryan Lopmo | Confirmação do solicitante em 23/10/2026 | Nome e apresentação como “Responsável pelo AXIS CLIPES” confirmados; natureza jurídica não informada. |
+| Identificação fiscal declarada | Declaração do solicitante | O dado fornecido não tem o comprimento padrão de CPF ou CNPJ e foi omitido das páginas públicas. Documento corrigido e titularidade continuam pendentes; o número não é reproduzido neste relatório. |
+| E-mail `engineeraxisltda@gmail.com` | Confirmação do solicitante em 23/10/2026 | Publicado como contato de privacidade e suporte legal; monitoramento operacional da caixa não foi verificado. `contato@axis.dev` permanece como contato comercial da seção de contato. |
+| Site `https://www.engineraxis.com.br`, hospedagem Vercel e logs de acesso | Confirmações do solicitante em 23/10/2026 | Site oficial, hospedagem Vercel e existência de logs de acesso foram informados e registrados. Retenção, região, campos e acesso aos logs foram marcados pendentes pelo solicitante. O checkout não contém a configuração do deploy. |
+| Repositório/build do AXIS CLIPES | Confirmação do solicitante e relatório estático fornecido em 23/10/2026 | O repositório do app não está neste workspace institucional. O relatório descreve fluxo de dados, serviços e funções; sem reprodução independente ou validação contra o build distribuído. |
+| Status do AXIS CLIPES | Confirmação do responsável em 23/10/2026 | O produto continua em fase de testes beta; recursos da versão distribuída permanecem sem verificação independente. |
+| Sistemas suportados | Informação do responsável em 23/10/2026 | Beta distribuído apenas para Windows, sem versão oficial para smartphones e sem mínimo específico de hardware informado. Build e compatibilidade não disponíveis para verificação. |
+| Idade mínima | Informação do responsável e relatório estático fornecido em 23/10/2026 | Sem idade mínima segundo o responsável; relatório não encontrou verificação etária ou salvaguardas específicas. Adequação e proteção de menores pendentes. |
+| Publicação/agendamento e integrações | Relatório estático fornecido em 23/10/2026 | Implementações de fila, publishers e OAuth YouTube/TikTok identificadas; credenciais, configuração, aprovação e operação no build distribuído pendentes. |
+
+## Mapa de arquitetura observado
+
+| Componente | Evidência | Função observável | Dados que processa |
+|---|---|---|---|
+| Framework e runtime | `package.json`; `next.config.ts` | Next.js 16 App Router, React 19. | Requisições e conteúdo do site. Configuração de hosting não incluída. |
+| UI | `app/page.jsx:1-5`; `src/App.jsx:1-38` | A rota inicial compõe seções React no cliente. Código predominantemente JSX; TypeScript é usado em poucos arquivos/configurações. | Textos, imagens, preferências e campos do formulário. |
+| Estilo e animação | `src/index.css`; `src/animations/useAxisAnimations.js`; dependências em `package.json` | Tailwind/CSS, GSAP e Framer Motion constam do projeto. | Geometria e apresentação; não é evidência de processamento do CLIPES. |
+| Rotas | `app/` | Página inicial e páginas AXIS CLIPES, termos e privacidade. Não há API routes visíveis no inventário. | Conteúdo estático e interações client-side. |
+| Preferências | `src/context/site-preferences.jsx:7-32` | Lê e grava idioma/tema em `localStorage`. | Valores `axis-language` e `axis-theme`. |
+| Formulário | `src/sections/Contact.jsx:21-63, 156-208` | Mantém campos em estado React e, ao clicar, abre WhatsApp com mensagem pré-preenchida na URL. Não há POST para servidor AXIS no código observado. | Nome, tipo de projeto, orçamento e texto livre. |
+| Dependência Spline | `package.json`; `src/config/spline.js:1-4` | Biblioteca e URL de cena constam do projeto, mas a URL não é importada pelo código pesquisado. Uso efetivo não confirmado. | Não verificável como tráfego efetivo. |
+| Backend, banco e filas | Inventário do checkout e busca por Python, FastAPI, SQL, PostgreSQL, Docker, workers e endpoints | Não encontrados. | Sem evidência disponível. |
+
+## Matriz de funcionalidades do produto
+
+| Recurso atribuído ao CLIPES | Evidência disponível | Classificação da auditoria |
+|---|---|---|
+| Importar vídeos de arquivo/URL | Relatório estático fornecido descreve endpoints de upload/importação e yt-dlp. | Identificado no código segundo o relatório; build e operação não verificados. |
+| Extrair áudio, transcrever, detectar momentos, gerar clipes/legendas e exportar | Relatório identifica FFmpeg, Faster-Whisper, pipeline e arquivos de saída. | Identificado no código segundo o relatório; build e operação não verificados. |
+| Ollama | Relatório identifica cliente e endpoint configurável usado para texto/contexto. | Implementação identificada; host e retenção efetivos pendentes. |
+| Armazenar originais, transcrições e resultados | Relatório descreve PostgreSQL e filesystem de projeto; responsável informa execução local de API/workers/Ollama. | Implementação identificada; prazo geral e configuração efetiva pendentes. |
+| Exclusão de dados | Relatório descreve exclusão de projeto, reinício de vídeo, exclusão lógica de publicação e desconexão. | Fluxos parciais identificados; resultado não testado e cópias/backups pendentes. |
+| Criptografia | Relatório identifica Fernet em fluxos limitados, compatibilidade JSON legado e HTTPS para TikTok. | Não comprova cifragem geral nem segurança do build. |
+| OAuth, YouTube/TikTok, upload, publicação e agendamento | Relatório identifica APIs, escopos, fila e publishers. | Implementação identificada; credenciais, aprovação, configuração e operação pendentes. |
+| Instalador, licenciamento e suporte a sistemas operacionais | Não encontrados instalador, executável, Compose do produto, licença, release ou manual. | Não verificado; distribuição não documentada neste checkout. |
+
+## Achados e prioridades
+
+| ID / prioridade | Achado e evidência | Impacto e recomendação |
+|---|---|---|
+| A-01 — **Crítico até triagem** | `npm audit --omit=dev` aponta Next.js `16.2.9` em faixa afetada por advisories, incluindo advisory classificado como crítico. O relatório também aponta problemas condition-specific em App Router, Server Actions, image optimization e outros cenários. | Antes de deploy público, mapear quais cenários se aplicam, atualizar para versão corrigida e repetir build/testes. A auditoria não atualizou dependências nem testou exploração. |
+| A-02 — **Alto para distribuição** | Não há código fonte/binário/backend do CLIPES neste checkout. | Não publicar afirmações finais sobre dados, exclusão, segurança, IA, OAuth ou agendamento antes de auditar o repositório e build distribuído. |
+| A-03 — **Alto para documentos legais** | A identificação fiscal fornecida não tem comprimento padrão de CPF ou CNPJ; natureza jurídica, endereço e funcionamento do canal ainda requerem confirmação. | Obter documento fiscal válido e confirmar titularidade, endereço e procedimento de atendimento antes da aprovação dos documentos. |
+| A-04 — **Médio** | O formulário inclui dados digitados em parâmetro de URL para WhatsApp (`Contact.jsx:41-63`). | Informar isso junto ao formulário; evitar campo livre para dados sensíveis; considerar fluxo sem dados na URL e `noopener` em eventual abertura de nova janela. |
+| A-05 — **Médio** | Materiais de marketing apresentam telas de contas/publicação e recursos do produto, sem implementação disponível para confirmação (`src/data/portfolioImageSets.js`). | Revisar a correspondência de cada afirmação com a versão efetivamente distribuída e com aprovações das plataformas. |
+| A-06 — **Informativo** | Google Fonts é carregado remotamente (`src/index.css:2`); a URL Spline está em configuração mas sem import conhecido (`src/config/spline.js`). | Confirmar tráfego efetivo no deploy e documentar fornecedores, dados de conexão, regiões e contratos. |
+| A-07 — **Informativo** | Responsável confirma hospedagem Vercel e logs de acesso; a configuração de deploy/logs não está neste checkout. | Revisar a configuração do projeto para confirmar logs, headers, região, retenção e subprocessadores. |
+
+### Probabilidade e impacto
+
+Não há dados de produção ou telemetria que permitam estimar probabilidade numérica. Para A-01, a exposição depende de quais cenários do advisory estão ativos no deploy; o impacto potencial indicado pelo npm é crítico, mas exploração não foi testada. A-02 representa ausência de evidência, não prova de falha no produto. A-04 só é acionado se o visitante clicar no envio e inserir dados; não medimos armazenamento no destino. Os riscos restantes também não têm probabilidade mensurável com os arquivos fornecidos.
+
+## Verificações executadas
+
+- Inspeção dos arquivos versionados de `app/`, `src/`, `package.json`, `package-lock.json` e `next.config.ts`.
+- Busca estática por APIs de rede, armazenamento, cookies, analytics, banco, Docker, IA, criptografia, OAuth, publicação e exclusão.
+- `npm audit --omit=dev` — executado; 6 findings reportados. Comando somente de consulta; nenhuma correção aplicada.
+- Não foram executados testes funcionais do CLIPES: o aplicativo não está no checkout.
+- Não foram enviados dados a serviços; não houve login OAuth, publicação, exclusão ou acesso a produção.
+
+## Referências oficiais consultadas
+
+- [LGPD — Lei nº 13.709/2018, texto compilado](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm)
+- [ANPD — Direitos dos titulares](https://www.gov.br/anpd/pt-br/assuntos/titular-de-dados/direito-dos-titulares)
+- [ANPD — princípios da LGPD](https://www.gov.br/saude/pt-br/acesso-a-informacao/lgpd/principios)
+- [Código de Defesa do Consumidor](https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm)
+- [YouTube API Services Developer Policies](https://developers.google.com/youtube/terms/developer-policies)
+- [YouTube API Services Terms](https://developers.google.com/youtube/terms/api-services-terms-of-service)
+- [Google Privacy Policy](https://policies.google.com/privacy)
+- [TikTok Content Posting API — Direct Post](https://developers.tiktok.com/docs/en/content-posting-api-get-started)
+- [TikTok Content Sharing Guidelines](https://developers.tiktok.com/docs/en/content-sharing-guidelines)
+
+Referências foram consultadas para orientar pendências, não para concluir que essas APIs estão integradas ao CLIPES. A análise jurídica final requer profissional habilitado.

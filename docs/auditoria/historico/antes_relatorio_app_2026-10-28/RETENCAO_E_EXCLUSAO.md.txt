@@ -1,0 +1,83 @@
+# Retenção e exclusão
+
+**Endereço parcial e prazos informados — 28/10/2026:** Rua Graça Aranha, ainda sem número, bairro, cidade/UF e CEP. Logs técnicos do aplicativo: retenção prevista de 1 dia e exclusão automática; isso não define o prazo de logs do site. Médias de hardware recebidas pela AXIS: 2 dias para verificar anomalias e consumo excessivo, seguidos de exclusão. Esses prazos substituem as pendências equivalentes dos registros anteriores, mas implementação, início da contagem, gatilhos e cópias ainda precisam de verificação. Retenção de cadastro/assinatura e backups continua pendente.
+
+**Desinstalação e cobranças — 25/10/2026:** Desinstalar o aplicativo não cancela formalmente o cadastro ou a assinatura e não interrompe, por si só, as cobranças previstas nas condições de renovação escolhidas pelo usuário. O cancelamento poderá ser solicitado pelo site, ou ocorrer pela exclusão do cadastro no aplicativo. Sem cancelamento formal e sem regularização da fatura vencida, o plano pago será cancelado após 30 dias corridos contados do vencimento, encerrando novas cobranças e retornando às permissões do gratuito. No cancelamento automático por falta de pagamento ao fim desses 30 dias, a fatura vencida que originou o prazo também será cancelada e não permanecerá pendente de pagamento. Essa regra comercial precisa de implementação e revisão jurídica. Essa informação substitui as pendências equivalentes dos registros anteriores; a remoção dos dados locais pela desinstalação continua prevista e precisa de teste. Nenhum fluxo de cobrança foi implementado ou testado nesta etapa.
+
+**Alcance da remoção local confirmado — 25/10/2026:** resposta pela opção 1: desinstalar removerá os dados locais sob controle do aplicativo, incluindo projetos e histórico; excluir apenas o cadastro não fará essa limpeza. Continuam previstas as exclusões manuais e a limpeza após todas as postagens. Remoção efetiva precisa de teste; não se presumiu exclusão de arquivos externos/exportações/backups nem cancelamento de assinatura ao desinstalar. Esse esclarecimento resolve a ambiguidade de “excluir o app” nos registros anteriores abaixo.
+
+**Confirmação de exclusão — 25/10/2026:** excluir cadastro exigirá aviso sobre encerramento da assinatura/acesso e digitação exata de 'Excluo minha conta' no campo de exclusão. O responsável também informou que, ao 'excluir o app', todos os dados seriam excluídos; esclarecer se se refere à desinstalação, exclusão do cadastro ou ambas antes de alterar a regra pública para arquivos locais. Não foi implementada ou testada exclusão nesta etapa.
+
+**Região, exclusão imediata e cobranças — 25/10/2026:** servidores previstos em São Paulo, Brasil, com fornecedor/configuração ainda pendentes. Excluir cadastro pelo app terá efeito imediato no cadastro ativo, encerrando assinatura e novas cobranças. A regra comercial de ausência de reembolso automático das mensalidades já pagas preserva arrependimento/restituições legais quando aplicáveis (CDC arts. 49 e 51, II: https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm). Não foi prometida exclusão imediata de backups/registros de retenção legal, cujos prazos continuam pendentes, nem remoção de projetos/histórico locais. Essa confirmação substitui as pendências equivalentes anteriores; fluxos precisam de teste e revisão jurídica.
+
+**Cadastro/assinatura em servidores e exclusão pelo app — 25/10/2026:** o responsável confirmou armazenamento do e-mail e dos dados/situação da assinatura nos servidores do serviço. O usuário poderá excluir o cadastro AXIS pelo aplicativo, sem apagar a conta Google. Provedor/região, campos, acesso, proteção, retenção/exclusão, backups, prazo de conclusão e efeitos sobre assinatura/cobranças e arquivos/histórico locais permanecem pendentes. Cancelar plano pelo site e excluir cadastro pelo app são fluxos distintos cuja relação precisa ser definida. Esta confirmação substitui as pendências equivalentes anteriores, sem afirmar implementação ou exclusão integral testada.
+
+**Médias mensais e relatório pendente — 25/10/2026:** Envio previsto apenas das médias mensais de uso de RAM, CPU e GPU, sem picos ou medições individuais. Ao desativar o compartilhamento, o relatório pendente será apagado e não enviado. Essa regra não define exclusão de dados já recebidos pela AXIS, cuja retenção e exclusão continuam pendentes. Campos/unidades e implementação ainda precisam de verificação. Essa confirmação substitui as pendências equivalentes dos registros anteriores.
+
+## Hardware e envio mensal — 25/10/2026
+
+Métricas previstas de RAM, CPU e GPU, com envio no dia 1º de cada mês quando autorizado pela preferência de compartilhamento. O relatório resumirá o mês anterior. Se não puder enviar no dia 1º, ficará pendente para a próxima abertura em que o envio for possível, respeitada a preferência vigente. Campos/granularidade, horário/fuso e vários meses pendentes ainda precisam de definição e teste. A periodicidade mensal não estabelece prazo de retenção/exclusão local ou na AXIS. Este complemento substitui as pendências equivalentes sobre componentes e frequência nos registros anteriores.
+
+## Escopo atual de envio — 25/10/2026
+
+O responsável restringiu o compartilhamento a estatísticas de uso de hardware, sem identificação de origem no conteúdo enviado. A lista anterior de falhas, contagens de projetos/clipes e tempos de criação deixa de integrar o envio previsto. A escolha inicial e a alteração nas configurações permanecem. Componentes, campos/granularidade, frequência e retenção/exclusão do que for recebido pela AXIS continuam pendentes. Ausência de identificadores e tratamento de metadados de conexão/logs do receptor precisam de teste; não se declarou anonimização comprovada. O prazo de logs locais permanece pendente. Este esclarecimento substitui as listas de envio anteriores abaixo.
+
+## Categorias de estatísticas e mudança da preferência — 25/10/2026
+
+Estatísticas previstas: falhas, projetos criados, clipes concluídos, tempo de criação e uso de recursos dos componentes pelo app, para diagnóstico de funcionamento e desempenho. A escolha inicial poderá ser alterada a qualquer momento nas configurações. Campos, granularidade, identificadores, filtragem de relatórios, retenção/exclusão do que já foi compartilhado e comportamento anterior à escolha ainda precisam de definição e teste. Não foi comprovada anonimização ou ausência de conteúdo sensível em erros. O prazo de exclusão automática de logs foi expressamente mantido pendente. Essas respostas substituem as pendências equivalentes sobre categorias/finalidade e alteração posterior mencionadas abaixo.
+
+## Estatísticas opcionais, desconexão e logs — 25/10/2026
+
+Na primeira entrada no app, o usuário escolherá compartilhar estatísticas com a AXIS ou mantê-las no computador. Categorias, retenção/exclusão do que for compartilhado, relatórios de erro e alteração posterior da escolha permanecem pendentes. O usuário poderá desconectar contas Google/YouTube e TikTok pelo app; remoção de tokens, revogação e falhas ainda precisam de teste. Logs técnicos do app terão exclusão automática, mas prazo, conteúdo, gatilho e tratamento de cópias não foram informados. Essa regra não define retenção de logs da hospedagem do site nem exclusão do histórico local com links. Não foi afirmado que apagar logs garante segurança ou elimina todo dado residual.
+
+## Confirmações atuais — 25/10/2026
+
+- Excluir projeto exigirá aviso e confirmação antes de apagar os arquivos.
+- Arquivos de clipes com falha permanecerão até nova publicação ou exclusão confirmada; depois de todas as postagens concluídas, aplica-se a limpeza prevista.
+- Histórico com links ficará somente no computador do usuário, até ele excluí-lo pelo aplicativo.
+
+Essas respostas resolvem as pendências equivalentes dos registros anteriores abaixo. Implementação, integridade dos arquivos necessários para nova tentativa e exclusão efetiva ainda precisam ser verificadas; regras para postagens canceladas, arquivos externos, exportações e backups permanecem pendentes.
+
+## Histórico e aviso de exclusão — atualização de 25/10/2026
+
+O histórico com links será mantido até o usuário excluí-lo pelo aplicativo. O responsável também informou aviso/notificação ao tentar excluir um projeto; ainda é preciso definir se exige confirmação antes da remoção. A retenção de clipes que falharam e nunca foram republicados ou excluídos não foi definida pela resposta sobre o aviso. O local de armazenamento do histórico e a eficácia da exclusão continuam pendentes de verificação. Este complemento resolve as referências abaixo a prazo de retenção do histórico não informado, sem declarar teste concluído.
+
+## Esclarecimento de abrangência, falhas e histórico — 25/10/2026
+
+A limpeza prevista após a postagem de todos os clipes busca liberar armazenamento e abrange todos os arquivos locais do projeto, incluindo o vídeo original baixado, transcrições e demais arquivos de processamento. Os vídeos publicados nas redes permanecem e será mantido um histórico com os links. Em falha de postagem, o usuário será notificado e poderá tentar republicar. Permanecem pendentes o prazo e a remoção do histórico, retenção de clipes com falha/abandono/cancelamento, exportações/backups e arquivos de origem externos ao projeto. A informação não autoriza apagar arquivos externos do usuário; a implementação precisa ser testada e conciliada com o relatório anterior. Este complemento resolve as pendências de abrangência local e manutenção do histórico mencionadas abaixo, sem estabelecer prazo não informado.
+
+## Regra de projeto informada em 25/10/2026
+
+O responsável esclareceu que excluir um projeto remove apenas os arquivos locais e mantém os vídeos já publicados nas redes. Informou também limpeza automática dos arquivos locais após a postagem de todos os clipes daquele projeto: o gatilho é a conclusão das postagens, sem prazo fixo em dias informado. A regra ainda precisa de teste e deve ser conciliada com o relatório estático anterior, que descrevia preservação de originais e legendas. Permanecem pendentes arquivos de origem fora do projeto, exportações/backups, retenção de registros/histórico e falhas/cancelamentos de postagem. Não foi definida exclusão da conta Google ou de credenciais compartilhadas entre projetos. As tabelas abaixo continuam registrando a ausência de verificação operacional, sem negar a regra prevista agora informada.
+
+## Site institucional
+
+| Dado | Persistência demonstrada | Retenção definida | Exclusão possível observada |
+|---|---|---|---|
+| Tema e idioma | `localStorage` do browser (`axis-theme`, `axis-language`; `src/context/site-preferences.jsx:7-32`). | Não há expiração no código. | Limpeza dos dados do site no navegador. Não há botão de exclusão próprio. |
+| Campos do briefing | Estado React em memória (`src/sections/Contact.jsx:29-39`). | Enquanto a página mantém o estado; persistência servidor não encontrada. | Sair/recarregar a página descarta estado client-side, mas depois do clique o URL e eventual mensagem entram no domínio/conta WhatsApp fora do controle demonstrado. |
+| Logs, requisições e backups do hosting | Não há configuração nem acesso de operação no checkout. | **Não definido/não verificável.** | Política do fornecedor e configuração de produção devem ser fornecidas. |
+| Registro WhatsApp do briefing | O site abre URL `wa.me` (`src/sections/Contact.jsx:41-63`). | Fora do site; não auditado. | Usuário pode enviar mensagem. Retenção/exclusão no WhatsApp e dispositivo precisam ser tratados à parte. |
+
+## Aplicativo AXIS CLIPES
+
+O responsável declarou armazenamento de vídeos/transcrições e botão de exclusão. Não há app, schema, paths, volumes, logs ou endpoint para testar. Assim, a remoção de cada categoria é **não verificada**, inclusive remoção de registros, arquivos, temporários, miniaturas, outputs, tokens, logs e backups. Não foi clicado botão nem executado comando destrutivo.
+
+| Categoria potencial | Armazenamento | Exclusão | Retenção |
+|---|---|---|---|
+| Vídeo original/arquivo baixado | `[PENDENTE: path, volume ou serviço]` | Não verificada | Não definido |
+| Áudio, transcrição, prompts e resultados Ollama | `[PENDENTE: paths, banco e logging]` | Não verificada | Não definido |
+| Clipes, legendas, miniaturas e temporários | `[PENDENTE: pipeline e diretórios]` | Não verificada | Não definido |
+| Jobs, projetos e histórico de publicação | `[PENDENTE: banco/filas]` | Não verificada | Não definido |
+| Tokens de plataformas | `[PENDENTE: local de armazenamento e revogação]` | Não verificada | Não definido |
+| Logs e backups | `[PENDENTE: app, hosting e política de backup]` | Não verificada | Não definido |
+
+## Plano de verificação seguro para a próxima fase
+
+1. Receber checkout e build exatos do app; mapear storage e schema sem abrir dados de usuários.
+2. Criar fixtures fictícias em diretório/instância descartável isolada.
+3. Exercitar botão/endpoint de exclusão somente com fixture e verificar DB, arquivos, temporários e jobs por observação não destrutiva.
+4. Revisar logs/backups sem apagá-los e documentar limites da exclusão lógica versus física.
+5. Não revogar credenciais reais; usar conta de teste e credenciais de sandbox se a plataforma oferecer.
+
+Essa etapa requer ambiente do produto e, para qualquer ação escrita, dados fictícios isolados.

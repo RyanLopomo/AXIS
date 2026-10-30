@@ -127,7 +127,7 @@ export function PortfolioImageCarousel({
               type="button"
               aria-label={`${projectName}: imagem anterior`}
               onClick={() => moveBy(-1)}
-              style={{ left: "clamp(12px, 1vw, 16px)", top: "50%", translate: "0 -50%" }}
+              style={{ left: "clamp(12px, 1vw, 16px)", top: "50%" }}
               className="pointer-events-auto absolute left-3 top-1/2 z-50 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-cyan-300/45 bg-[#020916]/80 text-cyan-300 shadow-lg backdrop-blur-sm transition hover:scale-105 hover:border-cyan-200 hover:bg-[#020916] hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:left-4 sm:h-10 sm:w-10"
             >
               <ChevronLeft size={19} aria-hidden="true" />
@@ -136,7 +136,7 @@ export function PortfolioImageCarousel({
               type="button"
               aria-label={`${projectName}: próxima imagem`}
               onClick={() => moveBy(1)}
-              style={{ right: "clamp(12px, 1vw, 16px)", top: "50%", translate: "0 -50%" }}
+              style={{ right: "clamp(12px, 1vw, 16px)", top: "50%" }}
               className="pointer-events-auto absolute right-3 top-1/2 z-50 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-cyan-300/45 bg-[#020916]/80 text-cyan-300 shadow-lg backdrop-blur-sm transition hover:scale-105 hover:border-cyan-200 hover:bg-[#020916] hover:text-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:right-4 sm:h-10 sm:w-10"
             >
               <ChevronRight size={19} aria-hidden="true" />

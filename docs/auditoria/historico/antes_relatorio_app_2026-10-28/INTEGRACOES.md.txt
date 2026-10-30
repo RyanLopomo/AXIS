@@ -1,0 +1,29 @@
+# Integrações e serviços externos
+
+**Escopo:** site institucional inspecionado diretamente; integrações do AXIS CLIPES resumidas de relatório estático fornecido em 23/10/2026. O código do aplicativo e seu build não foram verificados independentemente neste checkout. “Implementação identificada” não prova credenciais, aprovação ou disponibilidade no build distribuído.
+
+## Matriz de plataformas
+
+| Serviço/recurso | Evidência no checkout | Classificação para CLIPES | Observação |
+|---|---|---|---|
+| Ollama | Relatório estático identifica cliente de API para transcrições/legendas, metadados e sugestões; URL configurável. Responsável confirma que Ollama fica no computador do usuário no beta distribuído. | Implementação identificada; configuração do build não verificada independentemente. | Relatório permite endpoint configurável; confirmar se a versão distribuída pode ser alterada. Retenção local não definida. |
+| Google OAuth / YouTube Data API | Relatório identifica consulta de canal, upload de vídeo/thumbnail e programação; escopos `youtube.upload`, `youtube.readonly`, `youtube.force-ssl`. | Implementação identificada no relatório; app registrado, credenciais, escopos concedidos e operação pendentes. | Tokens/estado usam fluxos cifrados e há compatibilidade legada JSON; desconexão local não comprova revogação remota Google. |
+| TikTok OAuth / Content Posting API | Relatório identifica perfil do criador, upload, Inbox/Direct Post e acompanhamento; `user.info.basic`, `video.upload`, `video.publish` condicional. | Implementação identificada no relatório; flags, aprovação e elegibilidade pendentes. | Renovação e tentativa de revogação; falha pode manter credencial cifrada para nova tentativa explícita. |
+| Agendamento/publicação | Relatório identifica fila persistente, publishers, upload, acompanhamento e execução agendada; publicação automática é condicionada a configuração. | Implementação identificada no relatório; operação real e configuração pendentes. | Conectividade, permissões, limites e aprovação afetam execução; comportamento do build não testado. |
+| WhatsApp | `src/sections/Contact.jsx:41-63` abre `https://wa.me/...` com texto pré-preenchido. | Integração do site confirmada como handoff; sem API. | Usuário ainda precisa enviar a mensagem pelo WhatsApp. |
+| Google Fonts | `src/index.css:2` usa `@import` remoto. | Requisição do site confirmada pelo código. | Dados de conexão/logs e retenção de Google não auditados. Política oficial: https://policies.google.com/privacy. |
+| Spline | URL existe em `src/config/spline.js`; nenhuma importação/referência encontrada em `app/` ou `src/`. | Configuração presente; uso efetivo não confirmado. | Não concluir que há tráfego Spline sem observar deploy em browser/rede. |
+| Analytics/pixels | Nenhuma referência a Vercel Analytics, Speed Insights, GA, GTM, pixels ou SDKs de analytics no código consultado. Responsável informou em 23/10/2026 que a publicação usa somente Google Fonts e o encaminhamento ao WhatsApp. | Não encontrado no checkout; declaração da publicação não verificada independentemente. | Revisar scripts/cookies da versão publicada; a configuração de deploy não está no workspace. |
+| Redes e portfólio | Links estáticos para WhatsApp, Instagram, LinkedIn, GitHub e dois projetos (`src/data/contact.js`, `src/sections/Contact.jsx`, `src/data/portfolio.js`). | Links de navegação; sem API no site. | Navegação externa transfere requisição ao destino após clique. |
+
+## Requisitos condicionais para integração YouTube
+
+O relatório estático fornecido identifica implementação YouTube. Revisar os [termos oficiais](https://developers.google.com/youtube/terms/api-services-terms-of-service) e as [políticas de desenvolvedor](https://developers.google.com/youtube/terms/developer-policies) contra o fluxo real. Confirmar tela OAuth, escopos efetivamente concedidos, app registrado e processo de revogação; o relatório não encontrou revogação remota Google neste fluxo. Termos do usuário: https://www.youtube.com/t/terms.
+
+## Requisitos condicionais para integração TikTok
+
+O relatório estático fornecido identifica código TikTok, com `video.publish` condicional. Confirmar app registrado, produto Content Posting API habilitado, aprovação, escopo concedido e elegibilidade. Conferir [Get Started — Direct Post](https://developers.tiktok.com/docs/en/content-posting-api-get-started) e [Content Sharing Guidelines](https://developers.tiktok.com/docs/en/content-sharing-guidelines) na versão vigente. Implementação não comprova aprovação ou disponibilidade.
+
+## Evidência normativa
+
+Requisitos externos acima são condicionais e consultados em páginas oficiais em 22/10/2026. Eles não servem como evidência de que uma integração existe ou está aprovada.

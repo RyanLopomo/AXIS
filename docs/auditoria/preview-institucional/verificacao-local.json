@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-30",
+  "scope": "local production build, not live Vercel settings",
+  "routes": [
+    {
+      "route": "/",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      }
+    },
+    {
+      "route": "/axisclipes",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      }
+    },
+    {
+      "route": "/privacidade",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      }
+    },
+    {
+      "route": "/termos",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      }
+    }
+  ],
+  "automaticExternalHosts": [
+    "fonts.googleapis.com",
+    "fonts.gstatic.com"
+  ],
+  "localStorageKeys": [
+    "axis-language",
+    "axis-theme"
+  ],
+  "cookies": [],
+  "pageErrors": []
+}

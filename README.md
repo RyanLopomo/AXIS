@@ -4,6 +4,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+On Windows PowerShell, use `npm.cmd run dev` from this folder. This avoids the
+`npm.ps1` execution-policy error without changing the system policy. The parent
+workspace folder also forwards this command to the application.
+
 ```bash
 npm run dev
 # or
@@ -18,7 +22,29 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The stylesheet currently loads Inter, Montserrat and Poppins from Google Fonts. This external connection is described in the website privacy notice.
+
+## Institutional release preparation
+
+Public website notices are in `src/data/siteLegalDocuments.js`. App proposals and audit findings remain in `src/data/legalDocuments.js` and `docs/auditoria`; public routes must not import those drafts.
+
+Read [the release preparation report](docs/auditoria/PREPARACAO_PUBLICACAO_INSTITUCIONAL.md) for outstanding owner confirmations and production checks. Deployment root: this folder (`AXIS`), framework Next.js. Do not publish app downloads or commercial flows from this institutional release.
+
+To reproduce the browser checks, build and start a local production server:
+
+```powershell
+npm.cmd run build
+npm.cmd run start -- --hostname 127.0.0.1 --port 3417
+```
+
+In another terminal, with Chrome installed:
+
+```powershell
+$env:PLAYWRIGHT_CHANNEL = 'chrome'
+npm.cmd run test:public
+```
+
+Alternatively, install Playwright Chromium with `npx.cmd playwright install chromium` and leave `PLAYWRIGHT_CHANNEL` unset. Tests use synthetic form text and intercept WhatsApp window opening; they do not send messages. Production Vercel settings are not verified by local browser tests.
 
 ## Learn More
 

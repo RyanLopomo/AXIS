@@ -1,0 +1,845 @@
+diff --git a/.gitignore b/.gitignore
+index bf3076a..db1c144 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -9,3 +9,7 @@ storage/
+ .env.*
+ !.env.example
+ !.env.*.example
++
++/.tools/
++/.venv/
++__pycache__/
+diff --git a/backend/app/api/clips.py b/backend/app/api/clips.py
+index ae7a02b..8ee327c 100644
+--- a/backend/app/api/clips.py
++++ b/backend/app/api/clips.py
+@@ -12,6 +12,35 @@ from app.services.publication_errors import public_error
+ 
+ router = APIRouter(prefix="/clips", tags=["clips"])
+ 
++
++@router.post("/{clip_id}/tiktok/prepare")
++def prepare_tiktok_clip(clip_id: int, db: Session = Depends(get_db)):
++    from app.services.tiktok_media import prepare_tiktok_render
++    clip = db.query(Clip).filter(Clip.id == clip_id).with_for_update().first()
++    if not clip:
++        raise HTTPException(404, 'Clipe nao encontrado.')
++    if clip.status != 'COMPLETED':
++        raise HTTPException(409, 'Aguarde a conclusao do clipe.')
++    try:
++        signature = prepare_tiktok_render(clip)
++    except (OSError, ValueError, RuntimeError):
++        db.rollback()
++        raise HTTPException(422, 'Nao foi possivel preparar a versao TikTok. Verifique as fontes locais e tente novamente.') from None
++    db.commit()
++    return {'media_signature': signature,
++            'preview_url': f'/clips/{clip.id}/tiktok/stream?signature={signature}'}
++
++
++@router.get("/{clip_id}/tiktok/stream")
++@router.get("/{clip_id}/tiktok/download")
++def stream_tiktok_clip(clip_id: int, signature: str, db: Session = Depends(get_db)):
++    from app.services.tiktok_media import verified_tiktok_render
++    clip = db.get(Clip, clip_id)
++    path = verified_tiktok_render(clip, signature) if clip else None
++    if not path:
++        raise HTTPException(404, 'Versao TikTok indisponivel ou alterada. Prepare e revise novamente.')
++    return FileResponse(str(path), media_type='video/mp4', headers={'Accept-Ranges': 'bytes'})
++
+ @router.get("/{clip_id}/thumbnail")
+ def get_thumbnail(
+     clip_id: int,
+diff --git a/backend/app/api/publications.py b/backend/app/api/publications.py
+index 6f57b78..099d03c 100644
+--- a/backend/app/api/publications.py
++++ b/backend/app/api/publications.py
+@@ -930,11 +930,10 @@ def create_publication(payload: PublicationCreate, db: Session = Depends(get_db)
+         raise HTTPException(422, 'Selecione uma conta conectada da plataforma correta.')
+     if platform == 'TIKTOK':
+         from app.services.tiktok import validate_options
+-        from app.services.publication_media import available_render
+-        if clip.render_has_logo is not False or clip.video.project.show_logo or clip.video.project.watermark_enabled or not available_render(clip):
+-            raise HTTPException(422, 'TikTok exige um clipe final verificado sem marca dagua promocional.')
+-        if (payload.platform_options or {}).get("mode") == "direct" and not (payload.platform_options or {}).get("reviewed"):
+-            raise HTTPException(422, "Revise o clipe final antes de confirmar o Direct Post.")
++        from app.services.tiktok_media import verified_tiktok_render
++        options = payload.platform_options or {}
++        if not options.get('reviewed') or not verified_tiktok_render(clip, options.get('media_signature')):
++            raise HTTPException(422, 'Prepare e revise a versao TikTok sem marca promocional antes de confirmar.')
+         try:
+             validate_options(account, payload.platform_options or {}, clip.end_time - clip.start_time)
+         except ValueError as exc:
+diff --git a/backend/app/services/publication_batch.py b/backend/app/services/publication_batch.py
+index 35f9ce2..2f20569 100644
+--- a/backend/app/services/publication_batch.py
++++ b/backend/app/services/publication_batch.py
+@@ -251,7 +251,7 @@ def execute_batch(db: Session, payload: BatchRequest):
+                         remote_call(row, update_youtube_publish_at, row.platform_post_id, dt)
+                     row.scheduled_at = dt
+                     row.schedule_timezone = payload.timezone or str(publish_timezone())
+-                    if row.platform == 'TIKTOK' and json.loads(row.platform_options or '{}').get('mode') == 'direct':
++                    if row.platform == 'TIKTOK':
+                         options = json.loads(row.platform_options or '{}')
+                         options['reviewed'] = False
+                         row.platform_options = json.dumps(options)
+diff --git a/backend/app/services/publication_destinations.py b/backend/app/services/publication_destinations.py
+index 41472ca..0f4a3ee 100644
+--- a/backend/app/services/publication_destinations.py
++++ b/backend/app/services/publication_destinations.py
+@@ -20,11 +20,8 @@ def destination_plans(db, config, clips, video_id=None, project=None):
+         if account.platform == 'YOUTUBE' and 'https://www.googleapis.com/auth/youtube.upload' not in json.loads(account.scopes or '[]'):
+             raise HTTPException(422, 'Canal sem permissao de upload.')
+         if account.platform == 'TIKTOK':
+-            from app.models.clip import Clip
+-            if any(isinstance(clip, Clip) and clip.render_has_logo is not False for clip in clips):
+-                raise HTTPException(422, 'Clipes antigos sem comprovacao de render sem logo precisam ser gerados novamente para TikTok.')
+-            if project and (getattr(project, 'watermark_enabled', False) or getattr(project, 'show_logo', False)):
+-                raise HTTPException(422, 'TikTok: desative a marca dagua promocional antes de gerar.')
++            # Planning may precede rendering. Every TikTok destination requires
++            # preparation and review of its own clean output before upload.
+             from app.services.tiktok import validate_options
+             try:
+                 validate_options(account, item.get('options') or {}, config.get('clip_duration', 60))
+diff --git a/backend/app/services/publication_scheduler.py b/backend/app/services/publication_scheduler.py
+index a924a6a..052ddfa 100644
+--- a/backend/app/services/publication_scheduler.py
++++ b/backend/app/services/publication_scheduler.py
+@@ -338,7 +338,7 @@ def create_scheduled_publications(
+     )
+     clips_by_id = {clip.id: clip for clip in clips}
+     publications = []
+-    requires_review = platform == "TIKTOK" and (platform_options or {}).get("mode") == "direct"
++    requires_review = platform == "TIKTOK"
+     target_status = "REQUIRES_REVIEW" if requires_review else "SCHEDULED"
+ 
+     for item in plan["scheduled"]:
+diff --git a/backend/app/services/subtitle_generator.py b/backend/app/services/subtitle_generator.py
+index 2a453f1..6b8e081 100644
+--- a/backend/app/services/subtitle_generator.py
++++ b/backend/app/services/subtitle_generator.py
+@@ -20,12 +20,16 @@ def caption_width(text: str) -> float:
+ 
+ 
+ def subtitle_filter(input_srt: str, font_size: int = 12, fit_single_line: bool = True, margin_v: int = 108) -> str:
+-    escaped = str(input_srt).replace("\\", "/").replace(":", "\\:").replace("'", "\\'").replace(" ", "\\ ")
++    # FFmpeg parses option values and filtergraphs separately. Escape both
++    # levels; one backslash before a Windows drive colon is consumed too soon.
++    escaped = str(input_srt).replace("\\", "/")
++    escaped = ''.join('\\' + char if char in "\\':" else char for char in escaped)
++    escaped = ''.join('\\' + char if char in "\\'[],; \t\r\n" else char for char in escaped)
+     # libass scales font height from a 288-high SRT coordinate space. A
+     # portrait canvas has less horizontal room than the default landscape SRT.
+     # Keep the user's font size. Caption splitting handles the available width.
+     style = SUBTITLE_STYLE.replace("FontSize=12", f"FontSize={font_size:.2f}").replace("MarginV=108", f"MarginV={margin_v}") + f",WrapStyle={2 if fit_single_line else 0}"
+-    return f"subtitles={escaped}:force_style='{style}'"
++    return f"subtitles=filename={escaped}:force_style='{style}'"
+ 
+ 
+ def burn_subtitles(
+diff --git a/backend/app/services/tiktok.py b/backend/app/services/tiktok.py
+index 89cc8ea..888c248 100644
+--- a/backend/app/services/tiktok.py
++++ b/backend/app/services/tiktok.py
+@@ -107,20 +107,15 @@ def validate_options(account, options, duration=0):
+ def upload(db, publication, clip):
+     if publication.platform_post_id:
+         return publication.platform_post_id
+-    from app.services.publication_media import available_render
++    from app.services.tiktok_media import verified_tiktok_render
+     from datetime import datetime
+     account = publication.publication_account
+     options = json.loads(publication.platform_options or '{}')
+-    if options.get("mode") == "direct" and not options.get("reviewed"):
+-        raise ValueError("Confirme a revisao do clipe final antes do Direct Post.")
++    if not options.get('reviewed'):
++        raise ValueError('Revise a versao TikTok sem marca promocional antes do envio.')
+     validate_options(account, options, (clip.end_time or 0) - (clip.start_time or 0))
+-    # Do not share promotional overlays. Never silently change the user's render.
+-    project = clip.video.project
+-    if project.watermark_enabled or project.show_logo or clip.render_has_logo is not False:
+-        raise ValueError('TikTok exige conteudo sem marca dagua promocional. Desative a logo antes de gerar os clipes.')
+-    path = available_render(clip)
+-    if not path:
+-        raise FileNotFoundError('Render indisponivel.')
++    if not verified_tiktok_render(clip, options.get('media_signature')):
++        raise ValueError('Versao TikTok indisponivel ou alterada. Prepare e revise novamente.')
+     # A committed intent prevents duplicate initialization after an ambiguous timeout.
+     if publication.upload_started_at and not publication.platform_post_id:
+         raise AmbiguousUploadError('Envio sem confirmacao remota. Verifique a conta antes de tentar novamente.')
+@@ -131,7 +126,7 @@ def upload(db, publication, clip):
+         publication.upload_started_at = None
+         db.commit()
+         raise ValueError('Configure TIKTOK_MEDIA_BASE_URL com dominio HTTPS verificado pelo TikTok.')
+-    body = {'source_info': {'source': 'PULL_FROM_URL', 'video_url': f'{media_base}/clips/{clip.id}/download'}}
++    body = {'source_info': {'source': 'PULL_FROM_URL', 'video_url': f"{media_base}/clips/{clip.id}/tiktok/download?signature={options['media_signature']}"}}
+     if options['mode'] == 'direct':
+         body['post_info'] = {key: options[key] for key in ('privacy_level', 'title', 'disable_comment', 'disable_duet', 'disable_stitch', 'brand_content_toggle', 'brand_organic_toggle', 'is_aigc') if key in options}
+     endpoint = '/post/publish/video/init/' if options['mode'] == 'direct' else '/post/publish/inbox/video/init/'
+diff --git a/backend/app/workers/publisher_worker.py b/backend/app/workers/publisher_worker.py
+index 692d343..2b1786e 100644
+--- a/backend/app/workers/publisher_worker.py
++++ b/backend/app/workers/publisher_worker.py
+@@ -495,7 +495,8 @@ def process_publication(db, publication: Publication):
+ 
+     if not publication.platform_post_id:
+         from app.services.publication_media import ensure_render
+-        ensure_render(clip)
++        if publication.platform != 'TIKTOK':
++            ensure_render(clip)
+         log("PUBLISHER", f"Upload iniciado {publication_context(publication)} tentativa={publication.attempts + 1}/{publisher_max_attempts()}")
+         metadata = retry(lambda: run_stage("metadata", lambda: asyncio.run(adapter.metadata(clip))))
+         if publication.platform == 'YOUTUBE' and hasattr(db, 'get_bind'):
+diff --git a/backend/app/youtube/cleanup.py b/backend/app/youtube/cleanup.py
+index 78c8f02..fbc2aba 100644
+--- a/backend/app/youtube/cleanup.py
++++ b/backend/app/youtube/cleanup.py
+@@ -36,6 +36,9 @@ def cleanup_clip_files(clip, force=False):
+         intermediate = final_path.with_name(final_path.name.replace("_final", ""))
+         paths.append(str(intermediate))
+         paths.append(str(final_path.with_name(f"{final_path.stem}_youtube_short.mp4")))
++        from app.services.tiktok_media import manifest_path
++        paths.append(str(manifest_path(clip)))
++        paths.extend(str(p) for p in final_path.parent.glob(f'{final_path.stem}_tiktok_*.mp4'))
+ 
+     removed = False
+     for path in paths:
+diff --git a/frontend/package-lock.json b/frontend/package-lock.json
+index f8752ca..f34f403 100644
+--- a/frontend/package-lock.json
++++ b/frontend/package-lock.json
+@@ -32,6 +32,7 @@
+       "dev": true,
+       "license": "MIT",
+       "optional": true,
++      "peer": true,
+       "dependencies": {
+         "@emnapi/wasi-threads": "1.2.3",
+         "tslib": "^2.4.0"
+@@ -44,6 +45,19 @@
+       "dev": true,
+       "license": "MIT",
+       "optional": true,
++      "peer": true,
++      "dependencies": {
++        "tslib": "^2.4.0"
++      }
++    },
++    "node_modules/@emnapi/runtime": {
++      "version": "1.11.3",
++      "resolved": "https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.11.3.tgz",
++      "integrity": "sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==",
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "peer": true,
+       "dependencies": {
+         "tslib": "^2.4.0"
+       }
+@@ -757,7 +771,6 @@
+       "integrity": "sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "undici-types": "~7.18.0"
+       }
+@@ -768,7 +781,6 @@
+       "integrity": "sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "csstype": "^3.2.2"
+       }
+@@ -1536,7 +1548,6 @@
+       "integrity": "sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "engines": {
+         "node": ">=12"
+       },
+@@ -1616,7 +1627,6 @@
+       "resolved": "https://registry.npmjs.org/react/-/react-19.2.7.tgz",
+       "integrity": "sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==",
+       "license": "MIT",
+-      "peer": true,
+       "engines": {
+         "node": ">=0.10.0"
+       }
+@@ -1626,7 +1636,6 @@
+       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.7.tgz",
+       "integrity": "sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ==",
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "scheduler": "^0.27.0"
+       },
+@@ -1780,7 +1789,6 @@
+       "integrity": "sha512-Ds+gBRbj0lwRO2Y5hwnUBdxSwlAve9LeRyU4sNnAr0ewW0gWF0n5bgXgUzbgZ49MV9BVUAQUFYVcDUcilUExMA==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "lightningcss": "^1.32.0",
+         "picomatch": "^4.0.4",
+diff --git a/frontend/playwright.config.ts b/frontend/playwright.config.ts
+index ccafb18..3716c12 100644
+--- a/frontend/playwright.config.ts
++++ b/frontend/playwright.config.ts
+@@ -2,9 +2,9 @@ import { defineConfig } from '@playwright/test'
+ 
+ export default defineConfig({
+   testDir: './tests',
+-  use: { baseURL: 'http://127.0.0.1:5174', headless: true },
++  use: { baseURL: 'http://127.0.0.1:5174', headless: true, channel: process.env.PLAYWRIGHT_CHANNEL },
+   webServer: {
+-    command: 'npm run dev -- --host 127.0.0.1 --port 5174 --strictPort',
++    command: 'node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5174 --strictPort',
+     url: 'http://127.0.0.1:5174',
+     reuseExistingServer: false,
+   },
+diff --git a/frontend/src/App.tsx b/frontend/src/App.tsx
+index 1a64ead..f85cdd7 100644
+--- a/frontend/src/App.tsx
++++ b/frontend/src/App.tsx
+@@ -20,7 +20,7 @@ import { API_BASE_URL } from './api/client'
+ import { listVideoClips } from './api/clips'
+ import { getHealth } from './api/health'
+ import { listNotifications, markNotificationsRead, testNotification } from './api/notifications'
+-import { cancelPublication, confirmPublicationSchedule, disconnectYouTube, getPublicationSettings, getYouTubeAccount, listPublications, listWaitingProjects, previewPublicationSchedule, publishClipNow, savePublicationSettings, scheduleClipPublication, startYouTubeAuth, suggestPublicationTimes, syncPublications, updatePublicationSchedule } from './api/publications'
++import { prepareTikTokClip, cancelPublication, confirmPublicationSchedule, disconnectYouTube, getPublicationSettings, getYouTubeAccount, listPublications, listWaitingProjects, previewPublicationSchedule, publishClipNow, savePublicationSettings, scheduleClipPublication, startYouTubeAuth, suggestPublicationTimes, syncPublications, updatePublicationSchedule } from './api/publications'
+ import { createProject, deleteProject, listProjects } from './api/projects'
+ import { listVideos, pauseVideo, restartVideo, resumeVideo, startVideo } from './api/videos'
+ import type { Clip } from './types/clip'
+@@ -171,11 +171,25 @@ function UploadModal({ clip, onClose, reviewPublication }: { clip: Clip; reviewP
+   const [scheduledAt, setScheduledAt] = useState('')
+   const { accounts: allAccounts } = useSocialAccount()
+   const accounts = reviewPublication ? allAccounts.filter(item => item.id === (reviewPublication.account?.id ?? reviewPublication.publication_account_id)) : allAccounts
+-  const [destinations, setDestinations] = useState<PublicationDestination[]>(() => reviewPublication ? [{ account_id: (reviewPublication.account?.id ?? reviewPublication.publication_account_id)!, options: { mode: 'direct', consent: false } }] : [])
++  const [destinations, setDestinations] = useState<PublicationDestination[]>(() => reviewPublication ? [{ account_id: (reviewPublication.account?.id ?? reviewPublication.publication_account_id)!, options: { ...reviewPublication.platform_options, consent: false } }] : [])
+   const [busy, setBusy] = useState(false)
+   const [error, setError] = useState('')
++  const needsTikTok = destinations.some(item => accounts.find(account => account.id === item.account_id)?.platform === 'TIKTOK')
++  const [tikTokMedia, setTikTokMedia] = useState<{ preview_url: string; media_signature: string } | null>(null)
++  const [mediaReady, setMediaReady] = useState(false)
++  const [mediaError, setMediaError] = useState('')
++  const [mediaAttempt, setMediaAttempt] = useState(0)
++  useEffect(() => {
++    if (!needsTikTok) return
++    let cancelled = false
++    setTikTokMedia(null); setMediaReady(false); setMediaError('')
++    void prepareTikTokClip(clip.id).then(result => { if (!cancelled) setTikTokMedia(result) })
++      .catch(error => { if (!cancelled) setMediaError(friendlyError(error)) })
++    return () => { cancelled = true }
++  }, [clip.id, needsTikTok, mediaAttempt])
++  const mediaBlocked = needsTikTok && (!tikTokMedia || !mediaReady || Boolean(mediaError))
+   const send = async (schedule = false) => {
+-    if (!destinations.length || busy) return
++    if (!destinations.length || busy || mediaBlocked) return
+     if (!schedule && !window.confirm('Publicar nos destinos selecionados agora?')) return
+     setBusy(true); setError('')
+     const failed: PublicationDestination[] = []
+@@ -184,15 +198,17 @@ function UploadModal({ clip, onClose, reviewPublication }: { clip: Clip; reviewP
+       const account = accounts.find(item => item.id === destination.account_id)
+       if (!account) continue
+       try {
+-        if (schedule) await scheduleClipPublication(clip.id, new Date(scheduledAt).toISOString(), account.platform, account.id, { ...destination.options, reviewed: true })
+-        else await publishClipNow(clip.id, account.platform, account.id, { ...destination.options, reviewed: true })
++        const options = { ...destination.options, reviewed: true,
++          ...(account.platform === 'TIKTOK' ? { media_signature: tikTokMedia!.media_signature } : {}) }
++        if (schedule) await scheduleClipPublication(clip.id, new Date(scheduledAt).toISOString(), account.platform, account.id, options)
++        else await publishClipNow(clip.id, account.platform, account.id, options)
+       } catch (e) { failed.push(destination); messages.push(`${account.account_name}: ${friendlyError(e)}`) }
+     }
+     window.dispatchEvent(new Event('axis-publications-changed'))
+     setBusy(false); setDestinations(failed)
+     if (failed.length) setError(messages.join(' ')); else onClose()
+   }
+-  return <Modal onClose={() => { if (!busy) onClose() }} label="Publicar clipe"><div className="player upload-modal"><button className="close" disabled={busy} onClick={onClose}>Fechar</button><img src={`${API_BASE_URL}${clip.thumbnail_url}`} alt={clipTitle(clip)}/><h2>{clipTitle(clip)}</h2><video src={`${API_BASE_URL}${clip.stream_url}`} controls preload="metadata"/><p className="muted">{clip.duration}s · Revise o clipe final antes de confirmar a publicação direta.</p><fieldset disabled={busy} className="batch-config"><DestinationSelector accounts={accounts} value={destinations} onChange={setDestinations} times={[]} timezone="America/Sao_Paulo" allowSchedules={false}/><label>Agendar<input type="datetime-local" value={scheduledAt} onChange={e => setScheduledAt(e.target.value)}/></label><div className="actions"><button className="primary" disabled={busy || !destinations.length} onClick={() => void send()}>{busy ? 'Enviando...' : 'Publicar agora'}</button><button disabled={busy || !scheduledAt || !destinations.length} onClick={() => void send(true)}>Agendar</button></div></fieldset>{error && <p className="error-text" role="alert">{error}</p>}</div></Modal>
++  return <Modal onClose={() => { if (!busy) onClose() }} label="Publicar clipe"><div className="player upload-modal"><button className="close" disabled={busy} onClick={onClose}>Fechar</button><img src={`${API_BASE_URL}${clip.thumbnail_url}`} alt={clipTitle(clip)}/><h2>{clipTitle(clip)}</h2><video src={`${API_BASE_URL}${clip.stream_url}`} controls preload="metadata"/><p className="muted">{clip.duration}s · Revise o clipe final antes de confirmar a publicação direta.</p>{needsTikTok && <section aria-label="Versao TikTok"><h3>TikTok: sem marca promocional da AXIS</h3>{!tikTokMedia && !mediaError && <p role="status">Preparando a versao TikTok...</p>}{tikTokMedia && <><video key={tikTokMedia.media_signature} src={`${API_BASE_URL}${tikTokMedia.preview_url}`} controls preload="auto" onLoadedData={() => setMediaReady(true)} onError={() => { setMediaReady(false); setMediaError('Nao foi possivel carregar a previa TikTok.') }}/><p>Revise esta versao antes de confirmar o envio ao TikTok. A marca dos outros destinos permanece conforme a configuracao.</p></>}{mediaError && <><p role="alert">{mediaError}</p><button onClick={() => setMediaAttempt(value => value + 1)}>Tentar novamente</button></>}</section>}<fieldset disabled={busy} className="batch-config"><DestinationSelector accounts={accounts} value={destinations} onChange={setDestinations} times={[]} timezone="America/Sao_Paulo" allowSchedules={false}/><label>Agendar<input type="datetime-local" value={scheduledAt} onChange={e => setScheduledAt(e.target.value)}/></label><div className="actions"><button className="primary" disabled={busy || mediaBlocked || !destinations.length} onClick={() => void send()}>{busy ? 'Enviando...' : 'Publicar agora'}</button><button disabled={busy || mediaBlocked || !scheduledAt || !destinations.length} onClick={() => void send(true)}>Agendar</button></div></fieldset>{error && <p className="error-text" role="alert">{error}</p>}</div></Modal>
+ }
+ 
+ function PublicationPlannerModal({ clips, settings, onClose, onConfirm }: { clips: Clip[]; settings?: PublicationSettings; onClose: () => void; onConfirm: (clipIds: number[], maxPerDay: number, startDate: string, times: string[], accountId?: number) => Promise<void> }) {
+diff --git a/frontend/src/api/publications.ts b/frontend/src/api/publications.ts
+index d77786f..9e2a744 100644
+--- a/frontend/src/api/publications.ts
++++ b/frontend/src/api/publications.ts
+@@ -102,3 +102,7 @@ export function deletePublication(publicationId: number, projectId: number) {
+ export function listWaitingProjects(accountId = "ALL") {
+   return request<WaitingProject[]>(`/publications/waiting${accountId === "ALL" ? "" : `?account_id=${encodeURIComponent(accountId)}`}`);
+ }
++
++export function prepareTikTokClip(clipId: number) {
++  return request<{ preview_url: string; media_signature: string }>(`/clips/${clipId}/tiktok/prepare`, { method: 'POST' })
++}
+diff --git a/frontend/src/api/socialAccounts.ts b/frontend/src/api/socialAccounts.ts
+index 0b497fa..8799975 100644
+--- a/frontend/src/api/socialAccounts.ts
++++ b/frontend/src/api/socialAccounts.ts
+@@ -6,7 +6,7 @@ export interface SocialAccount {
+ }
+ export interface PublicationDestination {
+   account_id: number; times?: string[] | null; timezone?: string | null;
+-  options?: { mode?: string; reviewed?: boolean; consent?: boolean; privacy_level?: string; title?: string; disable_comment?: boolean; disable_duet?: boolean; disable_stitch?: boolean; commercial_disclosure?: boolean; brand_content_toggle?: boolean; brand_organic_toggle?: boolean; is_aigc?: boolean };
++  options?: { mode?: string; reviewed?: boolean; media_signature?: string; consent?: boolean; privacy_level?: string; title?: string; disable_comment?: boolean; disable_duet?: boolean; disable_stitch?: boolean; commercial_disclosure?: boolean; brand_content_toggle?: boolean; brand_organic_toggle?: boolean; is_aigc?: boolean };
+ }
+ export interface CreatorInfo { privacy_level_options: string[]; creator_username?: string; creator_nickname?: string; max_video_post_duration_sec: number; comment_disabled: boolean; duet_disabled: boolean; stitch_disabled: boolean }
+ export const listSocialAccounts = () => request<SocialAccount[]>('/social-accounts')
+diff --git a/frontend/src/components/DestinationSelector.tsx b/frontend/src/components/DestinationSelector.tsx
+index 802775e..abf0baf 100644
+--- a/frontend/src/components/DestinationSelector.tsx
++++ b/frontend/src/components/DestinationSelector.tsx
+@@ -17,7 +17,7 @@ export default function DestinationSelector({ accounts, value, onChange, times,
+         {account.platform === 'TIKTOK' && <><label>Modo TikTok — {account.account_name}<select value={selected.options?.mode || ''} onChange={event => { update(account.id, { options: { mode: event.target.value, consent: false } }); if (event.target.value === 'direct') void query(account.id) }}><option value="" disabled>Selecione</option><option value="inbox" disabled={!account.modes.includes('inbox')}>Enviar para TikTok — finalizar no aplicativo</option><option value="direct" disabled={!account.modes.includes('direct')}>Publicação direta — sujeita à autorização</option></select></label>
+           {selected.options?.mode === 'direct' && <><button type="button" disabled={loading === account.id} onClick={() => void query(account.id)}>{loading === account.id ? 'Consultando…' : 'Atualizar permissões do criador'}</button>{info && <><small>{info.creator_nickname || info.creator_username} · Até {info.max_video_post_duration_sec}s</small><label>Privacidade — {account.account_name}<select value={selected.options?.privacy_level || ''} onChange={event => update(account.id, { options: { ...selected.options, privacy_level: event.target.value, disable_comment: true, disable_duet: true, disable_stitch: true, consent: false } })}><option value="" disabled>Escolha a privacidade</option>{info.privacy_level_options.filter(option => account.direct_audited || option === 'SELF_ONLY').map(option => <option key={option} value={option}>{option}</option>)}</select></label><label>Legenda TikTok — {account.account_name}<input maxLength={2200} value={selected.options?.title || ''} onChange={event => update(account.id, { options: { ...selected.options, title: event.target.value, consent: false } })}/></label>{(['disable_comment','disable_duet','disable_stitch'] as const).map((key, index) => <label className="destination-check" key={key}><input type="checkbox" checked={!(selected.options?.[key] ?? true)} disabled={info[(['comment_disabled','duet_disabled','stitch_disabled'] as const)[index]]} onChange={event => update(account.id, { options: { ...selected.options, [key]: !event.target.checked, consent: false } })}/>{['Permitir comentários','Permitir duetos','Permitir stitches'][index]}</label>)}</> }</>}
+           {selected.options?.mode === 'direct' && <><label className="destination-check"><input type="checkbox" checked={Boolean(selected.options?.commercial_disclosure)} onChange={event => update(account.id, { options: { ...selected.options, commercial_disclosure: event.target.checked, brand_content_toggle: false, brand_organic_toggle: false, consent: false } })}/>Conteúdo comercial</label>{selected.options?.commercial_disclosure && <>{(['brand_organic_toggle', 'brand_content_toggle'] as const).map((key, index) => <label className="destination-check" key={key}><input type="checkbox" checked={Boolean(selected.options?.[key])} disabled={key === 'brand_content_toggle' && selected.options?.privacy_level === 'SELF_ONLY'} onChange={event => update(account.id, { options: { ...selected.options, [key]: event.target.checked, consent: false } })}/>{index === 0 ? 'Minha marca — rotulado como conteúdo promocional' : 'Outra marca — rotulado como parceria paga; exige visibilidade pública/amigos'}</label>)}</>}</>}
+-          <p className="muted">Envio para revisão exige finalizar a postagem no TikTok. A publicação direta respeita a privacidade e a elegibilidade reais da conta. Clipes com marca d’água promocional não são enviados.</p><label className="destination-check"><input type="checkbox" checked={Boolean(selected.options?.consent)} onChange={event => update(account.id, { options: { ...selected.options, consent: event.target.checked } })}/>Confirmo o envio a esta conta e, no modo direto, a publicação com as opções selecionadas. Ao publicar, concordo com a confirmação de uso de música do TikTok.</label><a className="text-link" href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener noreferrer">Confirmação de uso de música</a>{selected.options?.brand_content_toggle && <a className="text-link" href="https://www.tiktok.com/legal/page/global/bc-policy/en" target="_blank" rel="noopener noreferrer">Política de conteúdo de marca</a>}
++          <p className="muted">Envio para revisão exige finalizar a postagem no TikTok. A publicação direta respeita a privacidade e a elegibilidade reais da conta. O TikTok recebe uma versão separada sem marca promocional da AXIS, em todos os planos. Revise essa versão antes do envio.</p><label className="destination-check"><input type="checkbox" checked={Boolean(selected.options?.consent)} onChange={event => update(account.id, { options: { ...selected.options, consent: event.target.checked } })}/>Confirmo o envio a esta conta e, no modo direto, a publicação com as opções selecionadas. Ao publicar, concordo com a confirmação de uso de música do TikTok.</label><a className="text-link" href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener noreferrer">Confirmação de uso de música</a>{selected.options?.brand_content_toggle && <a className="text-link" href="https://www.tiktok.com/legal/page/global/bc-policy/en" target="_blank" rel="noopener noreferrer">Política de conteúdo de marca</a>}
+         </>}
+       </div>}
+     </div> })}{accounts.length === 0 && <p className="muted">Conecte contas em Configurações para configurar múltiplos destinos.</p>}{error && <p role="alert" className="error-text">{error}</p>}
+diff --git a/frontend/src/components/ProjectWorkflow.tsx b/frontend/src/components/ProjectWorkflow.tsx
+index 10e2a7a..0f8ffe4 100644
+--- a/frontend/src/components/ProjectWorkflow.tsx
++++ b/frontend/src/components/ProjectWorkflow.tsx
+@@ -212,7 +212,7 @@ export default function ProjectWorkflow({ project, videos, initialVideoId, onSav
+ 
+     </fieldset>
+     <div hidden={form.step !== 2} className="panel prep-panel workflow-schedule"><h2>Agendamento</h2>{recovering && <p role="status">Clipes gerados preservados. Ajuste e reaplique o agendamento; a geracao nao sera reiniciada.</p>}
+-      <div className="workflow-schedule-layout"><fieldset disabled={busy || started} className="batch-config"><DestinationSelector accounts={accounts} value={form.destinations || []} onChange={destinations => change({ destinations })} times={form.times} timezone={form.timezone}/>{form.destinations?.some(item => item.options?.mode === 'direct') && <p className="muted">TikTok Direct Post: os clipes finais precisarão de revisão e confirmação individual após a geração, antes do envio.</p>}<div className="prep-grid">
++      <div className="workflow-schedule-layout"><fieldset disabled={busy || started} className="batch-config"><DestinationSelector accounts={accounts} value={form.destinations || []} onChange={destinations => change({ destinations })} times={form.times} timezone={form.timezone}/>{form.destinations?.some(item => accounts.find(account => account.id === item.account_id)?.platform === 'TIKTOK') && <p className="muted">TikTok: as versoes sem marca promocional precisarão de revisão e confirmação individual após a geração, antes do envio.</p>}<div className="prep-grid">
+         <label>Clipes por dia<input type="number" min={1} max={1440} value={form.clips_per_day} onChange={event => changeSchedule({ clips_per_day: Number(event.target.value) })} /></label>
+         <label>Data inicial<input type="date" value={form.start_date} onChange={event => changeSchedule({ start_date: event.target.value })} /></label>
+         <label>Data final<input type="date" min={form.start_date} value={form.end_date} onChange={event => changeSchedule({ end_date: event.target.value })} /></label>
+diff --git a/frontend/tests/social-publications.spec.ts b/frontend/tests/social-publications.spec.ts
+index a9b2b07..39c67e7 100644
+--- a/frontend/tests/social-publications.spec.ts
++++ b/frontend/tests/social-publications.spec.ts
+@@ -1,4 +1,5 @@
+ import { test, expect, type Page } from '@playwright/test'
++import { readFileSync } from 'node:fs'
+ 
+ const accounts = [
+   { id: 1, platform: 'YOUTUBE', account_name: 'Canal A', platform_account_id: 'channel-a', enabled: true, connection_status: 'CONNECTED', is_default: true, modes: ['direct'], scopes: [] },
+@@ -7,11 +8,11 @@ const accounts = [
+   { id: 4, platform: 'TIKTOK', account_name: 'Criador B', platform_account_id: 'creator-b', enabled: true, connection_status: 'CONNECTED', is_default: false, modes: ['inbox'], scopes: [], direct_audited: false },
+ ]
+ 
+-async function setup(page: Page) {
++async function setup(page: Page, mode = 'direct') {
+   let connected = structuredClone(accounts)
+   let project: Record<string, unknown> = { id: 1, name: 'Multiaccount', status: 'CREATED', created_at: '2026-10-20', clip_duration: 30, watermark_enabled: false, watermark_scale: 1, watermark_opacity: 78, preview_text: 'Exemplo', preview_font_size: 12 }
+   const starts: Record<string, unknown>[] = [], posted: Record<string, unknown>[] = []
+-  const publications = accounts.slice(0,3).map((account, index) => ({ id: index+1, clip_id: 15, project_id: 1, title: 'Mesmo clipe', platform: account.platform, account, publication_account_id: account.id, status: index === 2 ? 'REQUIRES_REVIEW' : 'SCHEDULED', scheduled_at: '2099-10-20T15:00:00Z', timezone: 'America/Sao_Paulo', duration: 30 }))
++  const publications = accounts.slice(0,3).map((account, index) => ({ id: index+1, clip_id: 15, project_id: 1, title: 'Mesmo clipe', platform: account.platform, account, publication_account_id: account.id, platform_options: index === 2 ? { mode } : {}, status: index === 2 ? 'REQUIRES_REVIEW' : 'SCHEDULED', scheduled_at: '2099-10-20T15:00:00Z', timezone: 'America/Sao_Paulo', duration: 30 }))
+   await page.route('http://localhost:8000/**', async route => {
+     const req = route.request(), path = new URL(req.url()).pathname
+     if (path === '/social-accounts') return route.fulfill({ json: connected })
+@@ -34,6 +35,8 @@ async function setup(page: Page) {
+       if (req.method() === 'POST') { posted.push(req.postDataJSON()); return route.fulfill({ json: { ...publications[2], status:'PENDING' } }) }
+       return route.fulfill({ json: publications })
+     }
++    if (path.endsWith('/tiktok/prepare')) return route.fulfill({ json: { media_signature: 'reviewed-clean-output', preview_url: '/clips/15/tiktok/stream?signature=reviewed-clean-output' } })
++    if (path.endsWith('/tiktok/stream')) return route.fulfill({ contentType: 'video/webm', body: readFileSync(new URL('./fixtures/clean.webm', import.meta.url)) })
+     if (path.endsWith('/stream')) return route.fulfill({ status: 404 })
+     if (path.endsWith('/visual-preview')) return route.fulfill({ status: 422, json: { detail: 'Frame indisponível' } })
+     return route.fulfill({ json: [] })
+@@ -97,7 +100,8 @@ test('TikTok Direct Post shows final video review and only real permitted privac
+   const state = await setup(page); await page.goto('/publications')
+   await page.getByRole('button', { name: 'Revisar destino TikTok' }).click()
+   const modal = page.getByRole('dialog', { name: 'Publicar clipe' })
+-  await expect(modal.locator('video')).toHaveAttribute('src', 'http://localhost:8000/clips/15/stream')
++  await expect(modal.locator('video').first()).toHaveAttribute('src', 'http://localhost:8000/clips/15/stream')
++  await expect(modal.getByRole('region', { name: 'Versao TikTok' }).locator('video')).toHaveAttribute('src', 'http://localhost:8000/clips/15/tiktok/stream?signature=reviewed-clean-output')
+   await modal.getByRole('button', { name: 'Atualizar permissões do criador' }).click()
+   const privacy = modal.getByLabel('Privacidade — Criador A')
+   await expect(privacy).toHaveValue('')
+@@ -108,7 +112,32 @@ test('TikTok Direct Post shows final video review and only real permitted privac
+   page.on('dialog', dialog => dialog.accept())
+   await modal.getByRole('button', { name: 'Publicar agora', exact: true }).click()
+   await expect.poll(() => state.posted.length).toBe(1)
+-  expect(state.posted[0]).toMatchObject({ clip_id: 15, publication_account_id: 3, platform: 'TIKTOK', platform_options: { mode: 'direct', reviewed: true, consent: true, privacy_level: 'SELF_ONLY' } })
++  expect(state.posted[0]).toMatchObject({ clip_id: 15, publication_account_id: 3, platform: 'TIKTOK', platform_options: { mode: 'direct', reviewed: true, consent: true, privacy_level: 'SELF_ONLY', media_signature: 'reviewed-clean-output' } })
++})
++
++test('TikTok preparation failure blocks upload and allows retry', async ({ page }) => {
++  const state = await setup(page)
++  await page.route('**/clips/15/tiktok/prepare', route => route.fulfill({ status: 422, json: { detail: 'Fontes indisponiveis.' } }))
++  await page.goto('/publications')
++  await page.getByRole('button', { name: 'Revisar destino TikTok' }).click()
++  const modal = page.getByRole('dialog', { name: 'Publicar clipe' })
++  await expect(modal.getByRole('alert')).toContainText('Fontes indisponiveis')
++  await expect(modal.getByRole('button', { name: 'Publicar agora', exact: true })).toBeDisabled()
++  await expect(modal.getByRole('button', { name: 'Tentar novamente' })).toBeVisible()
++  expect(state.posted).toHaveLength(0)
++})
++
++test('TikTok Inbox review preserves mode and submits the clean preview signature', async ({ page }) => {
++  const state = await setup(page, 'inbox')
++  await page.goto('/publications')
++  await page.getByRole('button', { name: 'Revisar destino TikTok' }).click()
++  const modal = page.getByRole('dialog', { name: 'Publicar clipe' })
++  await expect(modal.getByLabel('Modo TikTok — Criador A')).toHaveValue('inbox')
++  await modal.getByRole('checkbox', { name: /Confirmo o envio/ }).check()
++  page.on('dialog', dialog => dialog.accept())
++  await modal.getByRole('button', { name: 'Publicar agora', exact: true }).click()
++  await expect.poll(() => state.posted.length).toBe(1)
++  expect(state.posted[0]).toMatchObject({ platform_options: { mode: 'inbox', reviewed: true, consent: true, media_signature: 'reviewed-clean-output' } })
+ })
+ 
+ for (const width of [320,768,1440]) {
+diff --git a/backend/app/services/tiktok_media.py b/backend/app/services/tiktok_media.py
+new file mode 100644
+index 0000000..7663769
+--- /dev/null
++++ b/backend/app/services/tiktok_media.py
+@@ -0,0 +1,77 @@
++"""Destination-specific output. Never use the promotional render as a fallback."""
++import hashlib
++import json
++from pathlib import Path
++from tempfile import TemporaryDirectory
++
++
++def _hash(path):
++    with Path(path).open('rb') as source:
++        return hashlib.file_digest(source, 'sha256').hexdigest()
++
++
++def manifest_path(clip):
++    if not clip.clip_path:
++        raise ValueError('Clipe sem caminho de render.')
++    return Path(clip.clip_path).with_suffix('.tiktok.json')
++
++
++def _inputs(clip):
++    if not clip.video.file_path or not clip.subtitle_path:
++        raise ValueError('Video original e legendas salvas sao necessarios para preparar o TikTok.')
++    source = Path(clip.video.file_path)
++    captions = Path(clip.subtitle_path)
++    stat = source.stat()
++    if stat.st_size <= 0 or not captions.is_file() or clip.end_time <= clip.start_time or clip.start_time < 0:
++        raise ValueError('Fontes indisponiveis para gerar a versao TikTok.')
++    data = [1, str(source.resolve()), stat.st_size, stat.st_mtime_ns, _hash(captions),
++            clip.start_time, clip.end_time, clip.video.editing_style or 'default',
++            getattr(clip.video.project, 'subtitle_font_size', 12)]
++    return hashlib.sha256(json.dumps(data).encode()).hexdigest()
++
++
++def verified_tiktok_render(clip, signature):
++    """Reject missing, modified, stale or unreviewed media before remote upload."""
++    try:
++        data = json.loads(manifest_path(clip).read_text(encoding='utf-8'))
++        if not signature or signature != data['signature'] or data['inputs'] != _inputs(clip):
++            return None
++        path = manifest_path(clip).with_name(data['filename'])
++        if path.parent != manifest_path(clip).parent or path.name != f'{Path(clip.clip_path).stem}_tiktok_{signature}.mp4':
++            return None
++        return path if _hash(path) == data['sha256'] else None
++    except (OSError, ValueError, KeyError, TypeError):
++        return None
++
++
++def prepare_tiktok_render(clip):
++    """Caller holds the clip row lock. Render from original + saved captions."""
++    manifest = manifest_path(clip)
++    try:
++        signature = json.loads(manifest.read_text(encoding='utf-8'))['signature']
++        if verified_tiktok_render(clip, signature):
++            return signature
++    except (OSError, ValueError, KeyError, TypeError):
++        pass
++    inputs = _inputs(clip)
++    from app.services.video_cutter import generate_clip
++    from app.services.reel_adapter import adapt_to_reel
++    from app.services.subtitle_generator import burn_subtitles
++    manifest.parent.mkdir(parents=True, exist_ok=True)
++    with TemporaryDirectory(prefix='tiktok_', dir=manifest.parent) as tmp:
++        raw, reel, output = [str(Path(tmp) / name) for name in ('raw.mp4', 'reel.mp4', 'final.mp4')]
++        generate_clip(clip.video.file_path, raw, clip.start_time, clip.end_time)
++        adapt_to_reel(raw, reel, editing_style=clip.video.editing_style or 'default', show_logo=False)
++        burn_subtitles(reel, clip.subtitle_path, output,
++                       font_size=getattr(clip.video.project, 'subtitle_font_size', 12), source_video=raw)
++        if Path(output).stat().st_size <= 0 or _inputs(clip) != inputs:
++            raise ValueError('Fontes alteradas ou render TikTok vazio. Prepare novamente.')
++        digest = _hash(output)
++        signature = hashlib.sha256(f'{inputs}:{digest}'.encode()).hexdigest()
++        final = manifest.with_name(f'{Path(clip.clip_path).stem}_tiktok_{signature}.mp4')
++        Path(output).replace(final)
++        temporary_manifest = Path(tmp) / 'manifest.json'
++        temporary_manifest.write_text(json.dumps(dict(inputs=inputs, signature=signature,
++                                                      filename=final.name, sha256=digest)), encoding='utf-8')
++        temporary_manifest.replace(manifest)
++    return signature
+diff --git a/backend/tests/test_tiktok_ffmpeg.py b/backend/tests/test_tiktok_ffmpeg.py
+new file mode 100644
+index 0000000..91593d4
+--- /dev/null
++++ b/backend/tests/test_tiktok_ffmpeg.py
+@@ -0,0 +1,57 @@
++"""Optional real FFmpeg smoke test: pip install imageio-ffmpeg; set FFMPEG_SMOKE=1.
++
++The probe helper reads FFmpeg metadata because the portable test package does
++not bundle ffprobe. Production continues to require ffmpeg AND ffprobe.
++"""
++import os
++import re
++import subprocess
++import tempfile
++import unittest
++from pathlib import Path
++from types import SimpleNamespace as NS
++from unittest.mock import patch
++
++
++@unittest.skipUnless(os.getenv('FFMPEG_SMOKE') == '1', 'Optional FFmpeg smoke test')
++class RealRenderTest(unittest.TestCase):
++    def test_clean_output_is_decodable_and_has_no_synthetic_promotional_overlay(self):
++        import imageio_ffmpeg
++        from app.services.tiktok_media import prepare_tiktok_render, verified_tiktok_render
++        executable = imageio_ffmpeg.get_ffmpeg_exe()
++        real_run = subprocess.run
++
++        def run(command, **kwargs):
++            return real_run([executable, *command[1:]], **kwargs)
++
++        def probe(path):
++            result = real_run([executable, '-hide_banner', '-i', str(path)], capture_output=True, text=True)
++            match = re.search(r'Video:.*?\b(\d{2,5})x(\d{2,5})\b', result.stderr)
++            if not match:
++                raise ValueError('Missing video dimensions')
++            return int(match[1]), int(match[2]), 0.5
++
++        with tempfile.TemporaryDirectory(dir='.tools', prefix='real_render_') as temporary:
++            root = Path(temporary)
++            source, primary, captions = root / 'source.mp4', root / 'primary.mp4', root / "clip user's [v1],.srt"
++            real_run([executable, '-y', '-f', 'lavfi', '-i', 'color=c=blue:s=640x360:r=10',
++                      '-t', '0.5', '-c:v', 'libx264', str(source)], check=True, capture_output=True)
++            real_run([executable, '-y', '-i', str(source), '-vf', 'drawbox=x=0:y=0:w=160:h=100:color=red:t=fill',
++                      '-c:v', 'libx264', str(primary)], check=True, capture_output=True)
++            captions.write_text('1\n00:00:00,000 --> 00:00:00,500\nTest caption\n', encoding='utf-8')
++            original_primary = primary.read_bytes()
++            clip = NS(clip_path=str(primary), subtitle_path=str(captions), start_time=0, end_time=0.5,
++                      video=NS(file_path=str(source), editing_style='default',
++                               project=NS(show_logo=True, subtitle_font_size=12)))
++            with patch('subprocess.run', side_effect=run), patch('app.services.reel_adapter.probe_media', side_effect=probe):
++                signature = prepare_tiktok_render(clip)
++            clean = verified_tiktok_render(clip, signature)
++            self.assertIsNotNone(clean)
++            self.assertEqual(probe(clean)[:2], (1080, 1920))
++            self.assertEqual(primary.read_bytes(), original_primary)
++            frame = real_run([executable, '-v', 'error', '-i', str(clean), '-frames:v', '1',
++                              '-vf', 'crop=100:100:0:0', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'],
++                             check=True, capture_output=True).stdout
++            self.assertEqual(len(frame), 100 * 100 * 3)
++            self.assertFalse(any(frame[i] > 150 and frame[i + 1] < 80 and frame[i + 2] < 80
++                                 for i in range(0, len(frame), 3)))
+diff --git a/backend/tests/test_tiktok_media.py b/backend/tests/test_tiktok_media.py
+new file mode 100644
+index 0000000..237fd0b
+--- /dev/null
++++ b/backend/tests/test_tiktok_media.py
+@@ -0,0 +1,183 @@
++"""No credentials, network, production database or real social uploads required."""
++import json
++import os
++import tempfile
++import unittest
++from pathlib import Path
++from types import SimpleNamespace as NS
++from unittest.mock import Mock, patch
++
++from app.services import tiktok, tiktok_media as media
++
++
++class TikTokMediaTests(unittest.TestCase):
++    def setUp(self):
++        self.directory = tempfile.TemporaryDirectory()
++        self.addCleanup(self.directory.cleanup)
++        self.root = Path(self.directory.name)
++        for name, content in [('source.mp4', b'original'), ('clip.mp4', b'AXIS promo render'),
++                              ('clip.srt', b'1\n00:00:00,000 --> 00:00:01,000\nCaption\n')]:
++            (self.root / name).write_bytes(content)
++        self.clip = NS(id=1, clip_path=str(self.root / 'clip.mp4'),
++                       subtitle_path=str(self.root / 'clip.srt'), start_time=0, end_time=1,
++                       video=NS(file_path=str(self.root / 'source.mp4'), editing_style='default',
++                                project=NS(show_logo=True, watermark_enabled=True, subtitle_font_size=12)))
++        self.cut = self.enterContext(patch('app.services.video_cutter.generate_clip', side_effect=self.copy_output))
++        self.reel = self.enterContext(patch('app.services.reel_adapter.adapt_to_reel', side_effect=self.copy_output))
++        self.burn = self.enterContext(patch('app.services.subtitle_generator.burn_subtitles', side_effect=self.copy_output))
++
++    @staticmethod
++    def copy_output(source, *args, **kwargs):
++        output = args[1] if len(args) >= 2 and str(args[0]).endswith('.srt') else args[0]
++        Path(output).write_bytes(Path(source).read_bytes() + b' rendered')
++        return True
++
++    def prepare(self):
++        return media.prepare_tiktok_render(self.clip)
++
++    def publication(self, mode='inbox', signature=None):
++        return NS(platform_post_id=None, upload_started_at=None,
++                  publication_account=NS(scopes=json.dumps(['video.upload', 'video.publish'])),
++                  platform_options=json.dumps(dict(mode=mode, consent=True, reviewed=True,
++                                                   privacy_level='SELF_ONLY', media_signature=signature)))
++
++    def test_original_used_and_primary_untouched(self):
++        signature = self.prepare()
++        self.assertEqual(self.cut.call_args.args[0], self.clip.video.file_path)
++        self.assertIs(self.reel.call_args.kwargs['show_logo'], False)
++        self.assertEqual(Path(self.clip.clip_path).read_bytes(), b'AXIS promo render')
++        self.assertNotIn(b'AXIS promo', media.verified_tiktok_render(self.clip, signature).read_bytes())
++        self.assertTrue(self.clip.video.project.show_logo)
++
++    def test_cache_reuses_variant_without_rendering(self):
++        signature = self.prepare()
++        self.assertEqual(signature, self.prepare())
++        self.assertEqual(self.cut.call_count, 1)
++
++    def test_modified_output_is_rejected(self):
++        signature = self.prepare()
++        media.verified_tiktok_render(self.clip, signature).write_bytes(b'AXIS promotional')
++        self.assertIsNone(media.verified_tiktok_render(self.clip, signature))
++
++    def test_changed_captions_invalidate_review(self):
++        signature = self.prepare()
++        Path(self.clip.subtitle_path).write_text('new captions')
++        self.assertIsNone(media.verified_tiktok_render(self.clip, signature))
++        self.assertNotEqual(signature, self.prepare())
++
++    def test_missing_source_never_uses_promotional_render(self):
++        Path(self.clip.video.file_path).unlink()
++        with self.assertRaises(FileNotFoundError):
++            self.prepare()
++        self.assertIsNone(media.verified_tiktok_render(self.clip, 'unknown'))
++
++    def test_failed_render_does_not_create_manifest_or_fallback(self):
++        self.burn.side_effect = RuntimeError('ffmpeg failed')
++        with self.assertRaises(RuntimeError):
++            self.prepare()
++        self.assertFalse(media.manifest_path(self.clip).exists())
++        self.assertEqual(Path(self.clip.clip_path).read_bytes(), b'AXIS promo render')
++
++    def test_upload_uses_reviewed_variant_for_both_modes(self):
++        signature = self.prepare()
++        for mode in ('inbox', 'direct'):
++            with self.subTest(mode=mode), patch.dict(os.environ, TIKTOK_MEDIA_BASE_URL='https://verified.example'), \
++                    patch.object(tiktok, 'creator_info', return_value=dict(privacy_level_options=['SELF_ONLY'], max_video_post_duration_sec=60)), \
++                    patch.object(tiktok, 'call', return_value={'publish_id': 'remote-id'}) as call:
++                publication = self.publication(mode, signature)
++                db = Mock()
++                self.assertEqual(tiktok.upload(db, publication, self.clip), 'remote-id')
++                source = call.call_args.args[2]['source_info']
++                self.assertEqual(source['video_url'], f'https://verified.example/clips/1/tiktok/download?signature={signature}')
++                self.assertEqual(source['source'], 'PULL_FROM_URL')
++                self.assertEqual(tiktok.upload(db, publication, self.clip), 'remote-id')
++                self.assertEqual(call.call_count, 1)
++
++    def test_wrong_signature_cannot_start_upload(self):
++        self.prepare()
++        with patch.object(tiktok, 'call') as call:
++            with self.assertRaises(ValueError):
++                tiktok.upload(Mock(), self.publication(signature='wrong'), self.clip)
++            call.assert_not_called()
++
++    def test_inbox_requires_review_too(self):
++        publication = self.publication(signature=self.prepare())
++        options = json.loads(publication.platform_options)
++        options['reviewed'] = False
++        publication.platform_options = json.dumps(options)
++        with self.assertRaises(ValueError):
++            tiktok.upload(Mock(), publication, self.clip)
++
++    def test_ambiguous_intent_prevents_second_initialization(self):
++        publication = self.publication(signature=self.prepare())
++        publication.upload_started_at = 'already started'
++        with patch.object(tiktok, 'call') as call:
++            with self.assertRaises(tiktok.AmbiguousUploadError):
++                tiktok.upload(Mock(), publication, self.clip)
++            call.assert_not_called()
++
++    def test_media_endpoint_serves_same_file_and_rejects_stale_signature(self):
++        from app.api.clips import stream_tiktok_clip
++        from fastapi import HTTPException
++        signature = self.prepare()
++        db = Mock()
++        db.get.return_value = self.clip
++        self.assertEqual(Path(stream_tiktok_clip(1, signature, db).path), media.verified_tiktok_render(self.clip, signature))
++        with self.assertRaises(HTTPException) as error:
++            stream_tiktok_clip(1, 'wrong', db)
++        self.assertEqual(error.exception.status_code, 404)
++
++    def test_renderer_does_not_resolve_logo_when_disabled(self):
++        from app.services.reel_adapter import resolve_logo, build_filter
++        self.assertIsNone(resolve_logo(False, 'promotional.png'))
++        filters, has_logo = build_filter(1920, 1080, False)
++        self.assertFalse(has_logo)
++        self.assertNotIn('[1:v]', filters)
++
++    def test_consent_and_scope_guards_are_preserved(self):
++        publication = self.publication(signature=self.prepare())
++        options = json.loads(publication.platform_options)
++        options['consent'] = False
++        publication.platform_options = json.dumps(options)
++        with self.assertRaises(ValueError):
++            tiktok.upload(Mock(), publication, self.clip)
++        options['consent'] = True
++        publication.platform_options = json.dumps(options)
++        publication.publication_account.scopes = '[]'
++        with self.assertRaises(ValueError):
++            tiktok.upload(Mock(), publication, self.clip)
++
++    def test_cleanup_waits_for_both_destinations(self):
++        from sqlalchemy import create_engine
++        from sqlalchemy.orm import Session
++        from app.db.database import Base
++        from app.models import Project, Video, Clip, Publication
++        from app.youtube.cleanup import cleanup_clip_files
++        engine = create_engine('sqlite://')
++        self.addCleanup(engine.dispose)
++        Base.metadata.create_all(engine)
++        with Session(engine) as db:
++            project = Project(name='Two destinations', show_logo=True)
++            video = Video(project=project, source_type='FILE', file_path=self.clip.video.file_path)
++            clip = Clip(video=video, title='Clip', status='COMPLETED', start_time=0, end_time=1,
++                        clip_path=self.clip.clip_path, subtitle_path=self.clip.subtitle_path)
++            youtube = Publication(clip=clip, platform='YOUTUBE', status='PUBLISHED')
++            tiktok_job = Publication(clip=clip, platform='TIKTOK', status='REQUIRES_REVIEW')
++            db.add_all([youtube, tiktok_job])
++            db.commit()
++            signature = media.prepare_tiktok_render(clip)
++            clean = media.verified_tiktok_render(clip, signature)
++            self.assertFalse(cleanup_clip_files(clip, force=True))
++            self.assertTrue(clean.exists())
++            self.assertTrue(Path(clip.clip_path).exists())
++            tiktok_job.status = 'PUBLISHED'
++            db.commit()
++            self.assertTrue(cleanup_clip_files(clip, force=True))
++            self.assertFalse(clean.exists())
++            self.assertFalse(media.manifest_path(clip).exists())
++            self.assertTrue(Path(video.file_path).exists())
++            self.assertTrue(Path(clip.subtitle_path).exists())
++
++
++if __name__ == '__main__':
++    unittest.main()
+diff --git a/frontend/tests/fixtures/clean.webm b/frontend/tests/fixtures/clean.webm
+new file mode 100644
+index 0000000000000000000000000000000000000000..aba3e59dbfc5e9be6c7bc8ac56f064e15329adf1
+GIT binary patch
+literal 755
+zcmb1gy}x+AQ(GgW({~{L)X3uWxsk)EsiizMDc7mJk;$pGkx3%BA)S!{1egvB`pz!d
+z<-5B(cy)`Y=gPF;HH`})Jh6~<*+AYk-`zbxIiZll>A`E77*!x#nc&?($tI??Zy@F{
+zM1qZ@1p#u^2CeHGoB5p_d>eXv63f!e4E4<Q3=Isz9Z|S0ogEJK4q!Kc9Di~h)NKye
+z8ySm_b}Y(!K4<fc-7DubGAM1G(_EUD($UD!)*2Qc7GTlb$f*3dxrO!XLxu+vH#9ET
+z)x;<>tC1;mLrdt+Mn;h5e-{_ePd?C)eqyHU;&xX*XMY#hAeVL&`-_XOB_HTcM%a{o
+zVj;5PDL}U;1Kn<D339wbPG(YBK?PV%hf8RXV~D4}pG*5>0|P5C(la%H0tR{KZKaOP
+z&l?#QJ9IWOFf;`4FwAAtTEHN~$l%V=+S<|D(!s>URJw}!2NPRc%XhZMl=<1WXRBLO
+zQ;aGZ{{8nA`u`^){9|JL(bjq(`RC8Mw@3dxV^}=9ks*blkcoj+U=4!=gG7Y>7Y2@o
+sMqWF=n;*cEC-6uz>fn={fJ+jT>?ZE+-`vQsy$hJUKQ=Kg`OwG=0K`P}TL1t6
+
+literal 0
+HcmV?d00001
+

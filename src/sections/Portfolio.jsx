@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { MagneticButton } from "../lightswind/magnetic-button";
-import { PortfolioImageCarousel } from "../components/PortfolioImageCarousel";
 import { portfolioItems } from "../data/portfolio";
 import { translations } from "../data/translations";
 import { useSitePreferences } from "../context/site-preferences";
@@ -71,18 +71,9 @@ export function Portfolio() {
 }
 
 function PortfolioCard({ item, theme, language, content }) {
-  const images = item.imagesByTheme?.[theme === "dark" ? "dark" : "bright"] || item.images || [item.image];
-  const slideKey = `${item.href || item.title}-${theme}`;
-  const [activeSlide, setActiveSlide] = useState(images[0]);
-  const updateActiveSlide = useCallback((_key, slide) => setActiveSlide(slide), []);
-
-  useEffect(() => {
-    setActiveSlide(images[0]);
-  }, [images]);
-
-  const localized = (value) => (typeof value === "string" ? value : value?.[language] || value?.["pt-BR"] || "");
-  const title = localized(activeSlide?.title) || item.title;
-  const description = localized(activeSlide?.description) || item.description[language] || item.description["pt-BR"];
+  const image = item.imagesByTheme?.[theme === "dark" ? "dark" : "bright"]?.[0]?.src || item.image;
+  const isInternal = item.href?.startsWith("/");
+  const sharedTransition = item.href === "/axisclipes";
 
   return (
     <article
@@ -92,38 +83,36 @@ function PortfolioCard({ item, theme, language, content }) {
       {item.href ? (
         <a
           href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={isInternal ? undefined : "_blank"}
+          rel={isInternal ? undefined : "noopener noreferrer"}
           aria-label={`${content.viewProject}: ${item.title}`}
-          className="absolute inset-0 z-10 rounded-[1.5rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+          className="absolute inset-0 z-30 rounded-[1.5rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
         >
           <span className="sr-only">{content.viewProject}: {item.title}</span>
         </a>
       ) : null}
 
-      <div className="relative pointer-events-none">
-        <div className="relative z-20 isolate aspect-[16/10] overflow-hidden bg-[#071426]">
-          <PortfolioImageCarousel
-            images={images}
-            imageFit={item.imagesByTheme ? "object-contain" : "object-cover transition duration-500 group-hover:scale-[1.03]"}
-            projectName={item.title}
-            imageLabel={content.projectImageAlt}
-            language={language}
-            slideKey={slideKey}
-            onSlideChange={updateActiveSlide}
+      <div className="pointer-events-none">
+        <div className="relative isolate aspect-[16/10] overflow-hidden bg-[#071426]">
+          <Image
+            src={image}
+            alt={`${content.projectImageAlt}: ${item.title}`}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            priority={false}
+            style={sharedTransition ? { viewTransitionName: "axis-clipes-cover" } : undefined}
+            className="object-cover transition duration-500 group-hover:scale-[1.035]"
           />
         </div>
         <div className="flex items-start justify-between gap-4 p-5 sm:p-6">
           <motion.div
-            key={`${slideKey}-${title}-${description}`}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22, ease: "easeOut" }}
             className="min-w-0 flex-1"
-            aria-live="polite"
           >
-            <h3 className="min-h-7 text-xl font-semibold tracking-[-0.03em] text-white">{title}</h3>
-            <p className="mt-2 min-h-12 text-sm leading-6 text-white/62">{description}</p>
+            <h3 className="min-h-7 text-xl font-semibold tracking-[-0.03em] text-white">{item.title}</h3>
+            <p className="mt-2 min-h-12 text-sm leading-6 text-white/62">{item.description[language] || item.description["pt-BR"]}</p>
           </motion.div>
           {item.href ? (
             <span className="mt-1 shrink-0 rounded-full border border-white/15 p-2 text-cyan-300 transition group-hover:border-cyan-300/50 group-hover:bg-cyan-300/10" aria-hidden="true">

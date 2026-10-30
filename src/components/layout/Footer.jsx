@@ -2,6 +2,7 @@
 import React from "react";
 import { translations } from "../../data/translations";
 import { useSitePreferences } from "../../context/site-preferences";
+import { institutionalData } from "../../config/institutionalData";
 
 // Cria o componente Footer.
 export function Footer() {
@@ -23,12 +24,14 @@ export function Footer() {
         </div>
 
         {/* Agrupa os links legais. */}
-        <div className="flex gap-6">
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <a href={`mailto:${institutionalData.privacyEmail}`} className="transition hover:text-cyan-300">{institutionalData.privacyEmail}</a>
+          <a href={institutionalData.officialWebsite} target="_blank" rel="noopener noreferrer" className="transition hover:text-cyan-300">{language === "en" ? "Official website" : "Site oficial"}</a>
           {/* Link de política de privacidade. */}
-          <a href="#privacidade" className="transition hover:text-cyan-300">{content.privacy}</a>
+          <a href="/privacidade" className="transition hover:text-cyan-300">{content.privacy}</a>
 
           {/* Link de termos de uso. */}
-          <a href="#termos" className="transition hover:text-cyan-300">{content.terms}</a>
+          <a href="/termos" className="transition hover:text-cyan-300">{content.terms}</a>
         </div>
       </div>
     </footer>

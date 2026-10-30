@@ -25,9 +25,28 @@ html {
   scroll-behavior: smooth;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(axis-clipes-cover) {
+  animation-duration: 560ms;
+  animation-timing-function: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+::view-transition-old(axis-clipes-cover),
+::view-transition-new(axis-clipes-cover) {
+  height: 100%;
+  object-fit: contain;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  ::view-transition-group(axis-clipes-cover) {
+    animation-duration: 1ms;
   }
 }
 

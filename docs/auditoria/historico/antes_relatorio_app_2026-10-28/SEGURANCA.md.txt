@@ -1,0 +1,45 @@
+# Segurança — evidências e riscos
+
+**Data:** 22/10/2026. Análise estática do site institucional; o código e binário do AXIS CLIPES não foram fornecidos.
+
+## Matriz de controles
+
+| Controle | Status | Evidência e limite |
+|---|---|---|
+| TLS no app | **Não verificado** | URLs externas codificadas usam HTTPS. Não há configuração de domínio/CDN/certificado do site neste checkout. TLS de produção precisa ser confirmado no hosting. |
+| Criptografia em repouso do produto | **Declarada, não comprovada** | Responsável declara criptografia; implementação, algoritmos, chaves e dados protegidos não estão no checkout. |
+| Criptografia no trânsito do produto | **Não verificado** | Não há requisições/endpoints do app para inspecionar. HTTPS de uma eventual plataforma não prova criptografia em repouso. |
+| Segredos do app | **Não verificável** | Repositório/artefato do produto ausente. Não executar varredura de arquivos do usuário. Não foram lidos valores de variáveis de ambiente. |
+| Autenticação/autorização do app | **Não verificável** | Nenhum código de conta, backend ou API do app disponível. |
+| Segurança do site | **Parcialmente observável** | Checkout sem endpoint de negócio, autenticação, upload ou banco. Não há configuração local de CSP, HSTS, CORS ou security headers identificada em `next.config.ts`; headers do hosting não verificados. |
+| CORS | **Não aplicável ao frontend encontrado / não verificável em hosting** | Nenhuma API própria no checkout. Regras da plataforma de hosting não estão acessíveis. |
+| Validação de upload | **Não verificável** | Site institucional não tem upload de vídeo. Validação do aplicativo não está disponível. |
+| Proteção da preferência local | **Implementada parcialmente** | Apenas valores fixos `pt-BR/en` e `dark/light` são aceitos ao ler. `localStorage` pode ser editado pelo próprio usuário; não contém autenticação ou segredo. |
+| Contato para WhatsApp | **Risco identificado** | `src/sections/Contact.jsx:41-63` inclui todos os campos em query string e abre `wa.me`. URL pode ficar em histórico/telemetria de terceiros e conter texto livre. Não existe aviso junto ao formulário no código consultado. |
+| Abertura de nova aba | **Melhoria recomendada** | `window.open(whatsappUrl, "_blank")` não fornece feature `noopener`; links de contato usam `rel="noreferrer"`. Rever isolamento e experiência sem bloquear o uso. |
+| Proteção contra conteúdo malicioso | **Não verificável no app** | Sem pipelines de upload/renderização do produto. |
+| Criptografia de credenciais OAuth | **Não verificável** | OAuth e token storage não estão no checkout. |
+
+## Dependências de produção
+
+Comando executado: `npm audit --omit=dev`. Ele não atualiza dependências. Resultado em 22/10/2026: **6 vulnerabilidades reportadas** — 1 crítica, 4 altas e 1 moderada.
+
+| Pacote/versão instalada | Severidade do advisory | Observação |
+|---|---:|---|
+| `next@16.2.9` | Crítica | Vários advisories e cenários distintos, incluindo condições em App Router, Server Actions, SSRF, cache, imagem e execução em servidor Windows. O relatório do npm lista faixa afetada até versões posteriores; não foi testada exploração nem determinado quais endpoints são alcançáveis no deploy. |
+| `nanoid@3.3.15` | Alta | Dependência transitiva via PostCSS. Advisory descreve casos de loop/DoS com tamanho inválido/zero. |
+| `postcss@8.4.31` e `8.5.15` | Alta | Advisories reportados; versões aparecem em Next/Tailwind transitivamente. |
+| `sharp@0.34.5` | Alta | Advisories de dependências nativas/libvips. |
+| `source-map-js@1.2.1` | Alta | Advisory de DoS via offsets de sourcemap. |
+| `baseline-browser-mapping@2.10.40` | Moderada | Advisory de encerramento de processo em input inválido. |
+
+**Prioridade:** tratar a dependência Next como bloqueio de triagem para qualquer deploy público; confirmar versões corrigidas atuais, alcance real e testes de regressão antes de aplicar atualização. A atualização não foi autorizada nem realizada nesta auditoria.
+
+## Riscos classificados
+
+1. **Crítico/alto até triagem — dependências web:** advisory crítico para Next.js e outros advisories de produção. Impacto pode variar por feature exposta; probabilidade/explorabilidade não calculada. Corrigir em fluxo separado e validar deploy.
+2. **Alto para lançamento — segurança do CLIPES desconhecida:** sem fonte/build, não se pode validar armazenamento, upload, permissões, autenticação, segredos, criptografia, atualização ou cadeia de dependências do produto. Não é uma vulnerabilidade confirmada; é bloqueio de auditoria.
+3. **Médio — dados em URL de WhatsApp:** query string contém briefing completo. Minimizar campos, explicar o encaminhamento, orientar a não informar dado sensível e rever transporte da mensagem.
+4. **Médio — identidade e canal de privacidade pendentes:** natureza jurídica, documento fiscal com comprimento padrão, endereço e funcionamento do e-mail publicado ainda precisam ser confirmados.
+
+Nenhuma operação destrutiva, atualização, migração, publicação ou teste com conta/dado real foi feita.

@@ -27,7 +27,7 @@ export const translations = {
         },
         {
           title: "Acolhimento",
-          text: "Acolhemos empresas de todos os tamanhos, porque acreditamos que todos podem crescer.",
+          text: "Acolhemos empresas de todos os tamanhos porque acreditamos que todas podem crescer.",
         },
       ],
       items: [
@@ -67,7 +67,7 @@ export const translations = {
       eyebrow: "Portfólio",
       title: "Projetos que transformam ideias em experiências digitais.",
       subtitle: "Conheça alguns dos projetos que desenvolvemos e descubra o que podemos criar para o seu negócio.",
-      emptyState: "Estamos preparando esta seleção de projetos. Enquanto isso, conte à Axis o que você gostaria de criar.",
+      emptyState: "Estamos preparando esta seleção de projetos. Enquanto isso, conte à AXIS o que você gostaria de criar.",
       ctaTitle: "Seu próximo projeto pode estar aqui.",
       ctaText: "Agora que você conhece um pouco do nosso trabalho, que tal fazer parte dessa história? Vamos transformar sua ideia em um projeto extraordinário.",
       cta: "Vamos conversar",
@@ -88,7 +88,7 @@ export const translations = {
         },
         {
           title: "Aplicativos",
-          text: "Apps com experiência moderna, visual profissional e foco em Android e iOS.",
+          text: "Aplicativos sob medida, com visual profissional e plataformas definidas conforme o escopo de cada projeto.",
         },
         {
           title: "Inteligência Artificial",
@@ -99,20 +99,20 @@ export const translations = {
     contact: {
       eyebrow: "Contato",
       title: "Pronto para criar algo marcante?",
-      text: "Conte sua ideia e vamos transformar o conceito em uma experiência digital premium.",
+      text: "Conte sua ideia para conversarmos sobre uma solução digital para o seu projeto.",
       whatsapp: "Falar no WhatsApp",
       badges: [
-        ["Resposta rápida", "Até 24h úteis"],
+        ["Contato direto", "Pelo WhatsApp ou e-mail"],
         ["Visual premium", "Design de alto nível"],
-        ["Projeto seguro", "Código escalável"],
+        ["Planejamento técnico", "Escopo definido em proposta"],
       ],
-      formTitle: "Envie um briefing rápido",
-      formText: "Preencha os detalhes iniciais e enviaremos tudo direto para o WhatsApp da AXIS.",
+      formTitle: "Conte sobre o seu projeto",
+      formText: "Preencha os detalhes iniciais e revise a mensagem no WhatsApp antes de enviá-la.",
       namePlaceholder: "Seu nome",
       projectPlaceholder: "Tipo de projeto",
       budgetPlaceholder: "Orçamento estimado",
       messagePlaceholder: "Fale rapidamente sobre sua ideia...",
-      submit: "Enviar briefing pelo WhatsApp",
+      submit: "Revisar no WhatsApp",
       notInformed: "Não informado",
       briefingIntro: "Olá, vim pelo site da AXIS e quero iniciar um projeto.",
       fields: {
@@ -122,13 +122,13 @@ export const translations = {
         idea: "Ideia",
       },
       projects: ["Landing Page", "Sistema Web", "Aplicativo", "Inteligência Artificial", "Identidade Digital"],
-      budgets: ["Até R$ 1.000", "R$ 1.000 a R$ 3.000", "R$ 3.000 a R$ 7.000", "Acima de R$ 7.000"],
-      socials: ["Projetos e bastidores", "Atendimento direto", "contato@axis.dev", "Conexão profissional"],
+      budgets: ["Até R$ 1.000", "Acima de R$ 1.000 até R$ 3.000", "Acima de R$ 3.000 até R$ 7.000", "Acima de R$ 7.000"],
+      socials: ["Projetos e bastidores", "Atendimento direto", "engineeraxisltda@gmail.com", "Conexão profissional"],
     },
     footer: {
       rights: "Todos os direitos reservados.",
-      privacy: "Política de privacidade",
-      terms: "Termos de uso",
+      privacy: "Privacidade no site",
+      terms: "Termos do site",
     },
   },
   en: {
@@ -159,7 +159,7 @@ export const translations = {
         },
         {
           title: "Welcoming",
-          text: "We welcome businesses of every size because we believe everyone can grow.",
+          text: "We welcome businesses of every size because we believe every business can grow.",
         },
       ],
       items: [
@@ -220,7 +220,7 @@ export const translations = {
         },
         {
           title: "Apps",
-          text: "Apps with a modern experience, professional visuals, and focus on Android and iOS.",
+          text: "Custom apps with professional visuals and platforms selected for each project’s agreed scope.",
         },
         {
           title: "Artificial Intelligence",
@@ -231,20 +231,20 @@ export const translations = {
     contact: {
       eyebrow: "Contact",
       title: "Ready to create something remarkable?",
-      text: "Tell us your idea and we will turn the concept into a premium digital experience.",
+      text: "Tell us your idea so we can discuss a digital solution for your project.",
       whatsapp: "Chat on WhatsApp",
       badges: [
-        ["Fast response", "Within 24 business hours"],
+        ["Direct contact", "Through WhatsApp or email"],
         ["Premium visuals", "High-level design"],
-        ["Secure project", "Scalable code"],
+        ["Technical planning", "Scope defined in the proposal"],
       ],
-      formTitle: "Send a quick brief",
-      formText: "Fill in the initial details and we will send everything directly to AXIS on WhatsApp.",
+      formTitle: "Tell us about your project",
+      formText: "Fill in the initial details and review the message on WhatsApp before sending it.",
       namePlaceholder: "Your name",
       projectPlaceholder: "Project type",
       budgetPlaceholder: "Estimated budget",
       messagePlaceholder: "Briefly describe your idea...",
-      submit: "Send brief via WhatsApp",
+      submit: "Review on WhatsApp",
       notInformed: "Not provided",
       briefingIntro: "Hello, I came from the AXIS website and want to start a project.",
       fields: {
@@ -254,13 +254,13 @@ export const translations = {
         idea: "Idea",
       },
       projects: ["Landing Page", "Web System", "App", "Artificial Intelligence", "Digital Identity"],
-      budgets: ["Up to R$ 1,000", "R$ 1,000 to R$ 3,000", "R$ 3,000 to R$ 7,000", "Above R$ 7,000"],
-      socials: ["Projects and behind the scenes", "Direct support", "contact@axis.dev", "Professional connection"],
+      budgets: ["Up to R$ 1,000", "Over R$ 1,000 up to R$ 3,000", "Over R$ 3,000 up to R$ 7,000", "Over R$ 7,000"],
+      socials: ["Projects and behind the scenes", "Direct contact", "engineeraxisltda@gmail.com", "Professional connection"],
     },
     footer: {
       rights: "All rights reserved.",
-      privacy: "Privacy policy",
-      terms: "Terms of use",
+      privacy: "Website privacy",
+      terms: "Website terms",
     },
   },
 };

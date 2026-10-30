@@ -1,0 +1,97 @@
+# Mapa de dados — escopo verificável
+
+**Endereço parcial e prazos informados — 28/10/2026:** Rua Graça Aranha, ainda sem número, bairro, cidade/UF e CEP. Logs técnicos do aplicativo: retenção prevista de 1 dia e exclusão automática; isso não define o prazo de logs do site. Médias de hardware recebidas pela AXIS: 2 dias para verificar anomalias e consumo excessivo, seguidos de exclusão. Esses prazos substituem as pendências equivalentes dos registros anteriores, mas implementação, início da contagem, gatilhos e cópias ainda precisam de verificação. Retenção de cadastro/assinatura e backups continua pendente.
+
+**Alcance da remoção local confirmado — 25/10/2026:** resposta pela opção 1: desinstalar removerá os dados locais sob controle do aplicativo, incluindo projetos e histórico; excluir apenas o cadastro não fará essa limpeza. Continuam previstas as exclusões manuais e a limpeza após todas as postagens. Remoção efetiva precisa de teste; não se presumiu exclusão de arquivos externos/exportações/backups nem cancelamento de assinatura ao desinstalar. Esse esclarecimento resolve a ambiguidade de “excluir o app” nos registros anteriores abaixo.
+
+**Região, exclusão imediata e cobranças — 25/10/2026:** servidores previstos em São Paulo, Brasil, com fornecedor/configuração ainda pendentes. Excluir cadastro pelo app terá efeito imediato no cadastro ativo, encerrando assinatura e novas cobranças. A regra comercial de ausência de reembolso automático das mensalidades já pagas preserva arrependimento/restituições legais quando aplicáveis (CDC arts. 49 e 51, II: https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm). Não foi prometida exclusão imediata de backups/registros de retenção legal, cujos prazos continuam pendentes, nem remoção de projetos/histórico locais. Essa confirmação substitui as pendências equivalentes anteriores; fluxos precisam de teste e revisão jurídica.
+
+**Cadastro/assinatura em servidores e exclusão pelo app — 25/10/2026:** o responsável confirmou armazenamento do e-mail e dos dados/situação da assinatura nos servidores do serviço. O usuário poderá excluir o cadastro AXIS pelo aplicativo, sem apagar a conta Google. Provedor/região, campos, acesso, proteção, retenção/exclusão, backups, prazo de conclusão e efeitos sobre assinatura/cobranças e arquivos/histórico locais permanecem pendentes. Cancelar plano pelo site e excluir cadastro pelo app são fluxos distintos cuja relação precisa ser definida. Esta confirmação substitui as pendências equivalentes anteriores, sem afirmar implementação ou exclusão integral testada.
+
+**Destinatário e novo aceite confirmados — 25/10/2026:** avisos por e-mail irão ao endereço da conta Google usada para entrar; mudanças importantes nos Termos exigirão novo aceite antes de continuar o uso. O e-mail passa a ter finalidade confirmada de comunicação; demais dados recebidos do Google, localização/retenção desse cadastro e registros de aceite/entrega permanecem pendentes de definição ou verificação. Isso substitui as pendências equivalentes dos relatos anteriores abaixo. Não houve implementação dos fluxos de acesso, envio ou aceite no aplicativo.
+
+**Médias mensais e relatório pendente — 25/10/2026:** Envio previsto apenas das médias mensais de uso de RAM, CPU e GPU, sem picos ou medições individuais. Ao desativar o compartilhamento, o relatório pendente será apagado e não enviado. Essa regra não define exclusão de dados já recebidos pela AXIS, cuja retenção e exclusão continuam pendentes. Campos/unidades e implementação ainda precisam de verificação. Essa confirmação substitui as pendências equivalentes dos registros anteriores.
+
+## Métricas e frequência atuais — 25/10/2026
+
+O envio previsto limita-se ao uso de RAM, CPU e GPU, mensalmente no dia 1º, com compartilhamento habilitado pelo usuário. O relatório cobrirá o mês anterior; se o envio no dia 1º não for possível, será tentado na próxima abertura em que houver condições, respeitada a preferência vigente. Agregação, horário/fuso e tratamento de vários meses pendentes continuam não definidos. Retenção, exclusão e ausência de identificadores continuam sujeitas a definição/verificação. Essa confirmação substitui as pendências equivalentes de componentes e frequência nos registros anteriores abaixo.
+
+## Escopo atual de estatísticas compartilhadas — 25/10/2026
+
+Apenas uso de hardware, sem identificação de origem no conteúdo enviado, segundo a definição mais recente do responsável. Falhas, contagens de projetos/clipes e tempos de criação não integram mais o envio previsto, substituindo as listas anteriores abaixo. Componentes, campos/granularidade, frequência, retenção/exclusão e metadados de conexão/logs do receptor ainda precisam de definição/verificação. Escolha inicial e alteração nas configurações permanecem previstas; anonimização completa não foi comprovada.
+
+## Categorias de diagnóstico confirmadas — 25/10/2026
+
+Falhas, quantidade de projetos criados, clipes concluídos, tempo de criação e uso de recursos dos componentes pelo app são as categorias previstas para diagnóstico de funcionamento/desempenho. Compartilhamento com a AXIS ou manutenção local será escolhido na primeira entrada e poderá ser alterado a qualquer momento nas configurações. Campos, granularidade, identificadores, filtragem de relatórios e retenção/exclusão de dados compartilhados ainda precisam ser definidos e testados. Prazo de logs permanece pendente; não foi confirmada anonimização. Essas definições substituem as referências anteriores abaixo a categorias e alteração da preferência ainda não definidas.
+
+## Estatísticas e conexões — informação do responsável em 25/10/2026
+
+Primeira entrada terá escolha de compartilhar estatísticas com a AXIS ou manter somente no computador. Dados, finalidade detalhada, retenção compartilhada, relatórios de erro e alteração posterior da escolha ainda não foram definidos. Isso não é analytics do site nem envio de vídeos. Desconexão de contas Google/YouTube e TikTok prevista pelo app; remoção de tokens/revogação sem validação. Logs técnicos terão exclusão automática, com prazo e gatilho pendentes; não confundir com histórico local ou logs do site.
+
+## Confirmação atual do histórico e arquivos com falha — 25/10/2026
+
+Histórico com links exclusivamente no computador do usuário, até remoção pelo aplicativo. Arquivos com falha permanecem até nova publicação ou exclusão confirmada. A exclusão de projeto exigirá aviso e confirmação antes de apagar. Esses fluxos foram informados pelo responsável e aplicados às páginas PT/EN; não foram testados. Resolvem as referências anteriores abaixo a local do histórico, retenção de falhas e confirmação ainda não definidos.
+
+## Complemento de limpeza e histórico — 25/10/2026
+
+O responsável confirmou limpeza dos arquivos locais do projeto após todas as postagens, incluindo o vídeo original baixado e as transcrições, para liberar espaço. Os vídeos nas plataformas e o histórico local com links serão preservados. Falha de postagem terá notificação e possibilidade de nova tentativa. Prazo/regras de remoção do histórico, retenção de clipes com falha e arquivos externos/exportações/backups permanecem pendentes. Esses fluxos são previstos e não foram verificados no aplicativo.
+
+## Informações complementares do responsável — 25/10/2026
+
+- Acesso ao aplicativo previsto por conta Google; dados que serão recebidos expressamente mantidos pendentes pelo responsável, assim como verificação de escopos, sessão e cadastro.
+- AXIS não terá acesso aos vídeos gerados ou publicados, segundo o responsável; confirmar fluxo de mídia, logs, telemetria e suporte no aplicativo. Plataformas de publicação continuam recebendo o conteúdo enviado a elas.
+- Exclusão do projeto restrita a arquivos locais; vídeos publicados permanecem nas plataformas. Limpeza prevista dos arquivos locais após a postagem de todos os clipes do projeto. Originais externos, histórico, falhas/cancelamentos, exportações/backups e implementação precisam de validação; conciliar com a preservação de originais e legendas descrita no relatório anterior.
+
+**Data:** 22/10/2026.
+
+**Limite:** este checkout contém o site institucional, não o código do aplicativo. A seção AXIS CLIPES abaixo resume um relatório de auditoria estática fornecido pelo solicitante em 23/10/2026; não foi verificada independentemente neste checkout nem contra o build ou a instalação distribuída.
+
+## Site institucional
+
+| Categoria | Local de armazenamento/processamento | Finalidade observável | Compartilhamento | Exclusão/retensão |
+|---|---|---|---|---|
+| Idioma e tema | `localStorage` do navegador; chaves `axis-language` e `axis-theme` (`src/context/site-preferences.jsx:7-32`). | Manter preferências entre visitas. | Não há envio dessas chaves por código encontrado. | Sem prazo de expiração implementado; pessoa pode limpar dados do site no navegador. |
+| Nome, tipo de projeto, orçamento, mensagem | Estado React em memória durante a sessão (`src/sections/Contact.jsx:29-39`). | Preparar briefing comercial. | No clique, os valores são codificados numa URL `wa.me` (`:41-63`); o navegador abre o destino WhatsApp. Envio final da mensagem ao destinatário ocorre pela ação do usuário no WhatsApp. | Não há persistência do site demonstrada. Memória da página some ao sair; retenção de URL, navegador, WhatsApp e mensagens depende desses serviços e não foi auditada. |
+| Preferências e campos preenchidos durante carregamento/erro | Logs do hosting/CDN, navegador ou serviços externos | Não há configuração de log disponível. | Não verificado. | Não definido no checkout; pedir configuração e contrato do hosting. |
+| IP e metadados de conexão ao buscar fontes | Requisição do navegador para Google Fonts via CSS (`src/index.css:2`). | Entregar fontes Inter, Montserrat e Poppins. | Google recebe requisição de rede; os campos de log/retention aplicados pelo serviço não foram testados. | Política do fornecedor; não controlada por código visível neste checkout. |
+| Dados de navegação/analytics | Não localizado código de analytics, pixels ou SDKs em `app/`/`src/`. Responsável informou em 23/10/2026 que a publicação usa somente Google Fonts e encaminhamento ao WhatsApp. | Nenhuma finalidade de analytics demonstrada. | Não encontrado no código; declaração de produção não verificada por inspeção de rede. | A confirmar em produção; hosting logs continuam pendentes. |
+| Recursos Spline | URL configurada em `src/config/spline.js`, sem import/referência de runtime encontrada; responsável informa que a publicação usa apenas Google Fonts e WhatsApp. | Sem uso demonstrado no checkout. | Requisição efetiva não confirmada. | Não verificado em produção. |
+| Links sociais e projetos | Navegação do browser a WhatsApp, Instagram, LinkedIn, GitHub e destinos de projetos (`src/sections/Contact.jsx`, `src/data/contact.js`, `src/data/portfolio.js`). | Contato/visita a terceiros. | A partir do clique, o domínio externo recebe a requisição; políticas dos respectivos sites se aplicam. | Fora do controle demonstrado pelo site Axis. |
+
+## AXIS CLIPES — achados do relatório estático fornecido
+
+| Categoria | Local/processamento indicado | Compartilhamento | Exclusão/retenção indicada | Limite |
+|---|---|---|---|---|
+| Vídeo original e URL de origem | API/worker no computador do usuário segundo confirmação do responsável; arquivos em `storage/project_ID/sources/...`; URL/metadados no PostgreSQL | URL consultada por yt-dlp e conexão aos servidores de origem | Sem expiração geral; excluir projeto remove sua pasta local | Configuração do build distribuído não verificada |
+| Áudio e transcrição | Responsável informa API, workers e Ollama no computador do usuário na versão beta; FFmpeg/Faster-Whisper no worker; chunks WAV temporários e `transcript.json` | Texto é processado pelo Ollama local segundo o responsável; o código permite configurar endpoint | Limpeza geral de chunks após sucesso e retenção de transcrição não demonstradas | Confirmação contra o build e qualquer endpoint alternativo pendentes |
+| Clipes, legendas, thumbnails e prévias | Worker/FFmpeg e arquivos no diretório local do projeto | Navegador; YouTube/TikTok quando publicação é acionada; origem externa para prévias | Limpeza após publicação se habilitada e sem pendências/referências; `CLEANUP_AFTER_PUBLISH` tem padrão `true`; preserva originais e legendas; sem prazo em dias | Configuração de runtime não confirmada; não apaga cópias externas/backups |
+| Projetos, checkpoints, configurações e histórico | PostgreSQL/filesystem locais | Interface frontend | Sem prazo automático geral; excluir projeto apaga registros relacionados e tenta remover diretório; histórico pode permanecer | Resultado efetivo e backups não testados |
+| Contas, tokens e OAuth | PostgreSQL, arquivos `.enc` e compatibilidade com JSON legado | Google OAuth/YouTube e TikTok | Desconexão remove credencial local onde aplicável; revogação TikTok pode falhar e ficar pendente; não foi encontrado fluxo remoto equivalente Google | Configuração e credenciais reais pendentes; auditoria reporta caminho legado sem cifragem |
+| Credenciais | PostgreSQL/arquivos `.enc`, com compatibilidade legada JSON | Provedores OAuth correspondentes | Sem prazo geral; desconexão remove credencial sob condições previstas; revogação TikTok malsucedida pode mantê-la para nova tentativa | Valores legados podem não estar cifrados |
+| Filas e progresso temporário | Redis/RQ | Interface por HTTP/WebSocket | Jobs concluídos 7 dias; jobs falhos 30 dias; progresso/heartbeat 24 h desde última gravação, renovado a cada atualização | Não inclui todos os checkpoints persistentes nem conteúdo de mídia |
+| Notificações, logs e backups | PostgreSQL/saída de processos/volumes ou cópias da instalação | Operação local | Sem rotina geral de expiração/rotação identificada; política de backups não identificada | Confirmar execução, cópias, acesso e descarte |
+| Preferências locais | `localStorage` do navegador | Nenhum envio demonstrado no relatório | Sem expiração programada; persistem até remoção ou limpeza local | Preferências não são o prazo de retenção dos dados de projeto |
+
+### Validades que não representam exclusão de dados
+
+- Estado/cookie OAuth: 10 minutos; não foi identificada limpeza geral dos estados expirados no banco.
+- Cache de prévia de URL: janela de reutilização de 1 hora; não garante remoção do arquivo após esse prazo.
+- URL de upload TikTok: validade local de 1 hora; não é prazo de retenção do vídeo.
+- Consulta de processamento TikTok: 168 horas por padrão, ajustável por `TIKTOK_POLL_MAX_AGE_HOURS`; não apaga dados.
+- Timeout de job de vídeo: 24 horas por padrão, ajustável por `VIDEO_JOB_TIMEOUT_SECONDS`; não é retenção.
+- Tokens OAuth: expiração conforme validade indicada pelo provedor; não há prazo único de retenção definido pelo AXIS CLIPES.
+
+## Compartilhamentos e transferências potenciais
+
+- **Confirmado no site:** navegação para WhatsApp e transmissão de pedido pré-preenchido a `wa.me` ao clicar. O texto pode conter dados pessoais ou dados livres que o usuário decida inserir.
+- **Confirmado no site:** solicitação remota de Google Fonts por CSS.
+- **Declaração do responsável (23/10/2026):** o site usa Vercel e há logs de acesso. A configuração, região, campos/acesso aos logs, retenção e transferências internacionais não foram verificados neste checkout.
+- **Relatório estático e confirmação do responsável:** API, workers e Ollama ficam no computador do usuário no beta distribuído; o código permite configurar endpoint Ollama. Também há conexões a yt-dlp/origens de vídeo, APIs YouTube/TikTok após autorização e servidores externos de avatares. A confirmação deve ser confrontada com o build; regiões e transferências internacionais dos serviços externos permanecem pendentes.
+
+## Evidências
+
+- `src/sections/Contact.jsx:29-63, 157-208` — campos e encaminhamento para WhatsApp.
+- `src/context/site-preferences.jsx:7-32` — armazenamento de idioma/tema.
+- `src/index.css:1-3` — import de Google Fonts.
+- `src/config/spline.js:1-4` — URL Spline configurada; sem import identificado no restante do checkout.
+- Para achados do aplicativo, consultar relatório estático fornecido pelo solicitante; não foram reabertos os arquivos do app neste checkout institucional.

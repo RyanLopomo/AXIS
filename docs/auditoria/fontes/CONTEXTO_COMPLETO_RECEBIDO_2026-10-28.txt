@@ -1,0 +1,473 @@
+IMPLEMENTADO: “Todos” mostra apenas publicações operacionais; “Erros” reúne falhas atuais por publicação, conta e plataforma. Filtros, totais e paginação no backend; seleção limpa ao trocar de aba; atualização automática sem recarregar a página.
+ESTADOS ISOLADOS: falhas, retry pendente, reconexão, atraso e resultado remoto incerto. Pendência manual do TikTok permanece operacional. Recuperação confirmada devolve o item a “Todos”; histórico antigo e prévia não interferem.
+TESTES: 94 backend aprovados, 1 ignorado; 9 PostgreSQL e 78 de interface aprovados. Build e lint aprovados. Sem uploads reais.
+ARQUIVOS ALTERADOS: API, classificação centralizada, consulta de espera, frontend, tipos e testes. Relação na [documentação](C:/Users/hp/OneDrive/Documentos/AxisClip-Starter/docs/PUBLICATION_CENTER.md).
+PENDÊNCIAS: carregar a nova versão da API no ambiente em execução. Política de autocura, horários e publisher preservados.
+
+  Edited 17 files+488-50View changesUndoView changes
+
+backend/app/api/publications.pybackend/app/api/publications.py+44-11
+backend/app/services/publication_history.pybackend/app/services/publication_history.py+1-13
+backend/app/services/publication_state.pybackend/app/services/publication_state.py+61-0
+Show 14 more files
+
+
+
+
+5:07 PM
+
+
+
+
+
+
+
+# Prompt para coletar informações do aplicativo AXIS CLIPES Copie o texto abaix…
+
+
+
+
+Worked for 12m 28s
+
+
+
+Relatório técnico do AXIS CLIPES para atualização do site da Engineraxis
+Data da coleta: 28/10/2026.
+Conclusão principal: o repositório contém uma aplicação local de edição e publicação de vídeos, com integrações YouTube/TikTok. As regras comerciais, o cadastro de clientes, a cobrança, o instalador Windows e a telemetria mensal descritos no pedido não estão implementados nos componentes examinados.
+A limpeza integral dos projetos e a retenção de logs por um dia também não correspondem ao comportamento encontrado. Essas promessas precisam permanecer como intenção ou pendência na apresentação e nos documentos do site.
+Esta coleta não atesta conformidade jurídica, aprovação pelas plataformas ou segurança integral.
+1. Resumo e escopo
+Identificação
+Item	Resultado
+Repositório	C:\Users\hp\OneDrive\Documentos\AxisClip-Starter
+Commit HEAD	f7b74138cffb3d5ab60e68f58e0d2daa8ba8da19
+Último commit	f7b7413, de 20/10/2026, mensagem “multi contas adicionado”
+Versão declarada do frontend	0.0.0; pacote marcado como privado
+Alterações locais	129 entradas modificadas e 62 não rastreadas, incluindo código, documentação, assets e arquivos gerados
+Instruções locais	Não foram encontrados AGENTS.md no repositório ou nos ancestrais consultados
+Natureza da análise	Código do diretório de trabalho, incluindo alterações ainda não commitadas
+Modificações nesta coleta	Nenhuma correção, arquivo, dependência ou configuração criada ou alterada
+
+
+O commit, sozinho, não representa o estado auditado. Há funcionalidades relevantes em arquivos modificados ou ainda não rastreados.
+Foram examinados frontend, API, modelos, processamento, filas, publicação, OAuth, armazenamento de credenciais, limpeza, notificações, configurações, Dockerfiles, Compose, manifests, lockfile, testes existentes e documentação técnica.
+Não foram abertos vídeos, bancos reais, backups, arquivos de tokens, chaves ou valores de .env. Não foram consultados consoles Google/TikTok, hospedagem do site ou serviços comerciais externos.
+Uso dos status
+- identificado no código: existe implementação examinada; não significa execução bem-sucedida em produção.
+- default do código: valor usado na ausência de configuração; não comprova configuração efetiva.
+- configuração efetiva verificada: restrito, nesta coleta, às versões/metadados dos componentes instalados consultados por comandos de leitura.
+- testado em ambiente isolado: usado para validações anteriores desta conversa, discriminadas na seção 8.
+- somente declarado/documentado: consta do pedido ou de documentação, sem comprovação operacional suficiente.
+- divergente: há diferença concreta entre a regra declarada e a implementação.
+- não verificável neste escopo: depende de ambiente, outro repositório, console, fornecedor ou decisão do responsável.
+Os caminhos abaixo são relativos à raiz indicada; :n identifica a linha.
+2. Arquitetura e utilização
+Componentes locais e externos
+Componente	Implementação e localização prevista	Evidência
+Interface	React/TypeScript/Vite, acessada pelo navegador; Compose publica a porta 5173 em loopback	frontend/package.json; frontend/Dockerfile:1; docker-compose.yml:125
+API	FastAPI/Uvicorn em container; porta 8000 publicada em loopback	backend/Dockerfile:7; docker-compose.yml:33
+Banco	PostgreSQL, com projetos, vídeos, clipes, publicações, contas, operações e notificações	backend/app/models/; docker-compose.yml:2
+Fila de processamento	Redis/RQ, fila videos	backend/app/queue/redis_connectiuon.py:4
+Worker de vídeos	Processamento com FFmpeg, Faster-Whisper e seleção assistida por IA	backend/app/workers/supervisor.py:78; backend/app/pipeline/stages.py
+Publishers	Processos separados para YouTube e TikTok; publicações persistidas no PostgreSQL	docker-compose.yml:75; docker-compose.yml:99; backend/app/workers/publisher_worker.py:419
+Arquivos	Diretório /storage nos containers, vinculado a ./storage do host	docker-compose.yml:47; backend/app/api/videos.py:36
+Ollama	Serviço acessado por HTTP; pode estar no computador ou em endereço remoto configurado	backend/app/services/ollama_client.py:7
+Plataformas externas	Google/YouTube e TikTok recebem autorizações, chamadas de API e conteúdo enviado	backend/app/api/social_accounts.py:167; backend/app/services/tiktok.py:110
+Outras conexões	Origens de downloads, miniaturas, avatares e download de modelos	backend/app/api/videos.py:349; backend/app/services/preview_source.py:43; frontend/src/components/AccountSwitcher.tsx:11
+
+
+Status: arquitetura identificada no código. A execução exclusivamente no computador do usuário depende da implantação. O mesmo código pode ser executado em servidor.
+Não foi identificado um backend central da Engineraxis para cadastro, assinatura, cobrança ou recebimento das estatísticas mensais propostas.
+Instalação e Windows
+O empacotamento encontrado é composto por [docker-compose.yml (line 1)](/C:/Users/hp/OneDrive/Documentos/AxisClip-Starter/docker-compose.yml:1), [Dockerfile do backend (line 1)](/C:/Users/hp/OneDrive/Documentos/AxisClip-Starter/backend/Dockerfile:1) e [Dockerfile do frontend (line 1)](/C:/Users/hp/OneDrive/Documentos/AxisClip-Starter/frontend/Dockerfile:1).
+- Backend baseado em python:3.12-slim; instala FFmpeg, curl e compilador.
+- Frontend baseado em node:22; executa o servidor de desenvolvimento Vite.
+- PostgreSQL usa imagem de série 16; Redis, série 7.
+- Ollama não é instalado nem iniciado pelo Compose examinado.
+- Não foram encontrados instalador .msi/.exe, Inno Setup, NSIS, Electron, Tauri, atualizador ou desinstalador.
+- frontend/README.md:1 continua sendo documentação do template React/Vite, não um manual completo do produto.
+Há documentação relatando uso com Docker Desktop no Windows e inicialização do Docker no login, mas isso é somente declarado/documentado para esta auditoria. Não foi testado reinício físico do computador. Evidência: docs/RELIABILITY.md:32.
+Não foi localizada matriz de versões Windows suportadas, requisito mínimo validado de RAM/CPU/GPU ou procedimento formal de instalação. A execução nativa do backend no Windows não pode ser presumida: existem mecanismos POSIX, como sinais e grupos de processos. Evidências: backend/app/core/timeout.py:17; backend/app/workers/supervisor.py:36.
+Fluxo de utilização implementado
+1. Acessar a interface local.
+2. Criar projeto e importar arquivo ou URL.
+3. Configurar duração/quantidade dos clipes, aparência, destinos e planejamento.
+4. Revisar a prévia e confirmar o processamento.
+5. Acompanhar transcrição, seleção, renderização e publicações.
+6. Consultar falhas, reconectar contas ou executar ações explícitas de recuperação.
+O início do processamento exige configuração e planejamento válidos. Não se deve apresentar uma modalidade independente de “cortar sem configurar publicação” sem validar esse fluxo específico. Evidência: backend/app/api/videos.py:217, especialmente a validação em :228.
+Desinstalação
+Não verificável neste escopo: não há desinstalador implementado.
+O Compose utiliza diretórios vinculados, volumes persistentes e armazenamento do navegador. Portanto, parar ou remover containers não comprova remoção de vídeos, banco, credenciais, preferências ou cópias de segurança. Evidências: docker-compose.yml:47, :136; frontend/src/contexts/ThemeContext.tsx:12.
+O caminho do workspace está sob uma pasta chamada OneDrive. Isso não comprova sincronização ativa; eventual sincronização ou backup precisa ser verificado pelo responsável.
+3. Matriz de funcionalidades
+Nesta matriz, “implementado” significa identificado no código, salvo indicação diferente.
+Recurso	Implementação, configuração/default e limitações	Evidência
+Login do cliente com Google	Não identificado. OAuth das redes não constitui login do usuário no AXIS nem cadastro comercial	frontend/src/App.tsx:806; backend/app/models/
+Contas sociais	Conectar, selecionar, definir padrão, reconectar e desconectar contas YouTube/TikTok. Sem limite comercial de uma ou seis contas encontrado	backend/app/api/social_accounts.py:62, :125, :214, :239
+Projetos	Criação, consulta, configuração, associação a contas e exclusão	backend/app/api/projects.py:29, :57, :154, :176
+Importação de arquivo	Copia o arquivo para uma pasta própria da fonte; não usa o nome original como caminho final	backend/app/api/videos.py:124
+Importação por URL	Usa yt-dlp, baixa mídia e evita playlists. Compatibilidade depende da origem e do extrator	backend/app/api/videos.py:324, :349
+Extração de áudio	FFmpeg gera WAV mono de 16 kHz em segmentos; padrão de 600 segundos	backend/app/services/transcriber.py:58
+Transcrição	Faster-Whisper, modelo small, CPU e int8 por padrão; idioma inicial português	backend/app/services/transcriber.py:17, :97, :124
+Seleção de trechos	Ollama recebe transcrição; resultados passam por normalização, deduplicação e fallback heurístico. Não há comprovação de “viralização”	backend/app/services/clip_finder.py:56, :430
+Duração dos clipes	Opções de 15, 20, 30, 45 ou 60 segundos; padrão de projeto 60	backend/app/schemas/project.py:10
+Corte e formato vertical	FFmpeg; adaptação para 9:16 e estilos de edição	backend/app/services/video_cutter.py; backend/app/services/reel_adapter.py:103
+Legendas	Geração de SRT e legendas incorporadas ao vídeo, com tamanho configurável	backend/app/services/subtitle_generator.py:22, :223
+Marca d’água	Opcional e configurável, inclusive imagem própria, posição, opacidade e escala. Não há restrição por plano	backend/app/schemas/project.py:32; backend/app/services/project_configuration.py:27
+Miniaturas	Geração local e tentativa de envio ao YouTube	backend/app/services/thumbnail.py; backend/app/workers/publisher_worker.py:701
+Prévia visual	Gera imagem de fonte local ou remota; cache de imagem remota reutilizado por até uma hora	backend/app/services/preview_source.py:90; backend/app/api/projects.py:126
+Reprodução/exportação	Streaming/download dos clipes disponíveis e exportação explícita de derivação com marca d’água	backend/app/api/clips.py; backend/app/services/watermark_derivative.py:63
+Publicação YouTube	Upload, metadados, consulta de processamento, miniatura e controle de agendamento remoto quando aplicável	backend/app/youtube/uploader.py:91; backend/app/youtube/schedule_control.py:105
+TikTok Inbox	Envia o vídeo para finalização no TikTok; recebimento não equivale a publicação	backend/app/services/tiktok.py:315, :339
+TikTok Direct Post	Implementado com verificações adicionais de autorização, revisão e privacidade. Disponibilidade real depende de configuração e permissões externas	backend/app/services/tiktok.py:123, :271; backend/app/services/tiktok_config.py:71
+TikTok com marca promocional	O código bloqueia envio quando identifica marca d’água promocional ou não consegue comprovar sua ausência	backend/app/services/tiktok.py:285
+Agendamento	Planejamento por destino, fuso, reservas e confirmação; executado pelo publisher	backend/app/services/publication_scheduler.py; backend/app/services/schedule_contract.py
+Autocura	Desativada por padrão; exige política e prévia revisadas. Recupera atrasos elegíveis respeitando capacidade e prazo	backend/app/services/schedule_recovery.py:16; backend/app/api/schedule_recovery.py:35
+Central de Publicações	Separação por estado atual, conta e plataforma; erros isolados, paginação e contadores no backend	backend/app/services/publication_state.py:19; backend/app/api/publications.py:871
+Histórico e retry	Histórico persistente de falhas/operações; retry explícito com validação do destino e da mídia	backend/app/services/publication_history.py:13; backend/app/services/publication_retry.py:43
+Notificações	Internas, som e notificações do navegador conforme preferência/permissão. Sem envio de e-mail encontrado	backend/app/services/notifications.py:13; frontend/src/App.tsx:649
+Configurações	Publicação, contas, saúde operacional, notificações, temas e aparência do projeto	frontend/src/App.tsx:535
+Planos, cobrança e exclusão de cadastro	Não identificados no aplicativo examinado	Inventário de rotas e modelos
+Atualização automática e suporte por e-mail	Não identificados como funções implementadas	Manifests, rotas e fontes examinados
+
+
+Os temas Dark/Bright estão implementados; isso não constitui mecanismo de acesso ou assinatura. Evidência: frontend/src/contexts/ThemeContext.tsx.
+4. Mapa de dados
+Os destinos abaixo descrevem o código. A localização geográfica dos servidores externos e a configuração efetiva de implantação não foram verificadas.
+Categoria	Origem e finalidade implementada	Destino, persistência e acesso	Retenção/exclusão e evidência
+E-mail Google do cliente	Não foi encontrado pedido de e-mail/OpenID para cadastro do cliente	Nenhum cadastro comercial correspondente identificado	Não verificável neste escopo para eventual serviço do site
+Perfil/canal YouTube	Resposta channels.list: ID, título e miniatura do canal	PostgreSQL; nome/avatar/ID são apresentados à interface	Mantidos ao desconectar. backend/app/api/social_accounts.py:180
+Perfil TikTok	open_id, display_name, avatar_url	PostgreSQL e interface; dados vêm do TikTok	Mantidos ao desconectar. backend/app/api/social_accounts.py:195
+Sessão de login AXIS	Não identificada	Não há modelo de sessão de cliente	OAuth temporário não substitui essa sessão
+Estado OAuth	Aleatório, hash e vínculo com cookie para concluir autorização	Banco, payload cifrado; cookie HTTP-only	Validade de 10 minutos; consumo no callback. Expiração não comprova expurgo automático. backend/app/api/social_accounts.py:82, :118, :152
+Cadastro, assinatura e faturamento	Não identificados	Sem tabelas ou integração comercial encontrada	Regras propostas dependem de implementação externa
+Vídeos originais	Arquivo enviado pelo navegador ou baixado de URL	/storage/project_<id>/sources/<uuid>/; API e workers têm acesso	Preservados pela limpeza pós-publicação; removidos pela exclusão da pasta do projeto. backend/app/api/videos.py:142; backend/app/youtube/cleanup.py:50
+URL de origem	Informada pelo usuário	Campo Video.source_url, retornado pela API	Sem prazo automático encontrado. backend/app/api/videos.py:65, :327
+Áudio temporário	Extraído do vídeo para transcrição	Diretório *.whisper_chunks, próximo à transcrição	Reutilizado; sem limpeza geral após sucesso encontrada. backend/app/services/transcriber.py:28, :58
+Transcrição	Resultado do Faster-Whisper, com texto e tempos	transcript.json; enviado em prompts ao endpoint Ollama	Sem TTL; pode ser removido por reinício/exclusão do projeto. backend/app/pipeline/stages.py:92; backend/app/api/videos.py:267
+Clipes e renders	Gerados pelo pipeline	Arquivos no projeto, caminhos e estados no PostgreSQL	Limpeza condicionada aos destinos; alguns intermediários podem permanecer. backend/app/youtube/cleanup.py:12
+Legendas	Segmentos transcritos convertidos em SRT	Filesystem e vídeo renderizado	SRT é expressamente preservado pela limpeza pós-publicação. backend/app/youtube/cleanup.py:32
+Marca d’água e prévias	Imagem do usuário, imagem padrão e frames de vídeo	Pasta visual do projeto; imagens temporárias em operações específicas	Exclusão do projeto remove sua pasta; não há retenção geral documentada por prazo. backend/app/api/projects.py:86; backend/app/services/preview_source.py:100
+Prompts/resultados de IA	Transcrição, legendas e contexto de planejamento	HTTP para Ollama; planos/cache no filesystem e dados de sugestão no banco	Retenção no servidor Ollama não verificada. backend/app/services/ollama_client.py:15; backend/app/pipeline/stages.py:205; backend/app/models/video.py:147
+Agendamentos	Confirmação do usuário e eventual autocura autorizada	PostgreSQL, por publicação/conta/plataforma	Sem TTL geral; registra original, recuperação, motivo e contador. backend/app/models/publication.py:39, :69
+Histórico de operações	Falhas, recuperação, deduplicação e ações	publication_operations, incluindo IDs, horários, motivos e hashes	Sem expurgo geral encontrado. backend/app/models/publication.py:80; backend/app/services/publication_history.py:13
+Identificadores e links remotos	Respostas YouTube/TikTok	Publicações e notificações no PostgreSQL; exibidos na interface	Exclusão lógica de publicação preserva IDs/URLs. backend/app/services/publication_batch.py:254
+Tokens OAuth	Autorização e renovação pelas plataformas	Arquivos cifrados no fluxo atual; caminhos legados em JSON também existem	Remoção local ao desconectar, com exceção de revogação TikTok pendente. backend/app/services/social_credentials.py:48; backend/app/api/social_accounts.py:214
+URL assinada de upload TikTok	Resposta da inicialização do upload	upload_state cifrado no banco; não é serializado para o frontend	Contém validade operacional; não equivale a política geral de exclusão. backend/app/services/tiktok.py:329; backend/app/models/publication.py:54
+Preferências do navegador	Tema, conta selecionada, layout e notificações	localStorage	Sem limpeza central encontrada. frontend/src/contexts/SocialAccountContext.tsx:9; frontend/src/App.tsx:649
+Métricas operacionais	Contagens, tentativas, progresso e tempo médio de publicação	API local, PostgreSQL/Redis e interface	Não são o relatório mensal de CPU/RAM/GPU proposto. backend/app/main.py:132, :156
+Logs	Eventos, identificadores, caminhos, duração, erros e mensagens de ferramentas	stdout/stderr e infraestrutura de execução	Sem exclusão automática por um dia encontrada. backend/app/utils/pipeline_logger.py:5
+Backups	Não foi encontrado fluxo de backup gerenciado pelo produto	Possíveis cópias de volumes, host ou sincronização externa não examinadas	Não verificável neste escopo
+
+
+Limpeza: o que efetivamente acontece
+A limpeza pós-publicação é identificada no código, mas é divergente da promessa de remover todos os arquivos locais do projeto.
+backend/app/youtube/cleanup.py:12:
+- É chamada após conclusão da publicação, em backend/app/workers/publisher_worker.py:727.
+- Pode ser desativada por CLEANUP_AFTER_PUBLISH.
+- Aguarda aplicação do planejamento de destinos quando necessário.
+- Preserva arquivos enquanto existirem destinos em estados como falha, atraso, retry, autenticação necessária, upload, processamento, finalização manual ou revisão.
+- Tenta remover miniatura, render final e determinados derivados.
+- Preserva originais e referências compartilhadas.
+- Preserva expressamente legendas SRT.
+- Não implementa limpeza integral de transcrições, áudio segmentado, cache de seleção, imagens e todos os intermediários.
+- Não foi encontrada uma fila de tentativas dedicada a falhas de exclusão física.
+Há uma rotina manual que reaplica a limpeza a publicações concluídas: backend/app/workers/maintenance.py:19. Não foi identificada sua execução periódica no Compose.
+Exclusão e reinício não são equivalentes
+Operação	Efeito encontrado
+Excluir publicação	Exclusão lógica com deleted_at; preserva URLs/IDs e arquivos compartilhados. Pode cancelar agendamento privado remoto existente no YouTube, sem excluir vídeo já publicado. backend/app/services/publication_batch.py:243
+Excluir projeto	Exclui o projeto no banco e remove sua pasta, com verificação de contenção em /storage. backend/app/api/projects.py:154
+Histórico após excluir projeto	Publicações podem ser removidas por cascata, mas operações e notificações não têm o mesmo vínculo de exclusão; podem conservar referências. backend/app/models/publication.py:80; backend/app/models/notification.py:17
+Reiniciar processamento	Remove a pasta clips do projeto e a transcrição associada antes de reiniciar. A pasta é compartilhada no nível do projeto, não exclusiva do vídeo. backend/app/api/videos.py:258
+
+
+O último ponto exige atenção: reiniciar um vídeo pode atingir arquivos de outros vídeos do mesmo projeto. O alcance é demonstrado pelo caminho usado no código; não foi executado teste destrutivo.
+TTLs encontrados não comprovam a retenção declarada
+Objeto	Prazo/default identificado	Significado
+Resultado de job RQ	7 dias	Retenção do resultado do job
+Falha de job RQ	30 dias	Retenção da falha do job
+Progresso e heartbeat de vídeo	86.400 segundos	Cache/sinal de atividade no Redis
+Heartbeat de publisher	120 segundos	Sinal de saúde
+Estado OAuth atual	10 minutos de validade	Prazo para concluir autorização
+Imagem remota de prévia	Reutilização por uma hora	Validade de cache, não expurgo integral
+
+
+Evidências: backend/app/services/video_jobs.py:30; backend/app/services/video_progress.py:232; backend/app/workers/heartbeat.py:35; backend/app/api/social_accounts.py:118; backend/app/services/preview_source.py:103.
+5. Configurações
+Todos os valores desta seção são defaults do código ou parâmetros públicos. Valores efetivos de .env e arquivos de configuração não foram lidos.
+Processamento, armazenamento e endpoints
+Nome	Tipo/default público e efeito	Local de leitura
+Armazenamento de mídia	Caminho fixo /storage, vinculado a ./storage no Compose	backend/app/api/videos.py:36; docker-compose.yml:47
+SOCIAL_CREDENTIAL_DIR	Caminho; storage/social, relativo ao diretório do processo	backend/app/services/social_credentials.py:12
+SOCIAL_CREDENTIAL_KEY	Segredo opcional, sem valor público; se ausente, gera/lê .key na pasta de credenciais	backend/app/services/social_credentials.py:17
+PUBLICATION_SETTINGS_FILE	Caminho; /storage/publication_settings.json	backend/app/youtube/config.py:8
+OLLAMA_URL	URL; http://localhost:11434/api/generate; fallback para host.docker.internal:11434/api/generate	backend/app/services/ollama_client.py:7
+Modelo Ollama	Constante qwen3:8b, não variável de ambiente nesse cliente	backend/app/services/ollama_client.py:11
+OLLAMA_TIMEOUT	Inteiro; 180 segundos. A seleção de clipes também possui limite próprio de 180 segundos	backend/app/services/ollama_client.py:12; backend/app/services/clip_finder.py:13
+METADATA_OLLAMA_TIMEOUT	Inteiro; 20 segundos para metadados de publicação	backend/app/youtube/metadata.py:11
+WHISPER_MODEL	Texto; small	backend/app/services/transcriber.py:17
+WHISPER_DEVICE, WHISPER_COMPUTE_TYPE	Textos; cpu, int8	backend/app/services/transcriber.py:18
+WHISPER_CPU_THREADS, WHISPER_NUM_WORKERS, WHISPER_BEAM_SIZE	Inteiros; 2, 1 e 1	backend/app/services/transcriber.py:20
+WHISPER_CHUNK_SECONDS, WHISPER_HEARTBEAT_SECONDS	Inteiros; 600 e 30 segundos	backend/app/services/transcriber.py:23; backend/app/pipeline/stages.py:148
+MAX_CLIPS, MAX_FALLBACK_CLIPS	Inteiros; 1.000 e, por padrão, o mesmo limite	backend/app/services/clip_finder.py:14
+CLIP_ESTIMATE_USABLE_RATIO	Número; 0,5 para estimativa	backend/app/services/video_preparation.py:25
+VIDEO_JOB_TIMEOUT_SECONDS	Inteiro; 86.400 segundos, sobrescrevendo o timeout padrão da fila nesse enfileiramento	backend/app/services/video_jobs.py:30
+VIDEO_JOB_STALE_SECONDS, VIDEO_MAX_ATTEMPTS	Inteiros; 300 segundos e 3 tentativas	backend/app/services/video_recovery.py:29, :86
+PIPELINE_<ETAPA>_TIMEOUT	Segundos: transcrição 3.600; Ollama 600; FFmpeg/Reel/legendas incorporadas 330; miniatura 90; SRT 60	backend/app/services/processing_runtime.py:12
+FRONTEND_BASE_URL, VITE_API_BASE_URL	URLs; http://localhost:5173 e http://localhost:8000	backend/app/youtube/config.py:160; frontend/src/api/client.ts:2
+VITE_POLL_INTERVAL	Inteiro; 8.000 milissegundos	frontend/src/App.tsx:44
+AXIS_API_HOSTS	Lista separada por vírgulas; vazia, além dos hosts locais e hosts derivados dos redirects	backend/app/services/local_api_security.py:18
+CT_URI	Texto opcional; foi encontrado getter, mas não utilização para envio	backend/app/youtube/config.py:167
+
+
+O default relativo de credenciais merece distinção: com WORKDIR /app, storage/social corresponde a /app/storage/social, não automaticamente a /storage/social. A configuração efetiva pode alterar isso.
+Publicação e recuperação
+Nome	Tipo/default público	Evidência
+YOUTUBE_AUTO_PUBLISH	Booleano; false	backend/app/youtube/config.py:27
+YOUTUBE_PRIVACY_STATUS	Texto; public; valor inválido resulta em private	backend/app/youtube/config.py:31
+MAX_UPLOADS_PER_DAY	Inteiro; 5, não 20	backend/app/youtube/config.py:40
+PUBLISH_SCHEDULE	Lista; 09:00,12:00,18:00	backend/app/youtube/config.py:44
+PUBLISH_TIMEZONE	Fuso; America/Sao_Paulo	backend/app/youtube/config.py:51
+MANUAL_UPLOAD_COUNTS_TOWARD_DAILY_LIMIT	Booleano; true	backend/app/youtube/config.py:55
+PUBLISHER_MAX_ATTEMPTS, PUBLISHER_RETRY_DELAYS	5 tentativas; atrasos de 5, 15, 30 e 60 minutos, com tratamento adicional no worker	backend/app/youtube/config.py:99
+PUBLISHER_QUOTA_RETRY_MINUTES	Inteiro; 360 minutos	backend/app/youtube/config.py:108
+PUBLISHER_UPLOAD_TIMEOUT, PUBLISHER_PROCESSING_TIMEOUT	60 e 180 minutos	backend/app/youtube/config.py:112
+PUBLISHER_POLL_INTERVAL, RECOVERY_INTERVAL, WORKER_STALE_TIMEOUT	60, 300 e 300 segundos	backend/app/youtube/config.py:126
+YOUTUBE_PROCESSING_POLL_INTERVAL	60 segundos	backend/app/youtube/config.py:138
+PUBLISHER_MAX_CONCURRENT	Getter com default 1; não comprova concorrência efetivamente utilizada	backend/app/youtube/config.py:142
+PUBLISHER_PLATFORMS	Lista; código aceita YOUTUBE,TIKTOK; Compose separa os publishers	backend/app/workers/publisher_worker.py:429; docker-compose.yml:90
+PUBLISHER_UPLOADS_PAUSED, WORKER_RUN_ONCE	Booleanos; false	backend/app/workers/publisher_worker.py:437; backend/app/youtube/config.py:150
+PUBLISHER_OPERATION_TIMEOUT_SECONDS	1.800 segundos	backend/app/workers/publisher_worker.py:424
+PUBLICATION_MISSED_POLICY	hold; existe opção spaced	backend/app/services/missed_publications.py:10
+PUBLICATION_SCHEDULE_GRACE_SECONDS	120 segundos; caminho global impõe mínimo de 60	backend/app/services/missed_publications.py:9
+PUBLICATION_RECOVERY_SPACING_SECONDS	300 segundos, no caminho spaced	backend/app/services/missed_publications.py:56
+CLEANUP_AFTER_PUBLISH	Booleano; true	backend/app/youtube/config.py:146
+Sincronização YouTube	TTL 120 s; lote 50; cooldown de erro determinístico 900 s	backend/app/api/publications.py:108
+
+
+As preferências persistidas no arquivo de publicação têm precedência sobre determinadas variáveis de ambiente. Evidência: backend/app/youtube/config.py:18.
+Política de autocura por conta: desativada; fuso São Paulo; janela 09:00–21:00; todos os dias; intervalo mínimo de 60 minutos; tolerância de 120 segundos; prazo de 168 horas; até três recuperações. O limite diário inicial reutiliza a preferência global. Evidência: backend/app/services/schedule_recovery.py:16, :40.
+Essa política pode substituir a grade global para a conta. Não é uma implementação de planos comerciais.
+OAuth e TikTok
+Nome	Default/efeito público	Evidência
+YOUTUBE_REDIRECT_URI	http://localhost:8000/youtube/callback	backend/app/youtube/config.py:163
+Credencial Google	Arquivo de cliente OAuth referenciado pelo código; conteúdo não examinado	backend/app/youtube/auth.py:21
+TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET	Segredos necessários; valores não examinados	backend/app/api/social_accounts.py:107
+TIKTOK_LOGIN_KIT, TIKTOK_OAUTH_PLATFORM	Seleção Web/Desktop; ausência resulta em web; conflito é rejeitado	backend/app/services/tiktok_config.py:6
+TIKTOK_REDIRECT_URI	Sem endereço funcional por default; requer configuração	backend/app/services/tiktok_config.py:34
+TIKTOK_DESKTOP_REGISTERED	Sem confirmação por default; Desktop exige indicação explícita	backend/app/services/tiktok_config.py:49
+TIKTOK_SCOPES	user.info.basic,video.upload	backend/app/services/tiktok_config.py:25
+TIKTOK_PUBLISHING_ENABLED	Booleano; false	backend/app/services/tiktok_config.py:21
+TIKTOK_UPLOAD_SOURCE	FILE_UPLOAD	backend/app/services/tiktok_config.py:57
+TIKTOK_MEDIA_LOCATION	Vazio; FILE_UPLOAD exige declaração user_device	backend/app/services/tiktok_config.py:60
+TIKTOK_MEDIA_BASE_URL	Sem URL funcional por default; usado em PULL_FROM_URL	backend/app/services/tiktok_config.py:63
+TIKTOK_DIRECT_POST_ELIGIBLE, TIKTOK_APP_AUDITED	Exigem indicação explícita; não são prova de aprovação oficial	backend/app/services/tiktok.py:139, :161
+TIKTOK_STORAGE_ROOT	/storage	backend/app/services/tiktok_media.py:14
+TIKTOK_POLL_MAX_AGE_HOURS	168 horas; suspende consultas automáticas antigas, não apaga o histórico	backend/app/services/tiktok.py:365
+TIKTOK_STATUS/CREATOR/INIT/PROFILE_PER_MINUTE	Guardas locais de 30/20/6/20 por conta e categoria; não representam comprovação de cotas oficiais	backend/app/services/tiktok_limits.py:6
+
+
+Configurações ausentes
+Não foram encontradas configurações implementadas para plano gratuito/pago, faturamento, prazo de inadimplência, exclusão do cadastro, aceite versionado dos Termos, envio mensal de CPU/RAM/GPU ou retenção central dessas estatísticas.
+6. Conferência das regras declaradas
+Regra declarada	Status e confronto com o aplicativo
+Produto em desenvolvimento	somente declarado/documentado; versão 0.0.0, servidor de desenvolvimento e rascunhos reforçam esse estágio, sem definir maturidade comercial. frontend/package.json; docs/tiktok/TERMOS.rascunho.md:1
+Acesso apenas do responsável	somente declarado/documentado. Há desenho local, mas não autenticação de cliente que comprove exclusividade. backend/app/services/local_api_security.py:1
+Sem download público	não verificável neste escopo. Não foi auditada a distribuição pelo site
+Windows previsto	somente declarado/documentado; há uso descrito com Docker Desktop. Não há instalador ou matriz de suporte. docs/RELIABILITY.md:32
+Instalador futuro apenas pelo site oficial e atualização automática	somente declarado/documentado. Instalador, canal assinado e atualizador não encontrados
+Uso pessoal e comercial	somente declarado/documentado. O código não define licença comercial do produto
+Gratuito com corte, upload e agendamento	Funções identificadas no código, mas sem separação por plano
+Marca d’água obrigatória no gratuito	divergente: opcional, default desativado e sem verificação de assinatura. backend/app/schemas/project.py:11, :36
+Gratuito com 20 publicações somadas YouTube/TikTok	divergente: default global de cinco; contagem/recuperação por conta e configurações substituíveis. Não há ledger único de cota do plano. backend/app/youtube/config.py:40; backend/app/workers/publisher_worker.py:289
+Uma conta por plataforma no gratuito	divergente: salvamento de múltiplas contas sem esse bloqueio comercial. backend/app/api/social_accounts.py:125
+Cota reinicia à meia-noite de Brasília e troca não reinicia	divergente: há cálculo por dia no fuso configurado, mas o fuso é editável e a contagem pode ser por conta. Não comprova cota única resistente à troca. backend/app/workers/publisher_worker.py:283, :317
+Pago mensal, sem marca e sem cota do plano	somente declarado/documentado. Não há plano pago; marca e limites são configurações operacionais
+Até seis contas no pago	divergente quanto ao limite proposto: não foi encontrado bloqueio de seis contas
+Troca diária de contas, reiniciando à meia-noite	somente declarado/documentado. Não existe controle comercial diário de troca; o seletor troca contexto. frontend/src/contexts/SocialAccountContext.tsx:14
+Restrições das plataformas continuam aplicáveis	Tratamentos identificados no código: rate limit, autorização, revisão e processamento. Limites/aprovações reais são não verificáveis neste escopo
+Renovação escolhida; cancelamento mantém período pago	somente declarado/documentado. Sem integração de assinatura no repositório
+Inadimplência por 30 dias com benefícios; depois cancelar plano/fatura e novas cobranças	somente declarado/documentado. Nenhuma máquina de estados comercial correspondente encontrada
+Desinstalar não cancela cobrança e remove dados locais	não verificável neste escopo: não há cobrança nem desinstalador auditáveis
+Excluir cadastro digitando exatamente Excluo minha conta	somente declarado/documentado. Frase e fluxo não encontrados
+Exclusão encerra cadastro/cobrança, preserva projetos e não exclui Google	somente declarado/documentado para cadastro comercial. Desconectar conta social preserva projetos e não exclui a conta Google, mas é outra operação
+Sem reembolso comercial automático pela exclusão	somente declarado/documentado; não existe código de reembolso examinado. Validade jurídica não avaliada
+E-mail e assinatura em servidores de São Paulo	não verificável neste escopo. Não há servidor comercial ou região comprovada
+AXIS não tem acesso aos vídeos	Não foi encontrado envio de vídeos para um endpoint central da Engineraxis, mas a garantia absoluta é não verificável neste escopo: depende da hospedagem, endpoint de IA, acesso aos volumes e backups
+Limpeza integral após todas as publicações, incluindo original e transcrição	divergente: limpeza é seletiva e preserva originais/SRT; não remove integralmente transcrição, áudio e intermediários. backend/app/youtube/cleanup.py:32, :50
+Vídeos publicados permanecem nas redes	identificado no código no fluxo de exclusão local: não há exclusão do vídeo remoto publicado nessa ação. backend/app/services/publication_batch.py:245
+Histórico local com links até exclusão pelo usuário	Persistência local identificada no código, mas exclusão completa é divergente/não comprovada: exclusão lógica preserva dados e operações podem permanecer após excluir projeto
+Excluir projeto exige aviso e confirmação	identificado no código na interface. A API não exige uma segunda confirmação independente. frontend/src/App.tsx:773; backend/app/api/projects.py:154
+Falhas preservam arquivos, notificam e permitem nova tentativa	identificado no código, com condições: mídia precisa existir/ser válida; resultado incerto bloqueia reenvio; reinício manual pode remover arquivos. backend/app/workers/publisher_worker.py:277, :404; backend/app/services/publication_retry.py:43
+Estatísticas opcionais apenas de médias mensais RAM/CPU/GPU	somente declarado/documentado. Coletor e payload não encontrados
+Escolha inicial, alteração em configurações, envio no dia 1º ou próxima abertura	somente declarado/documentado. Fluxos não encontrados
+Desativar estatísticas apaga relatório pendente	somente declarado/documentado. Não foi encontrada fila mensal ou relatório pendente
+Não enviar falhas, contagens, tempos, vídeos, transcrições ou credenciais nessa telemetria	não verificável neste escopo, pois o emissor/receptor mensal não existe no código examinado. Métricas locais existentes não devem ser confundidas com esse envio
+Logs do app por um dia; médias recebidas por dois dias	divergente para logs locais; sem retenção automática de um dia. Retenção do receptor de médias é não verificável neste escopo
+Aceite inicial dos Termos e apresentação da Política antes do acesso	divergente: não há bloqueio de entrada/registro de aceite encontrado
+Estatísticas com consentimento separado	somente declarado/documentado. Consentimento TikTok encontrado é para publicação, não para telemetria ou Termos AXIS
+Mudanças importantes por e-mail/app e novo aceite dos Termos	somente declarado/documentado. Sem mecanismo de e-mail ou aceite versionado
+Desconectar contas pelo app	identificado no código; revogação remota é diferente conforme a plataforma, descrita abaixo
+Sem idade mínima; salvaguardas para menores pendentes	Não foram encontrados cadastro de idade, verificação ou salvaguardas específicas. Adequação é não verificável neste escopo
+Suporte por e-mail sem SLA comercial	somente declarado/documentado. Canal operacional e atendimento não comprovados pelo aplicativo
+
+
+Publicação, agendamento e falhas
+O agendamento normal depende do computador, Docker, banco, publisher, arquivos, rede e autorização disponíveis. A janela do navegador não precisa permanecer aberta para o publisher funcionar, mas as notificações locais do navegador dependem da interface e das permissões. Não há serviço de push independente encontrado.
+O código possui:
+- armazenamento UTC e fuso explícito;
+- bloqueio de atrasos acima da tolerância;
+- recuperação autorizada por conta;
+- backoff e tentativas;
+- suspensão por autenticação;
+- respeito a rate limit/Retry-After;
+- consulta de estado remoto e bloqueio de incerteza;
+- locks, claim e revalidação antes do upload;
+- deduplicação por conteúdo, destino e intenção.
+Evidências: backend/app/services/schedule_contract.py:14; backend/app/services/missed_publications.py:6; backend/app/services/schedule_recovery.py:129; backend/app/workers/publisher_worker.py:234, :527, :560; backend/app/services/publication_dedup.py:85, :240.
+O supervisor limita reinícios consecutivos e aplica cooldown após seis reinícios; isso não permite publicar durante desligamento ou suspensão. Evidência: backend/app/workers/supervisor.py:15, :120.
+Aceitação do upload não equivale a publicação pública:
+- YouTube: há acompanhamento de processamento; PUBLISHED não deve ser interpretado como garantia universal de visibilidade pública, pois existem configurações privada/não listada. backend/app/workers/publisher_worker.py:678; backend/app/youtube/uploader.py:66.
+- TikTok: SEND_TO_USER_INBOX vira AWAITING_USER. PUBLISH_COMPLETE pode ser concluído sem ID público disponível, com NOT_CONFIRMED_PUBLIC. backend/app/services/tiktok.py:354.
+- Uma repostagem intencional exige confirmação própria; não é consequência de trocar de aba ou abrir a prévia. backend/app/api/publication_dedup.py:45.
+7. Segurança e licenças
+Autenticação e plataformas
+Google/YouTube
+- Escopos definidos: youtube.upload, youtube.readonly e, nos fluxos de gerenciamento, youtube.force-ssl.
+- Não foram encontrados escopos de e-mail/OpenID para login comercial.
+- O fluxo atual vincula OAuth a cookie, estado aleatório com validade, consumo único e credenciais por conta.
+- A versão instalada do SDK Google consultada gera PKCE S256 por default; o fluxo atual conserva o verifier no payload OAuth.
+- Há renovação de tokens e verificação de escopos concedidos.
+- Caminhos legados continuam capazes de ler/gravar token em JSON sem cifragem.
+Evidências: backend/app/youtube/auth.py:33, :145; backend/app/api/social_accounts.py:82, :105, :118, :148; SDK instalado google_auth_oauthlib/flow.py:104, :244.
+O fluxo OAuth legado salva estado em arquivo, mas não foi encontrada persistência do verifier equivalente à do fluxo atual. Sua compatibilidade com o SDK instalado não foi testada nesta coleta. Evidência: backend/app/youtube/auth.py:194, :222.
+TikTok
+- Escopos aceitos: user.info.basic, video.upload e video.publish.
+- Desktop possui PKCE explícito; Web exige redirect HTTPS configurado.
+- Há conferência da identidade, renovação de token e tratamento de revogação.
+- Flags de configuração como “auditado” não comprovam aprovação no console.
+Evidências: backend/app/services/tiktok_config.py:25, :34; backend/app/api/social_accounts.py:112, :195; backend/app/services/tiktok.py:76.
+Desconexão
+- YouTube: o fluxo examinado desabilita a conta local e remove sua credencial; não foi encontrada chamada equivalente de revogação remota Google.
+- TikTok: tenta revogação remota; se falhar, mantém credencial cifrada e marca revocation_pending.
+- Projetos e histórico são preservados.
+Evidência: backend/app/api/social_accounts.py:214; backend/app/services/tiktok.py:383.
+Nenhuma aprovação Google/TikTok, escopo aprovado, domínio verificado ou categoria de aplicativo foi confirmada nos consoles. docs/tiktok/REVISAO.md:3 também registra ausência de aprovação comprovada, como documentação, não como consulta atual.
+Achados priorizados
+As prioridades abaixo consideram impacto técnico. Não foram executadas explorações.
+Prioridade	Achado e alcance demonstrado
+Alta antes de exposição pública	Sem autenticação/autorização de cliente ou isolamento entre usuários. Host/Origin/CORS são proteções de API local, não autenticação de usuário. O filtro por conta social organiza destinos, não cria fronteira entre clientes. backend/app/services/local_api_security.py:7; backend/app/models/
+Alta para importação de fontes não confiáveis	Validação incompleta contra SSRF na importação. validate_video_url aceita HTTP/HTTPS com host, mas não rejeita rede privada/loopback; o resultado segue para yt-dlp. A prévia possui validação adicional de IP público, que não é reutilizada nesse caminho. Não foi comprovado acesso indevido real. backend/app/services/video_source.py:6; backend/app/api/videos.py:327; backend/app/services/preview_source.py:21
+Alta para preservação de dados	Reinício de um vídeo remove a pasta de clipes do projeto. Pode afetar mídias de outros vídeos/destinos. Alcance estático; não executado. backend/app/api/videos.py:263
+Relevante para privacidade	Retenção e exclusão não correspondem às declarações. Logs sem prazo automático; originais/SRT preservados; operações/notificações podem sobreviver à exclusão de projeto. Evidências na seção 4
+Relevante para credenciais	Cifragem não elimina acesso pelo operador do dispositivo. Há Fernet, gravação atômica e permissões POSIX solicitadas, mas a chave pode ficar junto aos arquivos cifrados. ACL Windows, proteção de backups e gestão operacional não foram verificadas. backend/app/services/social_credentials.py:11, :17, :48
+Relevante para legado	Token JSON legado pode permanecer. A migração copia para armazenamento cifrado, mas não remove o arquivo legado. Existência real desses arquivos não foi consultada. backend/app/services/social_credentials.py:108
+Relevante para recursos	Upload de vídeo sem limite explícito de tamanho nessa função. O arquivo é copiado antes da validação de duração; limites de imagem e de mídia TikTok não protegem necessariamente a entrada de vídeo. backend/app/api/videos.py:142; backend/app/api/projects.py:94; backend/app/services/tiktok_media.py:27
+Relevante para implantação	Banco com credenciais fixadas no código/Compose; Redis sem autenticação configurada no Compose examinado. Portas de host estão vinculadas a loopback, o que reduz exposição externa padrão. Não equivale a proteção contra processos locais ou serviços da rede Docker. backend/app/db/database.py:4; backend/app/queue/redis_connectiuon.py:4; docker-compose.yml:2
+Relevante para cadeia de fornecimento	Backend sem lock completo e divergência instalada. av==18.1.0 no manifesto, mas av 19.0.0 nos metadados do container. Pacote Python tzdata não foi encontrado nesse container; isso não comprova falha de fuso, pois o sistema pode fornecer os dados. backend/requirements.txt
+Pendente para distribuição	Não há cadeia auditável de instalador/atualizador. Assinatura de binários, integridade dos pacotes, atualização e desinstalação não puderam ser avaliadas
+
+
+Proteções positivas identificadas: loopback no Compose; validação de Host/Origin; cookies OAuth HTTP-only; state de uso único; cifragem no fluxo atual; verificação de identidade por conta; restrições de caminho para render TikTok; limites e normalização de imagem; comandos FFmpeg em listas de argumentos; guardas de deduplicação e de resultado remoto incerto.
+Evidências: docker-compose.yml:41; backend/app/services/local_api_security.py:18; backend/app/api/social_accounts.py:118; backend/app/services/tiktok_media.py:10; backend/app/api/projects.py:94; backend/app/services/reel_adapter.py:193.
+Essas proteções não comprovam ausência de vulnerabilidades. Não foi realizada auditoria dinâmica de aplicação, permissões do host ou isolamento de containers.
+Dependências e licenças
+As licenças abaixo foram obtidas do lockfile, metadados instalados ou aviso do próprio binário. Não representam uma análise jurídica de compatibilidade de distribuição.
+Componente	Versão examinada	Licença/evidência encontrada
+React / React DOM	19.2.7	MIT, frontend/package-lock.json
+React Router DOM	7.18.1	MIT, lockfile
+TanStack React Query	5.101.2	MIT, lockfile
+Axios	1.18.1	MIT, lockfile
+Vite	8.1.3	MIT, lockfile
+TypeScript	6.0.3	Apache-2.0, lockfile
+Playwright	1.64.1	Apache-2.0, lockfile
+Oxlint / plugin React	1.72.0 / 6.0.3	MIT, lockfile
+FastAPI / SQLAlchemy / Alembic	0.142.2 / 2.1.1 / 1.20.0	MIT, metadados instalados
+Uvicorn / RQ	0.54.0 / 2.12.0	BSD-3-Clause / BSD-2-Clause, metadados
+Pydantic / pydantic-settings	2.13.5 / 2.15.0	MIT, metadados
+Cliente Python Redis	8.1.0	MIT. Isso não identifica a licença do servidor Redis
+psycopg2-binary	2.9.13	Metadados indicam LGPL com exceções
+python-multipart	0.0.32	Apache-2.0
+yt-dlp	2026.8.19	Unlicense nos metadados
+Faster-Whisper / CTranslate2	1.2.1 / 4.8.2	MIT, metadados
+PyAV	19.0.0 instalado	BSD-3-Clause nos metadados; diverge do pin 18.1.0
+Google API client / auth / OAuthlib	2.201.0 / 2.59.1 / 1.5.0	Apache 2.0 nos metadados
+Cryptography	50.0.2	Apache-2.0 OR BSD-3-Clause
+HTTPX / Requests	0.28.1 / 2.34.2	BSD-3-Clause / Apache-2.0; utilizados diretamente, mas não declarados diretamente no requirements.txt
+FFmpeg nativo	7.1.5 no container	Build com --enable-gpl; aviso informa GPL versão 2 ou posterior
+ffmpeg-python	0.2.0	Metadado consultado retorna UNKNOWN; licença precisa de confirmação documental
+Fonte Inter	Arquivo local	SIL Open Font License 1.1, frontend/public/fonts/OFL-Inter.txt:3
+PostgreSQL / Redis servidor	16.15 / 7.4.11	Versões verificadas; licenças dos artefatos completos não foram inspecionadas nesta coleta
+Modelos Whisper/Qwen	small / qwen3:8b no código	Revisões, arquivos efetivamente instalados e licenças dos pesos não verificados
+Código e marca AXIS CLIPES	Sem versão comercial identificada	Não foi localizada licença geral do produto nos arquivos examinados
+
+
+O download automático de modelo é uma possibilidade concreta da biblioteca Faster-Whisper instalada: seu código associa small a Systran/faster-whisper-small e usa huggingface_hub.snapshot_download. Isso não significa envio do áudio ao Hugging Face. A inferência encontrada recebe o arquivo local. Evidências: biblioteca instalada faster_whisper/utils.py:17, :116; backend/app/services/transcriber.py:100.
+Não foi executada consulta a base de vulnerabilidades. Portanto, este relatório não afirma ausência de CVEs nem atualização suficiente das dependências.
+8. Verificações executadas
+Executadas nesta coleta
+Verificação	Resultado e limite
+git rev-parse, git log, git status, inventário de arquivos	Identificaram raiz, commit e alterações locais
+Buscas rg e leitura numerada de fontes	Localizaram rotas, configurações, dados, integração, retenção e ausências descritas
+Parsing com ast.parse	141 arquivos Python analisados sintaticamente, sem importar módulos da aplicação e sem gerar bytecode
+Leitura de manifests e lockfile	Identificou versões declaradas, imagens e licenças registradas
+docker exec ... python -I -B com importlib.metadata	Leu metadados de pacotes do container existente, sem importar o aplicativo
+Comandos --version	Python 3.12.14; Node 22.23.3; PostgreSQL 16.15; Redis 7.4.11
+ffmpeg -L	Identificou versão, configuração de build e aviso de licença
+Inspeção de fontes de bibliotecas instaladas	Verificou geração de PKCE pelo SDK Google e mecanismo de download do Faster-Whisper
+Comparação de estado Git	Permaneceu em 129 entradas modificadas e 62 não rastreadas; nenhuma alteração foi aplicada nesta coleta
+
+
+A primeira consulta de metadados foi interrompida ao não encontrar a distribuição Python tzdata. Uma consulta posterior tratou a ausência e completou os demais componentes. Nenhum pacote foi instalado.
+Não executadas nesta coleta
+- Inicialização/importação de app.main: executa criação de tabelas, migrações, migração de credenciais e recuperação. Evidência: backend/app/main.py:60.
+- Chamadas à API real: inclusive determinados GETs podem iniciar migração ou sincronização. Exemplo: backend/app/api/social_accounts.py:62.
+- Leitura de .env, tokens, chaves, bancos, backups ou arquivos de mídia.
+- Testes live, upload, publicação, revogação, exclusão, cobrança ou e-mail.
+- Build, lint e testes funcionais nesta etapa de auditoria.
+- Scanner de vulnerabilidades online, exploração, inspeção de consoles ou verificação de hospedagem/região.
+Validação anterior nesta conversa
+Antes desta coleta, na implementação da Central, foram executados 94 testes backend aprovados e um ignorado, nove testes PostgreSQL aprovados, 78 testes de navegador aprovados, build e lint aprovados.
+Esses resultados têm status testado em ambiente isolado para os cenários daquela alteração. Não foram repetidos nesta auditoria e não comprovam instalador, cobrança, telemetria, conformidade ou operação real nas plataformas. Não devem ser somados a outros totais históricos da documentação.
+9. Informações para atualizar o site
+O que já pode ser afirmado, com as condições indicadas
+- O código oferece organização de projetos, importação de vídeos, transcrição, seleção assistida de trechos, renderização vertical, legendas, marca d’água configurável, prévia e exportação.
+- Há integração de autorização com contas YouTube/TikTok; isso não é login comercial com Google.
+- As publicações são associadas a destinos independentes.
+- Agendamento e recuperação dependem dos serviços locais e das plataformas disponíveis.
+- A autocura depende de ativação e revisão da política; não publica durante desligamento ou suspensão.
+- O modo Inbox do TikTok exige finalização manual.
+- O código implementa tratamento de falhas, reconexão, histórico e proteções contra reenvio incerto.
+- O processamento de transcrição é local na implementação examinada; os textos usados por IA são enviados ao endpoint Ollama configurado.
+O que deve ser descrito como intenção
+- Instalador Windows oficial, atualizações automáticas e desinstalação completa.
+- Planos gratuito/pago, cota de 20 publicações, limites de contas e troca diária.
+- Renovação, cancelamento, inadimplência, faturas e exclusão de cadastro.
+- Hospedagem comercial em São Paulo.
+- Estatísticas mensais opcionais e seus prazos de retenção.
+- Aceite inicial/versionado dos Termos, avisos por e-mail e salvaguardas para menores.
+O que não deve ser prometido com base neste código
+- Limpeza integral automática de originais, transcrições e todos os arquivos após publicar.
+- Exclusão automática de logs em um dia.
+- Exclusão completa de todo histórico ao ocultar/remover uma publicação.
+- Ausência absoluta de acesso aos vídeos pela AXIS ou por terceiros.
+- Funcionamento de agendamentos com o computador desligado.
+- Que “upload aceito” ou PUBLISHED sempre signifique vídeo publicamente acessível.
+- Que Google/TikTok aprovaram o aplicativo.
+- Que os limites dos planos já são aplicados.
+- Anonimização completa de estatísticas ou conformidade jurídica integral.
+Pendências para o checklist de segurança
+Antes de distribuir ou hospedar o produto, precisam de comprovação: autenticação/isolamento conforme o modelo de uso; proteção da importação por URL; limites de recursos; gestão de chaves e legado; retenção e exclusão; proteção dos volumes/backups; versões reproduzíveis; licenças de distribuição; aprovação OAuth; instalador/atualizador; e implementação auditável dos serviços comerciais.
+Os rascunhos de Termos e Privacidade encontrados se identificam como não aprovados. Não devem ser apresentados como documentos finais sem revisão do responsável. Evidências: docs/tiktok/TERMOS.rascunho.md:1; docs/tiktok/PRIVACIDADE.rascunho.md:1.
+10. Perguntas restantes ao responsável
+1. Existe outro repositório para cadastro, cobrança, site comercial, instalador ou atualizador? Qual artefato e versão serão distribuídos?
+2. O produto continuará exclusivamente local ou haverá componentes hospedados pela Engineraxis? Quais fornecedores e regiões estão contratados?
+3. Quais aprovações e permissões estão comprovadas nos consoles Google/TikTok, inclusive categoria Desktop/Web, Direct Post e domínios verificados?
+4. Quais regras comerciais já foram implementadas fora deste repositório e quais ainda são decisões de produto?
+5. A preservação de originais, SRT e transcrições continuará sendo a política desejada ou a declaração de limpeza integral precisa ser revista?
+6. Quais são as políticas efetivas de logs, backups, sincronização do dispositivo e acesso administrativo? Há comprovação dos prazos de exclusão?
+7. Onde serão implementados emissor e receptor das estatísticas mensais? Quais metadados de rede/hospedagem serão registrados junto ao payload?
+8. Qual será o mecanismo de aceite dos Termos, comunicação de alterações, exclusão de cadastro e tratamento de menores?
+9. Qual é o canal oficial de suporte e privacidade, e quem responde operacionalmente por ele?
+10. Quais configurações efetivas, apresentadas sem segredos, comprovam endpoint de IA, localização das credenciais, limites e modo de publicação da versão que será disponibilizada?

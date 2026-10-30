@@ -1,0 +1,52 @@
+# Estado atual dos documentos legais
+
+**Consolidado em 28/10/2026.**
+
+Estas informações foram consolidadas em 28/10/2026 a partir das respostas do responsável. Funções previstas ainda precisam de teste; esta lista não representa aprovação jurídica ou conferência cadastral oficial.
+
+Fonte do quadro exibido nas duas páginas: `src/data/legalReviewStatus.js`.
+
+## Definições já informadas pelo responsável
+
+- [x] Identificação informada: Ryan Lopomo, nome empresarial Ryan Lopomo, MEI, CNPJ 69.569.807/0001-46 e e-mail de privacidade e suporte engineeraxisltda@gmail.com.
+- [x] Endereço parcial informado: Rua Graça Aranha, sem número. Logs técnicos do aplicativo com retenção prevista de 1 dia. Estatísticas recebidas pela AXIS com retenção de 2 dias para análise de anomalias e consumo excessivo de recursos, seguida de exclusão.
+- [x] Produto em desenvolvimento para Windows, testado somente pelo responsável e ainda sem download. Distribuição futura exclusiva pelo site oficial, atualizações automáticas e uso pessoal/comercial, inclusive para clientes.
+- [x] Gratuito com marca d’água, 20 publicações diárias somadas entre YouTube e TikTok e uma conta por plataforma. Pago mensal, sem marca d’água ou cota de publicações imposta pelo plano, com até 6 contas no total. Reinício e troca diária à meia-noite de Brasília; trocar conta não reinicia a cota.
+- [x] Renovação escolhida pelo usuário, cancelamento do plano pelo site e benefícios até o fim do período pago. Regularização em 30 dias corridos do vencimento com benefícios mantidos; sem pagamento, plano e fatura correspondente são cancelados. Desinstalar não cancela a assinatura.
+- [x] Exclusão imediata do cadastro pelo aplicativo, com confirmação pela frase ‘Excluo minha conta’, encerramento de novas cobranças e sem reembolso automático pela exclusão, preservados direitos legais. Excluir cadastro não apaga dados locais; a limpeza completa local ocorrerá na desinstalação.
+- [x] Limpeza dos arquivos locais do projeto após todas as postagens, incluindo vídeo baixado e transcrições. Falhas geram aviso e possibilidade de republicação; os arquivos permanecem até nova postagem ou exclusão confirmada. Vídeos publicados permanecem nas plataformas.
+- [x] Histórico com links somente no computador do usuário, mantido até exclusão manual pelo aplicativo. E-mail e situação da assinatura em servidores previstos na região de São Paulo, Brasil; a AXIS declara não ter acesso interno aos vídeos.
+- [x] Estatísticas opcionais apenas das médias mensais de RAM, CPU e GPU, sem identificação no conteúdo enviado. Escolha na primeira entrada e alteração nas configurações. Envio no dia 1º sobre o mês anterior, ou na próxima abertura possível; desativar apaga o relatório pendente.
+- [x] Acesso por conta Google, aceite inicial dos Termos e apresentação da Política. Mudanças importantes terão avisos no app e no e-mail Google; alterações importantes nos Termos exigirão novo aceite. Desconexão de contas pelo app prevista.
+- [x] Sem idade mínima estabelecida; proteção de menores ainda pendente. Suporte pelo e-mail confirmado, sem prazo comercial de resposta definido. Logs do aplicativo terão exclusão automática após a retenção prevista de 1 dia, sujeita à verificação.
+
+## O que ainda falta concluir
+
+- [ ] **Cadastro e contato:** Conferência oficial do CNPJ e titularidade; completar Rua Graça Aranha, sem número, com bairro, cidade/UF e CEP; revisar papéis de controlador/operador.
+- [ ] **Logs e hospedagem do site:** Campos registrados, prazo de retenção, quem acessa, região efetiva e regras de cópias/backups da hospedagem Vercel.
+- [ ] **Prazos e dados nos servidores:** Retenção de cadastro/assinatura e backups; fornecedor e proteção dos servidores; demais dados recebidos do Google. Os prazos de 1 dia para logs do aplicativo e 2 dias para estatísticas recebidas já foram informados, mas gatilhos, cópias e exclusão efetiva precisam de teste, assim como as regras de arquivos de projetos e histórico local.
+- [ ] **Ollama:** Endpoint efetivamente usado, possibilidade de endereço remoto e configuração do pacote; execução local foi informada, mas ainda não verificada.
+- [ ] **Crianças e adolescentes:** Definição, implementação e revisão das medidas de proteção e autorização/acompanhamento por responsáveis. A ausência de idade mínima não resolve essa pendência.
+- [ ] **Versão e segurança do aplicativo:** Acesso ao código e à versão instalável para testar compatibilidade, recursos, exclusão, autenticação, criptografia, credenciais, dependências e atualizações. Declarações de funcionamento não substituem esses testes.
+- [ ] **Google/YouTube e TikTok:** Aprovações efetivas, escopos concedidos, dados recebidos no login, revogação de tokens e funcionamento real de publicação/agendamento e desconexão.
+- [ ] **Site em produção:** Disponibilidade das rotas, inspeção de rede, cookies, armazenamento, SDKs e cabeçalhos na versão publicada. A análise do código local não confirma a implantação.
+- [ ] **Oferta e licença:** Preço, meios/provedor de pagamento, fluxo de contratação e cancelamento, detalhes da renovação e revisão das regras de cobrança/reembolso. Uso pessoal/comercial e distribuição oficial já foram definidos; titularidade e licenças de componentes ainda precisam de revisão.
+- [ ] **Conclusão jurídica:** Finalidades e bases legais, contratos/transferências, lei e foro aplicáveis, aprovação jurídica e data real de vigência após aprovação. A data de consolidação não é a data de vigência.
+
+## Verificação da publicação em 28/10/2026
+
+- `https://www.engineraxis.com.br/`: HTTP 200.
+- `https://www.engineraxis.com.br/axisclipes`: HTTP 404.
+- `https://www.engineraxis.com.br/privacidade`: HTTP 404.
+- `/axisclipes`, `/termos` e `/privacidade` no domínio sem `www`: HTTP 308. As rotas de destino precisam ser conferidas na implantação.
+- Isso não constitui inspeção completa de cookies, SDKs, tráfego ou cabeçalhos em produção.
+
+## Próximas respostas do responsável
+
+1. Bairro, cidade/UF e CEP para completar Rua Graça Aranha, sem número.
+2. Prazo e campos dos logs do site na Vercel, distintos dos logs locais do aplicativo.
+3. Fornecedor dos servidores de cadastro/assinatura previstos em São Paulo, Brasil.
+
+Logs do aplicativo: 1 dia. Médias de hardware recebidas pela AXIS: 2 dias; regras informadas, com execução ainda não testada.
+Preço, pagamentos e demais itens pendentes não receberam valores presumidos.
+Aprovação jurídica e data de vigência não foram atribuídas automaticamente.

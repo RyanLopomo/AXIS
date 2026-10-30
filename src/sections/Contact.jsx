@@ -4,10 +4,8 @@ import React, { useState } from "react";
 // Importa os ícones usados na seção.
 import {
   ArrowUpRight,
-  Camera,
   Mail,
   MessageCircle,
-  BriefcaseBusiness,
   Clock,
   Sparkles,
   ShieldCheck,
@@ -17,9 +15,10 @@ import {
 import { MagneticButton } from "../lightswind/magnetic-button";
 import { translations } from "../data/translations";
 import { useSitePreferences } from "../context/site-preferences";
+import { institutionalData } from "../config/institutionalData";
 
 // Define o número de WhatsApp que receberá o briefing.
-const whatsappNumber = "5513991087633";
+const whatsappNumber = institutionalData.commercialWhatsAppNumber;
 
 // Cria a seção Contato.
 export function Contact() {
@@ -39,7 +38,8 @@ export function Contact() {
   const [message, setMessage] = useState("");
 
   // Função executada ao clicar em "Enviar briefing".
-  function handleSendBriefing() {
+  function handleSendBriefing(event) {
+    event.preventDefault();
     // Monta a mensagem que será enviada para o WhatsApp.
     const briefingMessage = `
 ${content.briefingIntro}
@@ -59,7 +59,7 @@ ${message || content.notInformed}
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
     // Abre o WhatsApp em uma nova aba.
-    window.open(whatsappUrl, "_blank");
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   }
 
   // Retorna a seção de contato.
@@ -154,16 +154,22 @@ ${message || content.notInformed}
             </div>
 
             {/* Formulário visual. */}
-            <form className="grid gap-4">
+            <form className="grid gap-4" onSubmit={handleSendBriefing} aria-describedby="briefing-privacy">
+              <label className="sr-only" htmlFor="briefing-name">{content.fields.name}</label>
               <input
+                id="briefing-name"
                 type="text"
+                autoComplete="name"
+                maxLength={120}
                 placeholder={content.namePlaceholder}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-300/50"
               />
 
+              <label className="sr-only" htmlFor="briefing-project">{content.fields.type}</label>
               <select
+                id="briefing-project"
                 value={projectType}
                 onChange={(event) => setProjectType(event.target.value)}
                 className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-white/80 outline-none transition focus:border-cyan-300/50"
@@ -176,7 +182,9 @@ ${message || content.notInformed}
                 ))}
               </select>
 
+              <label className="sr-only" htmlFor="briefing-budget">{content.fields.budget}</label>
               <select
+                id="briefing-budget"
                 value={budget}
                 onChange={(event) => setBudget(event.target.value)}
                 className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-white/80 outline-none transition focus:border-cyan-300/50"
@@ -189,7 +197,10 @@ ${message || content.notInformed}
                 ))}
               </select>
 
+              <label className="sr-only" htmlFor="briefing-message">{content.fields.idea}</label>
               <textarea
+                id="briefing-message"
+                maxLength={2000}
                 placeholder={content.messagePlaceholder}
                 rows="4"
                 value={message}
@@ -197,9 +208,12 @@ ${message || content.notInformed}
                 className="resize-none rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-cyan-300/50"
               />
 
+              <p id="briefing-privacy" className="text-xs leading-6 text-white/65">
+                {language === "en" ? "Continuing opens WhatsApp and shares the entered text with that service so you can review it before sending. Avoid sensitive data. " : "Ao continuar, você abre o WhatsApp e compartilha o texto preenchido com esse serviço para revisar antes de enviar. Evite dados sensíveis. "}
+                <a href="/privacidade" className="text-cyan-300 underline underline-offset-4">{language === "en" ? "Website privacy" : "Privacidade no site"}</a>
+              </p>
               <button
-                type="button"
-                onClick={handleSendBriefing}
+                type="submit"
                 className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-bold text-[#020916] transition hover:bg-cyan-300"
               >
                 {content.submit}
@@ -211,13 +225,6 @@ ${message || content.notInformed}
           {/* Cards sociais menores. */}
           <div className="grid gap-4 sm:grid-cols-2">
             <ContactMiniCard
-              icon={Camera}
-              title="Instagram"
-              text={content.socials[0]}
-              href="https://instagram.com/axis"
-            />
-
-            <ContactMiniCard
               icon={MessageCircle}
               title="WhatsApp"
               text={content.socials[1]}
@@ -227,15 +234,8 @@ ${message || content.notInformed}
             <ContactMiniCard
               icon={Mail}
               title="E-mail"
-              text={content.socials[2]}
-              href="mailto:contato@axis.dev"
-            />
-
-            <ContactMiniCard
-              icon={BriefcaseBusiness}
-              title="LinkedIn"
-              text={content.socials[3]}
-              href="https://linkedin.com/company/axis"
+              text={institutionalData.privacyEmail}
+              href={`mailto:${institutionalData.privacyEmail}`}
             />
           </div>
         </div>
@@ -251,7 +251,7 @@ function ContactMiniCard({ icon: Icon, title, text, href }) {
     <a
       href={href}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.035] p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-300/45 hover:bg-cyan-300/[0.04]"
     >
       <div className="flex items-center gap-4">

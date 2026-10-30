@@ -7,29 +7,39 @@ const SitePreferencesContext = createContext(null);
 export function SitePreferencesProvider({ children }) {
   const [language, setLanguage] = useState("pt-BR");
   const [theme, setTheme] = useState("dark");
+  const [preferencesLoaded, setPreferencesLoaded] = useState(false);
 
   useEffect(() => {
-    const storedLanguage = window.localStorage.getItem("axis-language");
-    const storedTheme = window.localStorage.getItem("axis-theme");
+    try {
+      const storedLanguage = window.localStorage.getItem("axis-language");
+      const storedTheme = window.localStorage.getItem("axis-theme");
 
-    if (storedLanguage === "pt-BR" || storedLanguage === "en") {
-      setLanguage(storedLanguage);
-    }
+      if (storedLanguage === "pt-BR" || storedLanguage === "en") {
+        setLanguage(storedLanguage);
+      }
 
-    if (storedTheme === "light" || storedTheme === "dark") {
-      setTheme(storedTheme);
+      if (storedTheme === "light" || storedTheme === "dark") {
+        setTheme(storedTheme);
+      }
+    } catch {
+      // Browsing remains available when browser storage is disabled.
     }
+    setPreferencesLoaded(true);
   }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
-    window.localStorage.setItem("axis-language", language);
-  }, [language]);
+    if (preferencesLoaded) {
+      try { window.localStorage.setItem("axis-language", language); } catch { /* Optional preference. */ }
+    }
+  }, [language, preferencesLoaded]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("axis-theme", theme);
-  }, [theme]);
+    if (preferencesLoaded) {
+      try { window.localStorage.setItem("axis-theme", theme); } catch { /* Optional preference. */ }
+    }
+  }, [theme, preferencesLoaded]);
 
   const value = useMemo(
     () => ({
